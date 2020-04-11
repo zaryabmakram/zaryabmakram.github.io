@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deep-learning on Zaryab Muhammad Akram</title>
+    <link>https://zaryabmakram.github.io/tags/deep-learning/</link>
+    <description>Recent content in deep-learning on Zaryab Muhammad Akram</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://zaryabmakram.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to Deep Learning</title>
+      <link>https://zaryabmakram.github.io/posts/deeplearning.ai/01-course1/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zaryabmakram.github.io/posts/deeplearning.ai/01-course1/</guid>
+      <description>Deep Learning refers to training of Deep Neural Networks (neural networks with several hidden layers).
+Deep Neural Networks basically automate the feature extraction step.
+
+Neural Networks Takes input features, figures out functions to map it to output. Most commonly used function for this mapping is called ReLU (Rectified Linear Unit) function.
+
+Supervised Learning with Neural Networks 
+Examples    Network Type Usage Example Input (x) Output (y)     Simple NNN Housing Price Prediction House Features Price   Convolutional NN Image Classification Image Class (Cat/ Dog)   Recurrent NN Speech Recognition Audio Text    Structured vs.</description>
+    </item>
+    
+  </channel>
+</rss>

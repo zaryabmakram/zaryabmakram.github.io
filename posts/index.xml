@@ -1,0 +1,450 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Zaryab Muhammad Akram</title>
+        <link>https://zaryabmakram.github.io/posts/</link>
+        <description>Recent content in Posts on Zaryab Muhammad Akram</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+        <atom:link href="https://zaryabmakram.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Introduction to Deep Learning</title>
+            <link>https://zaryabmakram.github.io/posts/deeplearning.ai/01-course1/</link>
+            <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+            
+            <guid>https://zaryabmakram.github.io/posts/deeplearning.ai/01-course1/</guid>
+            <description>Deep Learning refers to training of Deep Neural Networks (neural networks with several hidden layers).
+Deep Neural Networks basically automate the feature extraction step.
+
+Neural Networks Takes input features, figures out functions to map it to output. Most commonly used function for this mapping is called ReLU (Rectified Linear Unit) function.
+
+Supervised Learning with Neural Networks 
+Examples    Network Type Usage Example Input (x) Output (y)     Simple NNN Housing Price Prediction House Features Price   Convolutional NN Image Classification Image Class (Cat/ Dog)   Recurrent NN Speech Recognition Audio Text    Structured vs.</description>
+            <content type="html"><![CDATA[<p><center><img src="/assets/DL_logo.png" style="zoom: 50%;" /></center></p>
+
+<p>Deep Learning refers to <strong>training of Deep Neural Networks</strong> (neural networks with several hidden layers).</p>
+
+<p>Deep Neural Networks basically <strong>automate the feature extraction step</strong>.</p>
+
+<p><center><img src="/assets/DLai_1/DNN.PNG" style="zoom: 75%;"/></center></p>
+
+<h2 id="neural-networks">Neural Networks</h2>
+
+<p>Takes input features, figures out functions to map it to output. Most commonly used function for this mapping is called <strong>ReLU</strong> (Rectified Linear Unit) function.</p>
+
+<p><center><img src="/assets/DLai_1/ReLU.PNG" style="zoom: 75%;"/></center></p>
+
+<h3 id="supervised-learning-with-neural-networks">Supervised Learning with Neural Networks</h3>
+
+<p><center><img src="/assets/DLai_1/supervised_learning.PNG" style="zoom: 75%;"/></center></p>
+
+<h4 id="examples">Examples</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Network Type</th>
+<th align="center">Usage Example</th>
+<th align="center">Input (x)</th>
+<th align="center">Output (y)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">Simple NNN</td>
+<td align="center">Housing Price Prediction</td>
+<td align="center">House Features</td>
+<td align="center">Price</td>
+</tr>
+
+<tr>
+<td align="center">Convolutional NN</td>
+<td align="center">Image Classification</td>
+<td align="center">Image</td>
+<td align="center">Class (Cat/ Dog)</td>
+</tr>
+
+<tr>
+<td align="center">Recurrent NN</td>
+<td align="center">Speech Recognition</td>
+<td align="center">Audio</td>
+<td align="center">Text</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="structured-vs-unstructured-data">Structured vs. Unstructured Data</h2>
+
+<p><center><img src="/assets/DLai_1/structuredData.PNG" style="zoom: 75%;"/></center></p>
+
+<p>In Unstructured Data, the features might be pixel values, single words from a text, intensities, etc. For computers, it is much harder to make sense of unstructured data.</p>
+
+<h2 id="why-is-deep-learning-taking-off">Why is Deep Learning taking off?</h2>
+
+<p>The three main factors that are driving the deep learning progress are:</p>
+
+<ol>
+<li><strong>More Data</strong></li>
+<li><strong>More Computation Power</strong></li>
+<li><strong>Algorithmic Advancements</strong>: <em>Use of ReLU instead of Sigmoid</em> as training using sigmoid function is much slower due to its slope being decreased at its ends. <em>(Decreased Slope = Slow Training)</em></li>
+</ol>
+
+<p><center><img src="/assets/DLai_1/AdvancementDL.PNG" style="zoom: 75%;"/></center></p>
+
+<p>So for high performance, we need <strong>large neural nets</strong> with <strong>large amount of data</strong>.</p>
+
+<blockquote>
+<p>In less data regime, performance depends on the <code>quality of hand crafted features</code> and <code>low level algorithmic details</code>. So even a simple algorithm like SVM might outperform a deep neural network.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="notation">Notation</h2>
+
+<p><center><img src="/assets/DLai_1/notTable.PNG"/></center></p>
+
+<hr>
+
+<h2 id="logistic-regression">Logistic Regression</h2>
+
+<p>Given <span  class="math">\( x \)</span>, we want <span  class="math">\( P(\hat{y}|x) \)</span> .</p>
+
+<ul>
+<li><strong>Parameters:</strong> <span  class="math">\( w \in R^{n_x}, b \in R\)</span></li>
+<li><strong>Output:</strong> <span  class="math">\( \hat{y} = w^Tx + b \)</span></li>
+</ul>
+
+<p>As we require probability as our output i.e. <span  class="math">\(\hat{y} \in [0, 1] \)</span> but <span  class="math">\( w^Tx + b \)</span> exceeds this limit.</p>
+
+<p>So, we apply using <code>Sigmoid Function</code>.</p>
+
+<p><center><img src="/assets/DLai_1/sigmoid.PNG"/></center></p>
+
+<ul>
+<li>If z is <strong>large</strong>, <span  class="math">\( \hat{y} \)</span> becomes <code>1</code>.</li>
+<li>If z is <strong>small</strong> (negative), <span  class="math">\( \hat{y} \)</span> becomes <code>0</code>.</li>
+</ul>
+
+<table style="width: 100%">
+    <tr>
+        <td><center><img src="/assets/DLai_1/sigmoidFunc.PNG"/></center></td>
+        <td><center><img src="/assets/DLai_1/sigmoidExp.PNG"/></center></td>
+    </tr>
+</table>
+
+<h3 id="loss-function">Loss Function</h3>
+
+<p>Loss Function computes <code>error on a single training example</code>.</p>
+
+<blockquote>
+<p>Unlike Linear Regression, Mean-squared-error cannot be used in this case as it makes the cost function non-convex (with local optima).</p>
+</blockquote>
+
+<p>So, following loss function is used:</p>
+
+<p><center><img src="/assets/DLai_1/lossFunc.PNG"/></center></p>
+
+<h4 id="explanation">Explanation</h4>
+
+<p><strong>For y = 1</strong>:</p>
+
+<ul>
+<li>If <span  class="math">\( y = 1 \)</span> and <span  class="math">\( \hat{y} =1 \)</span> then Loss = 0</li>
+<li>If <span  class="math">\( y = 1 \)</span> and <span  class="math">\( \hat{y} =0 \)</span> then Loss = <span  class="math">\( \infty \)</span></li>
+</ul>
+
+<p><center><img src="/assets/DLai_1/yOne.PNG"/></center></p>
+
+<p><strong>For y = 0</strong>:</p>
+
+<ul>
+<li>If <span  class="math">\( y = 0 \)</span> and <span  class="math">\( \hat{y} = 0 \)</span> then Loss = 0</li>
+<li>If <span  class="math">\( y = 0 \)</span> and <span  class="math">\( \hat{y} = 1 \)</span> then Loss = <span  class="math">\( \infty \)</span></li>
+</ul>
+
+<p><center><img src="/assets/DLai_1/yZero.PNG"/></center></p>
+
+<h3 id="cost-function">Cost Function</h3>
+
+<p>Cost function is <code>the average of the loss functions of the entire training set</code>.</p>
+
+<p><center><img src="/assets/DLai_1/costFunction.PNG"/></center></p>
+
+<p>The following cost function can be minimized using gradient descent.</p>
+
+<h2 id="gradient-descent">Gradient Descent</h2>
+
+<p>What gradient descent does is to find the values of w, b which minimize the cost function J(w, b) i.e. minimizes the Cost Function.</p>
+
+<table style="width: 100%">
+    <tr>
+        <td><center><img src="/assets/DLai_1/gdAlgo.PNG"/></center></td>
+        <td><center><img src="/assets/DLai_1/gdGraph.PNG"/></center></td>
+    </tr>
+</table>
+
+<ul>
+<li>At <code>point 1</code>, slope is <strong>positive</strong> so w will be <strong>decreased</strong>.</li>
+<li>At <code>point 2</code>, slope is <strong>negative</strong>, so w will be <strong>increased</strong>.</li>
+</ul>
+
+<h2 id="computation-graph">Computation Graph</h2>
+
+<p>It is basically an easy way to compute gradient of final output variable w.r.t to initial input variables.</p>
+
+<p>Each unit in a computation graph during in back-prop step takes in a gradient and route in to its input variables by multiplying with local gradients as follows:</p>
+
+<p><center><img src="/assets/DLai_1/computationG.PNG" style="zoom: 75%;"/></center></p>
+
+<blockquote>
+<p>If <code>z</code> is being output to multiple units, on back-prop their gradients will be added.</p>
+</blockquote>
+
+<p>Following is an example of gradient flow using Computation Graph:</p>
+
+<p><center><img src="/assets/DLai_1/sigComp.PNG" style="zoom: 75%;"/></center></p>
+
+<ul>
+<li><p>Add <span  class="math">\( (+) \)</span> Gate: <code>Gradient Distributer</code>
+<center><img src="/assets/DLai_1/addGate.PNG" style="zoom: 75%;"/></center></p></li>
+
+<li><p>Multiply <span  class="math">\( (\times) \)</span> Gate: <code>Gradient Switcher</code>
+<center><img src="/assets/DLai_1/mulGate.PNG" style="zoom: 75%;"/></center></p></li>
+
+<li><p>Max Gate: <code>Gradient Router</code> (Routes to the <strong>larger input</strong>, the other one is made 0)
+<center><img src="/assets/DLai_1/maxGate.PNG" style="zoom: 75%;"/></center></p></li>
+</ul>
+
+<h3 id="logistic-regression-using-computation-graph">Logistic Regression Using Computation Graph</h3>
+
+<p><center><img src="/assets/DLai_1/LRComp.jpg"/></center></p>
+
+<h2 id="logistic-regression-over-mtraining-examples">Logistic Regression over m-training Examples</h2>
+
+<p>As cost is average of losses, so derivate of cost will be:</p>
+
+<p><center><img src="/assets/DLai_1/avgCost.PNG"/></center>
+<center><img src="/assets/DLai_1/LRAlgo.PNG"/></center></p>
+
+<h2 id="logistic-regression--vectorized">Logistic Regression – Vectorized</h2>
+
+<p><center><img src="/assets/DLai_1/LRVect.PNG"/></center>
+<center><img src="/assets/DLai_1/LRVectExp.png" style="zoom: 75%;"/></center></p>
+
+<h2 id="neural-network-representation">Neural Network Representation</h2>
+
+<p>Following is an illustration of a <strong>two layered Neural Network</strong>; (<code>we do not count the input layer</code>):</p>
+
+<p><center><img src="/assets/DLai_1/2LayerNN.PNG" style="zoom: 75%;"/></center></p>
+
+<p>We will use the following notation:</p>
+
+<p><center><img src="/assets/DLai_1/notation.PNG"/></center></p>
+
+<p>For the neural network represented above, following are the computation equations for hidden layer units:</p>
+
+<p><center><img src="/assets/DLai_1/2NNEq.PNG" style="zoom: 75%;"/></center></p>
+
+<h3 id="vectorization--1-example">Vectorization – 1 example</h3>
+
+<p><center><img src="/assets/DLai_1/vector1eg.PNG" style="zoom: 75%;"/></center></p>
+
+<p>Then, just taking the <em>element-wise sigmoid</em> <span  class="math">\( Z^{[1]} \)</span>matrix, we can compute <span  class="math">\( A^{[1]} \)</span> matrix.</p>
+
+<h3 id="vectorization--m-examples">Vectorization - m examples</h3>
+
+<p>WE can extend the above equations for m-training examples are follows:</p>
+
+<p><center><img src="/assets/DLai_1/mEg.PNG" style="zoom: 75%;"/></center></p>
+
+<p>We can remove the explicit for-loop and vectorize these calculations also.</p>
+
+<p>Remember that our X matrix had <strong>all training examples</strong> stacked in <strong>columns</strong> as:</p>
+
+<p><center><img src="/assets/DLai_1/colX.PNG" style="zoom: 75%;"/></center></p>
+
+<p>So we can vectorize them as follows:</p>
+
+<p><center><img src="/assets/DLai_1/vectormEg.PNG"/></center></p>
+
+<p>So, <strong>each column</strong> of the resulting matrix (A) will represent a s<strong>ingle training</strong> example.</p>
+
+<p><center><img src="/assets/DLai_1/XA.PNG"/></center></p>
+
+<p>Thus, following the vectorized equations:</p>
+
+<p><center><img src="/assets/DLai_1/vectEq.PNG"/></center></p>
+
+<h2 id="activation-functions">Activation Functions</h2>
+
+<h3 id="tanh">Tanh</h3>
+
+<p><center><img src="/assets/DLai_1/tanh.PNG"/></center></p>
+
+<blockquote>
+<p>The tanh activation usually works better than sigmoid activation function for hidden units because the <code>mean of its output is closer to zero</code>, and so it <code>centers the data better for the next layer</code>.</p>
+</blockquote>
+
+<h3 id="relu">ReLU</h3>
+
+<p><center><img src="/assets/DLai_1/reluAct.PNG"/></center></p>
+
+<blockquote>
+<p>Even tho ReLU is not differentiable at the sharp edge, in practice, it works perfectly fine.</p>
+</blockquote>
+
+<h3 id="leaky-relu">Leaky ReLU</h3>
+
+<p><center><img src="/assets/DLai_1/lrelu.PNG"/></center></p>
+
+<blockquote>
+<p>The constant <code>0.01</code> in Leaky ReLU can actually be taken as a <code>hyper-parameter and fined tuned</code>.</p>
+</blockquote>
+
+<h2 id="need-of-a-nonlinear-activation-function">Need of a Non-Linear Activation Function</h2>
+
+<p>Suppose we have the following Neural Network with no activation function, i.e. the units only have linear function:</p>
+
+<p><center><img src="/assets/DLai_1/lnn.PNG"/></center>
+<center><img src="/assets/DLai_1/linearNN.PNG"/></center></p>
+
+<p>As we can see, not using a non-linear activation function, <code>causes the functions to collapse and the network ends up computing a single linear function with no benifit of stacking up multiple layers</code>.</p>
+
+<blockquote>
+<p>Linear activation can be used only in <code>output layer for regression problems</code> but <code>ReLU</code> can also be used for regression problems with <code>non-negative ouputs</code>.</p>
+</blockquote>
+
+<h2 id="gradient-descent-for-neural-networks">Gradient Descent for Neural Networks</h2>
+
+<p>For the following representaton, we assume our application to be Binary Classification i.e. <strong>sigmoid activation is being used for A2</strong>.</p>
+
+<p><center><img src="/assets/DLai_1/bpNN.PNG"/></center></p>
+
+<p><center><img src="/assets/DLai_1/bpEq.PNG"/></center></p>
+
+<h2 id="random-initialization">Random Initialization</h2>
+
+<p>If we initialize W to be 0, <strong>all units in a layer will be computing and outputting same value, even updated the same in back prop</strong>.</p>
+
+<p>Thus, we initialize randomly as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">W <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(shape) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.01</span>
+b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(shape)   <span style="color:#75715e">## can be intialized to 0</span></code></pre></div>
+<p>We multiply is with a small constant so that our weights are not too large, <code>if using sigmoid/ tanh they do not fall on flat ends and slow the training</code>.</p>
+
+<h2 id="deep-neural-networks">Deep Neural Networks</h2>
+
+<p><center><img src="/assets/DLai_1/deepNN.PNG" style="zoom: 75%;"/></center></p>
+
+<p>For a general <code>L-Layered Neural Network</code>, following are the equations for <strong>Forward Propagation</strong>:</p>
+
+<p><center>
+<span  class="math">\( z^{[l]} = W^{[l]}.a^{[l-1]} + b^{[l]} \)</span></p>
+
+<p><span  class="math">\( a^{[l-1]} = g^{[l]}(z^{[l]}) \)</span>
+</center></p>
+
+<p>where;</p>
+
+<p><span  class="math">\( l \)</span> = <span  class="math">\( l\)</span>-th  layer of the network</p>
+
+<p><span  class="math">\[ A^{[0]} = X  \]</span></p>
+
+<h3 id="matrix-dimensions">Matrix Dimensions</h3>
+
+<table style="width: 100%">
+    <tr>
+        <td>$$ W^{[l]}, dW^{[l]} $$</td>
+        <td>$$ (n^{[l]}, n^{[l-1]}) $$</td>
+    </tr>
+    <tr>
+        <td>$$ b^{[l]}, db^{[l]} $$</td>
+        <td>$$ (n^{[l]}, 1) $$</td>
+    </tr>
+</table>
+
+<p>The dimensiosn in forward propagation equations would be as follows:</p>
+
+<ul>
+<li><strong>For 1 training example:</strong></li>
+</ul>
+
+<table style="width: 100%">
+    <tr>
+        <td>$$ z^{[l]} = $$</td>
+        <td>$$ W^{[l]} . $$</td>
+        <td>$$ a^{[l-1]} + $$</td>
+        <td>$$ b^{[l]} $$</td>
+    </tr>
+    <tr>
+        <td>$$ (n^{[l]}, 1) $$</td>
+        <td>$$ (n^{[l]}, n^{[l-1]}) $$</td>
+        <td>$$ (n^{[l-1]}, 1) $$</td>
+        <td>$$ (n^{[l]}, 1) $$</td>
+    </tr>
+</table>
+
+<ul>
+<li><strong>For m training example:</strong></li>
+</ul>
+
+<table style="width: 100%">
+    <tr>
+        <td>$$ Z^{[l]} = $$</td>
+        <td>$$ W^{[l]} . $$</td>
+        <td>$$ A^{[l-1]} + $$</td>
+        <td>$$ b^{[l]} $$</td>
+    </tr>
+    <tr>
+        <td>$$ (n^{[l]}, m) $$</td>
+        <td>$$ (n^{[l]}, n^{[l-1]}) $$</td>
+        <td>$$ (n^{[l-1]}, m) $$</td>
+        <td>$$ (n^{[l]}, 1) \rightarrow (n^{[l]}, m) $$</td>
+    </tr>
+</table>
+
+<h3 id="building-block-of-the-network">Building Block of the Network</h3>
+
+<p>For every layer l, we are doing following computations:</p>
+
+<p><center><img src="/assets/DLai_1/buildBlock.PNG"/></center></p>
+
+<p>In short, the whole process for <strong>L</strong> Layers is as follows:</p>
+
+<p><center><img src="/assets/DLai_1/buildL.PNG"/></center></p>
+
+<h4 id="forward-propagation">Forward Propagation</h4>
+
+<p><center><img src="/assets/DLai_1/forwardBlock.PNG"/></center></p>
+
+<h4 id="back-propagation">Back Propagation</h4>
+
+<p><center><img src="/assets/DLai_1/backBlock.PNG"/></center></p>
+
+<h2 id="parameters-vs-hyperparameters">Parameters vs Hyper-Parameters</h2>
+
+<p><center><img src="/assets/DLai_1/hyperParams.PNG"/></center></p>
+
+<blockquote>
+<p>Usually, hyperparameter inference from one domain to another (e.g. Vision to NLP) does not work, but sometimes it might.</p>
+
+<p>Even if you tune your network to some hyper-parameters, with time they might change due to the constant advancements in infrastructure (CPUs, GPUs etc.).</p>
+</blockquote>
+
+<h2 id="why-use-deep-networks">Why use Deep Networks?</h2>
+
+<p>As the network gets deeper, it starts learning more and more complex features.</p>
+
+<p><center><img src="/assets/DLai_1/deepLayer1.PNG"/></center></p>
+
+<h3 id="circuit-theory-and-deep-learning">Circuit Theory and Deep Learning</h3>
+
+<p>With Circuit theory, it can be proved that <code>there are functions that can be computed with smaller L-layers but the same function would require exponential units to be computed by a single layer.</code></p>
+
+<p><center><img src="/assets/DLai_1/deepLayer2.PNG"/></center></p>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>
