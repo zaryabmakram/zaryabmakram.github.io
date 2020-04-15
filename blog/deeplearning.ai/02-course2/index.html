@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Zaryab Akram ">
+<meta name="description" content="Train/ Dev/ Test Sets  Train Dev/ Cross-Validation Test   Small Data 70% 15% 15%   Big Data 98% (1 million) 1% (10,000) 1% (10,000)   In real world application, we often do not have enough data and our models are data hungry. Its alright to collect Train data from multiple sources (e.g. Web Scraping when actual application deals with photos takes from a phone camera) and can be different from distribution different from dev/ test sets." />
+<meta name="keywords" content=", deeplearning.ai, deep-learning, machine-learning, andrew-ng" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://zaryabmakram.github.io/blog/deeplearning.ai/02-course2/" />
+
+
+    <title>
+        
+            Improving Deep Neural Networks :: Zaryab Muhammad Akram  — Personal Website
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.a71f1ccb2abf86c1f9d46cddfa6403b99497528c340efb7c3589023cc9808b15.css">
+
+
+
+
+<meta itemprop="name" content="Improving Deep Neural Networks">
+<meta itemprop="description" content="Train/ Dev/ Test Sets  Train Dev/ Cross-Validation Test   Small Data 70% 15% 15%   Big Data 98% (1 million) 1% (10,000) 1% (10,000)   In real world application, we often do not have enough data and our models are data hungry. Its alright to collect Train data from multiple sources (e.g. Web Scraping when actual application deals with photos takes from a phone camera) and can be different from distribution different from dev/ test sets.">
+<meta itemprop="datePublished" content="2020-04-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3281">
+<meta itemprop="image" content="https://zaryabmakram.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="deeplearning.ai,deep-learning,machine-learning,andrew-ng," /><meta property="og:title" content="Improving Deep Neural Networks" />
+<meta property="og:description" content="Train/ Dev/ Test Sets  Train Dev/ Cross-Validation Test   Small Data 70% 15% 15%   Big Data 98% (1 million) 1% (10,000) 1% (10,000)   In real world application, we often do not have enough data and our models are data hungry. Its alright to collect Train data from multiple sources (e.g. Web Scraping when actual application deals with photos takes from a phone camera) and can be different from distribution different from dev/ test sets." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zaryabmakram.github.io/blog/deeplearning.ai/02-course2/" />
+<meta property="og:image" content="https://zaryabmakram.github.io/"/>
+<meta property="article:published_time" content="2020-04-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-15T00:00:00+00:00" /><meta property="og:site_name" content="Zaryab Muhammad Akram" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zaryabmakram.github.io/"/>
+
+<meta name="twitter:title" content="Improving Deep Neural Networks"/>
+<meta name="twitter:description" content="Train/ Dev/ Test Sets  Train Dev/ Cross-Validation Test   Small Data 70% 15% 15%   Big Data 98% (1 million) 1% (10,000) 1% (10,000)   In real world application, we often do not have enough data and our models are data hungry. Its alright to collect Train data from multiple sources (e.g. Web Scraping when actual application deals with photos takes from a phone camera) and can be different from distribution different from dev/ test sets."/>
+
+
+
+    <meta property="article:section" content="deeplearning.ai" />
+
+
+
+    <meta property="article:published_time" content="2020-04-15 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">/home/zaryab/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://zaryabmakram.github.io/blog/">Blog</a></li><li><a href="https://zaryabmakram.github.io/CV.pdf">CV</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://zaryabmakram.github.io/blog/deeplearning.ai/02-course2/">Improving Deep Neural Networks</a></h2>
+
+            
+
+            <div class="post-content">
+                <p><center><img src="/assets/DL_logo.png" style="zoom: 50%;" /></center></p>
+
+<h2 id="train-dev-test-sets">Train/ Dev/ Test Sets</h2>
+
+<table style="width: 100%">
+    <th>
+        <td style="font-weight: bold;">Train</td>
+        <td style="font-weight: bold;">Dev/ Cross-Validation</td>
+        <td style="font-weight: bold;">Test</td>
+    </th>
+    <tr>
+        <td style="font-weight: bold;">Small Data</td>
+        <td>70%</td>
+        <td>15%</td>
+        <td>15%</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold;">Big Data</td>
+        <td>98% (1 million)</td>
+        <td>1% (10,000)</td>
+        <td>1% (10,000)</td>
+    </tr>
+</table>
+
+<p>In real world application, we often do not have enough data and our models are data hungry. Its alright to collect <strong>Train data</strong> from multiple sources (e.g. Web Scraping when actual application deals with photos takes from a phone camera) and can be different from distribution different from dev/ test sets.</p>
+
+<p>But <strong>Dev</strong> and <strong>Test</strong> Data should be from the distribution of the actual required application so we can fine tune our model accordingly.</p>
+
+<blockquote>
+<p>Dev and test sets should come from the same distribution.</p>
+</blockquote>
+
+<p>It is alright not to have a test set at times if you do not need an totally unbias estimation of your model.</p>
+
+<h2 id="bias-vs-variance">Bias vs Variance</h2>
+
+<table style="width: 100%">
+    <tr>
+        <td><img src="/assets/DLai_2/biasVarience.PNG"/></td>
+        <td><img src="/assets/DLai_2/highBiasVarience.PNG"/></td>
+    </tr>
+</table>
+
+<p><strong>Higher Dimension models are more prone to High Bias + High Variance case.</strong></p>
+
+<p>It is easy to visualize and detect Bias and Variance in 2D examples.</p>
+
+<p>For higher dimensions, we can use the <code>Train and Dev set Errors</code> to test bias and variance:</p>
+
+<p><center><img src="/assets/DLai_2/biasTest.PNG"/></center></p>
+
+<p>The above statistics assume the <code>Optimal/ Human/ Baye's Error</code> to be 0%.</p>
+
+<p>In short:</p>
+
+<blockquote>
+<p>Looking at the <code>training set error</code>, we can analyze <code>bias</code> (how well we are fitting the training data).</p>
+
+<p>And then looking at the <code>difference between Dev error and Train error</code>, we can check the <code>variance</code>.</p>
+</blockquote>
+
+<h3 id="bias-vs-variance-trade-off">Bias vs Variance Trade Off</h3>
+
+<p>In pre-big data era, there was a tradeoff between bias and variance, <code>decreasing bias would increase variance and vice versa</code>, but not anymore.</p>
+
+<h2 id="basic-recipe-for-tuning-models">Basic Recipe for Tuning Models</h2>
+
+<p><center><img src="/assets/DLai_2/recipe.PNG"/></center></p>
+
+<h2 id="regularization">Regularization</h2>
+
+<h3 id="l1-l2-regularization">L1/ L2 Regularization</h3>
+
+<p><center><img src="/assets/DLai_2/l1l2.PNG"/></center></p>
+
+<p><center> <span  class="math">\( \lambda = Regularization \, Parameter \)</span> </center></p>
+
+<p>We usually <code>do not apply regularization to the bias term</code>as its just a single constant. Most of the dimensions are covered by our weight matrix.</p>
+
+<blockquote>
+<p>It has been seen that <code>L1 regularization makes W sparse</code> (lots of zeros) and thus is said to compress the network.</p>
+</blockquote>
+
+<h4 id="frobenius-norm">Frobenius Norm</h4>
+
+<p>L2 Norm on a Neural Network is called Frobenius Norm.</p>
+
+<p><center><img src="/assets/DLai_2/regNN.PNG"/></center></p>
+
+<p><center><img src="/assets/DLai_2/regNN2.PNG"/></center></p>
+
+<h5 id="regularization-in-back-propagation">Regularization in Back Propagation</h5>
+
+<p><center><img src="/assets/DLai_2/regBP.png"/></center></p>
+
+<blockquote>
+<p>When implementing regularization, if the regularized cost is not plotted against the number of iterations, we will not observe the cost decreasing with each iteration.</p>
+</blockquote>
+
+<h4 id="regularization-as-weight-decay">Regularization as Weight Decay</h4>
+
+<p><center><img src="/assets/DLai_2/wDecay.png"/></center></p>
+
+<p>As we can see that we are now <code>multiplying our weights with a number less than 1</code>. So that is why, Frobenius Norm is also called <code>weight decay</code>.</p>
+
+<h4 id="how-regularization-works">How Regularization Works?</h4>
+
+<p>Regularization basically <code>zeros out the effect of hidden units (minimize their effect) by making the value of w</code> for them almost 0. Thus, our problem moves towards biasness from high variance.</p>
+
+<p><center><img src="/assets/DLai_2/zNN.PNG"/></center></p>
+
+<p>Another intuition could be that if <strong><span  class="math">\( \lambda \)</span> has a large value</strong>, it <strong>decreases <span  class="math">\( w \)</span></strong>, which <strong>in turn decreases <span  class="math">\( z \)</span></strong>. Thus, supposing we are using <strong>tanh function</strong> for activation unit, <strong>small z values means our <span  class="math">\( a \)</span> will be mostly in the linear part of the tanh function</strong>, thus <strong>preventing our NN to commute the high-powered terms that cause variance</strong>.</p>
+
+<p><center><img src="/assets/DLai_2/tanhVar.PNG" style="zoom: 75%;"/></center></p>
+
+<blockquote>
+<p>L2-regularization relies on the assumption that a model with small weights is simpler than a model with large weights. Thus, by penalizing the square values of the weights in the cost function you drive all the weights to smaller values. It becomes too costly for the cost to have large weights! This leads to a smoother model in which the output changes more slowly as the input changes.</p>
+</blockquote>
+
+<h3 id="inverted-dropout-regularization">Inverted Dropout Regularization</h3>
+
+<p>For each layer, we drop different units randomly, based on a defined probability.</p>
+
+<p><center><img src="/assets/DLai_2/dropout1.PNG" style="zoom: 75%;"/></center></p>
+
+<p><center><img src="/assets/DLai_2/dropout2.PNG" style="zoom: 75%;"/></center></p>
+
+<p>The last <strong>normalization with keep-prob step</strong> ensures that <strong>the value of Z is not affected</strong> so we <strong>do not have to scale our weights during test time</strong>.</p>
+<pre><code>Suppose, keep_prob = 0.6
+
+Original Activation = x 
+After applying Dropout = x - 0.4x = 0.6x
+
+After Normalization with keep_prob = 0.6x/keep_prob = x  (= Original)</code></pre>
+<p>We can use <code>different keep-prob for different layers</code>.</p>
+
+<p><center><img src="/assets/DLai_2/dropout2.PNG" style="zoom: 75%;"/></center></p>
+
+<blockquote>
+<p>Dropout usually is not applied to the input layer, but if applied, we use large value of keep-prob ~ 0.9</p>
+
+<p>When plotting cost function against number of iterations, we need to turn dropout off to test whether the gradient descent implementation is correct or not as due to dropout, we will not get a smooth, constantly decreasing cost.</p>
+</blockquote>
+
+<h4 id="dropout-backpropagation">Dropout: Backpropagation</h4>
+
+<ul>
+<li><p>During forward propagation, we shut down some neurons, by applying a mask <span  class="math">\( D^{[1]} \)</span>  to A1. In backpropagation, we will have to shut down the same neurons, by reapplying the same mask  <span  class="math">\( D^{[1]} \)</span>  to dA1.</p></li>
+
+<li><p>During forward propagation, we had <strong>divided A1 by keep_prob</strong>. In backpropagation, we'll therefore have to <strong>divide dA1 by keep_prob</strong> again.</p></li>
+</ul>
+
+<h4 id="dropout-at-test-time">Dropout at Test Time</h4>
+
+<blockquote>
+<p>We do <strong>NOT use dropout at test time</strong>.</p>
+</blockquote>
+
+<p>Sometimes, a number of predictions are made with dropout and then a average is computed but that gets computaionally expensive.</p>
+
+<h4 id="why-dropout-works">Why Dropout Works?</h4>
+
+<p>Due to dropout, <code>the network now can not rely on any single neuron/ feature as it can be dropped out</code>. Thus, it divides the weights to multiple neurons which <code>has the effect of weight shrinking, similar to L2 Regularization</code>.</p>
+
+<blockquote>
+<p>The idea behind drop-out is that at each iteration, you train a different model that uses only a subset of your neurons. With dropout, your neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time.</p>
+</blockquote>
+
+<p>Dropout is usually used in Computer Vision as the input (images) have very large parameters.</p>
+
+<h3 id="data-augmentation">Data Augmentation</h3>
+
+<p>To easily create more data, we could try rotations/ random cropping to our existing train data.</p>
+
+<blockquote>
+<p>It is not as effective as totally new examples.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_2/dataAug.PNG" style="zoom: 75%;"/></center></p>
+
+<h3 id="early-stopping">Early Stopping</h3>
+
+<p>You just stop the training of your NN midway where you find the train error and dev error difference to be comparatively less.</p>
+
+<blockquote>
+<p>As initially, w is close to zero (due to random initialization) so stopping early, we have a comparative Z.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_2/earlyStop1.PNG" style="zoom: 75%;"/></center></p>
+
+<h4 id="drawback-of-early-stopping">Drawback of Early Stopping</h4>
+
+<p>We could optimize (lower) cost even more but early stopping prevents that.</p>
+
+<p>What we should do is to first optimize cost as much as possible and then focus on reducing overfitting. This process is called <strong>Orthogonalization</strong>. But early stopping combines these two processes.</p>
+
+<p><center><img src="/assets/DLai_2/earlyStop2.PNG"/></center></p>
+
+<h2 id="normalizing-training-data">Normalizing Training Data</h2>
+
+<ol>
+<li>Subract Mean</li>
+<li>Divide by Standard Deviation</li>
+</ol>
+
+<p><center>
+<span  class="math">\( x = \frac{x - \mu}{\sigma}\)</span><br>
+</center></p>
+
+<p><center><img src="/assets/DLai_2/normal1.PNG"/></center></p>
+
+<blockquote>
+<p>We use the same Mean and SD value to normalize test set.</p>
+
+<p>Normalization causes<code>different features of our data to be of same range</code>, making the <code>cost function symmetric</code>. Thus, <code>gradient descent requires less steps to reach minima</code>.</p>
+</blockquote>
+
+<p>So, the <code>training process is optimized</code>.</p>
+
+<p><center><img src="/assets/DLai_2/normal2.PNG"/></center></p>
+
+<h2 id="vanishing-or-exploding-gradients">Vanishing or Exploding Gradients</h2>
+
+<p>Consider the following deep neural network, where we use linear activation functions <span  class="math">\( (g(z) = z) \)</span>.</p>
+
+<p><center><img src="/assets/DLai_2/vanishNN.PNG"/></center></p>
+
+<p>Suppose that the weight matrix for each layer is as follows:
+<center>
+<span  class="math">\( 
+W^{[1]} = W^{[2]} = ... = W^{[L-1]} = \begin{bmatrix}
+1.5 & 0\\
+0 & 1.5
+\end{bmatrix}
+\)</span>
+</center></p>
+
+<p>That means that:</p>
+
+<p><center>
+<span  class="math">\( 
+\hat{y} = W^{L} \, W^{L-1} x = W^{L}    
+\begin{bmatrix}
+1.5 & 0\\
+0 & 1.5
+\end{bmatrix}^{L-1} x 
+\)</span>
+</center></p>
+
+<p>Therefore, computing <span  class="math">\( (1.5)^{L-1} \)</span> will cause <code>exploding gradients</code>, very large value.</p>
+
+<p>Similarly, if:</p>
+
+<p><center>
+<span  class="math">\( 
+W^{[1]} = W^{[2]} = ... = W^{[L-1]} = \begin{bmatrix}
+0.5 & 0\\
+0 & 0.5
+\end{bmatrix}
+\)</span>
+</center></p>
+
+<p>computing <span  class="math">\( (0.5)^{L-1} \)</span> will cause <code>vanishing gradient</code>, very small value.</p>
+
+<p>In short,</p>
+
+<p><center> <span  class="math">\( W < I  \Rightarrow Vanishing \, Gradients \)</span> </center></p>
+
+<p><center> <span  class="math">\( W > I \Rightarrow Exploding \, Gradients \)</span></center></p>
+
+<p>where,</p>
+
+<p><center>
+<span  class="math">\( 
+I = 
+\begin{bmatrix}
+1 & 0\\
+0 & 1
+\end{bmatrix}
+\)</span>
+</center></p>
+
+<h3 id="solution-careful-weight-initialization">Solution: Careful Weight Initialization</h3>
+
+<p>Consider a single neuron:</p>
+
+<p><center><img src="/assets/DLai_2/weightInit.PNG"/></center></p>
+
+<p>As its computing sum of products of weights with training features, so if <code>larger the number of training features, we want 
+weights to be smaller</code>.</p>
+
+<p>Thus, one possible solution is:</p>
+
+<p><center>
+<span  class="math">\( Var(w_i) = \frac{1}{n} \)</span>
+</center></p>
+
+<h4 id="initialization-relu">Initialization: ReLU</h4>
+
+<p>For ReLU:</p>
+
+<p><center>
+<span  class="math">\( Var(w_i) = \frac{2}{n} \)</span>
+</center></p>
+
+<p>or <code>He Initialization</code> (similar to Xavier):</p>
+
+<p><span  class="math">\[ Var(w_i) = \sqrt{\frac{2}{n^{[l-1]}}} \]</span></p>
+
+<p><center><img src="/assets/DLai_2/weightInit2.PNG"/></center></p>
+
+<h4 id="initialization-tanh">Initialization: Tanh</h4>
+
+<p>For tanh, we can also use <code>Xavier Initialization</code>:</p>
+
+<p><span  class="math">\[ Var(w_i) = \sqrt{\frac{1}{n^{[l-1]}}} \]</span></p>
+
+<p>or</p>
+
+<p><span  class="math">\[ Var(w_i) = \sqrt{\frac{2}{n^{[l-1]} \star \, n^{[l]}}} \]</span></p>
+
+<h2 id="gradient-checking">Gradient Checking</h2>
+
+<h3 id="gradient-definition">Gradient Definition</h3>
+
+<p><center><img src="/assets/DLai_2/gradCheck1.PNG"/></center></p>
+
+<p>In turns out that,</p>
+
+<p><center>
+<span  class="math">\( \lim_{\epsilon \to 0} \frac{f(\theta + \epsilon) - f(\theta)}{\epsilon} \rightarrow Error: O(\epsilon) \)</span>
+</center></p>
+
+<p>But,</p>
+
+<p><center>
+<span  class="math">\( \lim_{\epsilon \to 0} \frac{f(\theta + \epsilon) - f(\theta- \epsilon)}{2\epsilon} \rightarrow Error: O(\epsilon^2) \)</span>
+</center></p>
+
+<p>Thus, the second formula gives us better approximation.</p>
+
+<h3 id="grad-check-implementation">Grad Check: Implementation</h3>
+
+<p><center><img src="/assets/DLai_2/gradCheck2.PNG"/></center></p>
+
+<p><center><img src="/assets/DLai_2/gradCheck3.PNG"/></center></p>
+
+<p>To check their difference, we can compute <code>Euclidean distance</code>:</p>
+
+<p><center><img src="/assets/DLai_2/gradCheck4.PNG"/></center></p>
+
+<p>where:</p>
+
+<p><center>
+<span  class="math">\( || d\theta||^2 = np.linalg.norm(d\theta) \)</span>
+</center></p>
+
+<h3 id="grad-check-notes">Grad Check: Notes</h3>
+
+<ol>
+<li>It is a slow process, so only use it for debugging.</li>
+<li>If the algorithm fails grad check, look at the components to identify the bug.</li>
+<li>Do not forget to <code>include the regularization term</code>, if used.</li>
+<li>It <code>does not work with Dropout</code>.</li>
+<li>If the algorithm fails grad check, sometimes its due to the random initialization. So let it train for sometime and then try again.</li>
+</ol>
+
+<h2 id="minibatch-gradient-descent">Mini-batch gradient descent</h2>
+
+<p>As we have previously seen that each gradient step is taken after a whole pass over our entire dataset. If our dataset is large (~ 5 million examples), training becomes slower, even with vectorization.</p>
+
+<p>So, the dataset is divided into small parts, each part called a <strong>mini-batch</strong>.</p>
+
+<p>Let’s say we divided our dataset with 5,000,000 examples into 5,000 mini-batches each with 1,000 examples.</p>
+
+<p><center><img src="/assets/DLai_2/miniBatch1.PNG"/></center></p>
+
+<p>Here, <span  class="math">\( (X^{\{t\}}, Y^{\{t\}} ) \)</span> is <strong>t-th</strong> mini-batch.</p>
+
+<blockquote>
+<p>1 Epoch = 1 iteration over the entire dataset.</p>
+</blockquote>
+
+<p>In the example above, <strong>1 epoch = 5,000 iterations</strong>.</p>
+
+<h3 id="gradcheck-for-minibatch">Grad-Check for Mini-Batch</h3>
+
+<p>Plot J against ## of mini-batches. The graph will be <strong>noisy but it should still be decreasing</strong>.</p>
+
+<p>It is <code>noisy as at each iteration we are using a different batch</code>, as if using new training examples.</p>
+
+<p><center><img src="/assets/DLai_2/miniBatch2.PNG"/></center></p>
+
+<h3 id="minibatch-size">Mini-Batch Size</h3>
+
+<table style="width: 100%">
+    <tr>
+        <td>Batch Size</td>
+        <td>Gradient Descent Algorithm</td>
+    </tr>
+    <tr>
+        <td style="color: white; background-color:blue;">m</td>
+        <td style="color: white; background-color:blue;">Batch - GD</td>
+    </tr>
+    <tr>
+        <td style="color: white; background-color:green;">1 < Size < m</td>
+        <td style="color: white; background-color:green;">Mini-Batch - GD</td>
+    </tr>
+    <tr>
+        <td style="color: white; background-color:#9400D3;">1</td>
+        <td style="color: white; background-color:#9400D3;">Stochastic - GD</td>
+    </tr>
+</table>
+
+<blockquote>
+<p><strong>Stochastic Gradient Descenet</strong> is really noisy and does not fully converge to the minima. But it can handled by lowering the learning rate, and a value quite close to the minima is obtained.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_2/miniBatch3.PNG" style="zoom: 75%;"/></center></p>
+
+<p>A value in between batch and Stochastic GD is used in practice.</p>
+
+<p><center><img src="/assets/DLai_2/miniBatch4.PNG"/></center></p>
+
+<blockquote>
+<p><strong>Mini-Batch Gradient Descenet</strong> also does not truly converge to the minima.</p>
+</blockquote>
+
+<h4 id="how-to-choose-minibatch-size">How to choose Mini-Batch size?</h4>
+
+<p><center><img src="/assets/DLai_2/miniBatch5.PNG"/></center></p>
+
+<p>We need make sure that our CPU/GPU can fit each mini-batch to process it, else learning will be slow.</p>
+
+<h2 id="exponentially-weighted-moving-average">Exponentially Weighted Moving Average</h2>
+
+<p>Consider the following data (of Temperature in London):</p>
+
+<p><center><img src="/assets/DLai_2/expAvg1.PNG"/></center></p>
+
+<p>We can compute the moving average of the above data as follows:</p>
+
+<p><center><img src="/assets/DLai_2/expAvg2.PNG"/></center></p>
+
+<p>where:</p>
+
+<p><span  class="math">\( v_t \)</span> = Current Moving Average</p>
+
+<p><span  class="math">\( \theta_t \)</span> = Current Day Temperate</p>
+
+<h3 id="effect-of--beta-">Effect of <span  class="math">\( \beta \)</span></h3>
+
+<p><center><img src="/assets/DLai_2/expAvg6.PNG"/></center></p>
+
+<table style="width: 100%">
+    <tr>
+        <td style="color: white; background-color:red;"><center>&Beta; = 0.9</center></td>
+        <td style="color: white; background-color:green;"><center>&Beta; = 0.98</center></td>
+        <td style="color: black; background-color:yellow;"><center>&Beta; = 0.5</center></td>
+    </tr>
+    <tr>
+        <td><center><img src="/assets/DLai_2/expAvg3.PNG"/></center></td>
+        <td><center><img src="/assets/DLai_2/expAvg4.PNG"/></center></td>
+        <td><center><img src="/assets/DLai_2/expAvg5.PNG"/></center></td>
+    </tr>
+</table>
+
+<blockquote>
+<p><strong>Larger the value of <span  class="math">\( \beta \)</span></strong> implies <strong>averaging over more number of days</strong>, i.e. a <strong>more smoother curve</strong>. Thus, it <strong>adapts more slowly to changes</strong>.</p>
+
+<p>Increasing <span  class="math">\( \beta \)</span> will <strong>shift the curve towards right</strong>.</p>
+</blockquote>
+
+<h3 id="understand-exponentially-weighted-average">Understand Exponentially Weighted Average</h3>
+
+<p>It turns out that exponentially weighted averages are basically <strong>element-wise product between data elements and their corresponding value of an exponentially decreasing function</strong>.</p>
+
+<p><center><img src="/assets/DLai_2/expAvg7.PNG"/></center></p>
+
+<p><center><img src="/assets/DLai_2/expAvg8.PNG"/></center></p>
+
+<blockquote>
+<p>All these coefficients sum up to approximately 1, where <strong>coefficients are the values from the exponentially decreasing curve</strong>.</p>
+</blockquote>
+
+<p>The above formula uses window size as:</p>
+
+<p><center>
+<span  class="math">\( {\beta^x} = \frac{1}{e} \rightarrow {(1 - \epsilon)}^\frac{1}{ \epsilon } = \frac{1}{e} \)</span>
+</center></p>
+
+<p>Where,</p>
+
+<p>x = no. of data units to have averaged on</p>
+
+<blockquote>
+<p>That is it will take <span  class="math">\( x \)</span> days to decrease the height of the exponentially decreasing curve by 1/e.</p>
+</blockquote>
+
+<h3 id="algorithm-implementation">Algorithm Implementation</h3>
+
+<p><center><img src="/assets/DLai_2/expAvg9.PNG"/></center></p>
+
+<h3 id="advantages">Advantages</h3>
+
+<p>We use exponentially weighted average as it is an easy way to average over large number of quantities. <strong>(Memory and Computationally Inexpensive)</strong>. Even though it is <strong>not as accurate as normal averaging method</strong>.</p>
+
+<h3 id="bias-correction">Bias Correction</h3>
+
+<p>It turns out that when we implement exponentially weighted average, instead of getting the <strong>green curve</strong>, we actually obtain <strong>purple curve</strong>:</p>
+
+<table style="width: 100%">
+    <tr>
+        <td><center><img src="/assets/DLai_2/expAvg10.PNG"/></center></td>
+        <td><center><img src="/assets/DLai_2/expAvg11.PNG"/></center></td>
+    </tr>
+</table>
+
+<p>As we can see that the curve <strong>intially starts from a little lower</strong>. It is due to fact that we <strong>initalize v=0</strong>, which in turns <strong>decreases the effect of inital data points on the average</strong>.</p>
+
+<p><center><img src="/assets/DLai_2/expAvg12.PNG"/></center></p>
+
+<p>In order to move the curve from green to purple, instead of computing <span  class="math">\( v_t \)</span> we compute:</p>
+
+<p><span  class="math">\[ v_t \xrightarrow[]{\text{instead compute}} \frac{v_t}{1 - \beta^t} \]</span></p>
+
+<blockquote>
+<p>As <strong>t</strong> gets large with each iteration, <span  class="math">\( \beta^t \approx 0 \)</span> and <span  class="math">\( (1 - \beta)^t \approx 1 \)</span>. So <strong>Bias correction has almost no effect for later data points</strong>.</p>
+</blockquote>
+
+<h2 id="gradient-descent-with-momentum">Gradient Descent with Momentum</h2>
+
+<p><strong>Basic Idea:</strong> To Compute Exponentially Weighted Average of gradients and use that to update the weights. As if to fit an average curve (using exponentially weighted averages) to the current gradients and follow that path.</p>
+
+<p>Consider the following cost function:</p>
+
+<p><center><img src="/assets/DLai_2/momentum1.PNG"/></center></p>
+
+<p>For the above cost function, we want <strong>slow learning in vertical axis</strong> and <strong>fast learning in horizontal axis</strong>.</p>
+
+<h3 id="implementation">Implementation</h3>
+
+<p><center><img src="/assets/DLai_2/momentum2.PNG"/></center></p>
+
+<blockquote>
+<p>Usually, <span  class="math">\( \beta = 0.9 \)</span> that is <strong>averaging over last 10 gradients</strong>. We usally keep <span  class="math">\( \beta \)</span> constant and instead tune learning rate accordingly. Common Range: from 0.8 to 0.999.</p>
+
+<p>If  <span  class="math">\( \beta = 0 \)</span> , then this just becomes <strong>standard gradient descent without momentum</strong>.</p>
+
+<p>In practice, momentum is implemented <strong>without Bias Correction</strong>.</p>
+</blockquote>
+
+<p>What using momentum does is averages the random movement of gradients as follows:</p>
+
+<p><center><img src="/assets/DLai_2/momentum3.PNG"/></center></p>
+
+<blockquote>
+<p>Another intuition could be: Cost Function = Ball Shaped Curve, dW, db to be acceleration of a ball, Vdw/ Vdb to be the speed and <span  class="math">\( \beta \)</span> to be the friction, not letting the ball to speed up much.</p>
+
+<p>In practice, sometimes <span  class="math">\(( 1 - \beta )\)</span> term is omitted <span  class="math">\( (v_{dw} = \beta v_{dw} + dW) \)</span> , as if <span  class="math">\( v_{dw}\)</span> has been scaled by  <span  class="math">\(( 1 - \beta )\)</span>. So then we have to tune the learning rate accordingly. That is why, it is not preferred.</p>
+</blockquote>
+
+<h2 id="root-mean-square-rms-prop">Root Mean Square (RMS) Prop</h2>
+
+<p><center><img src="/assets/DLai_2/rms1.PNG"/></center></p>
+
+<p>In practice, in order to make sure that we do not divide by 0 or relatively small value making W/ b blow up, we add a small value to it.</p>
+
+<p><center><img src="/assets/DLai_2/rms2.PNG"/></center></p>
+
+<h3 id="working">Working</h3>
+
+<p>In order to decrease vertical movement (cause of b) and increase horizontal movement (cause of W), we divide b by Sdb (large number) and W by Sdw (small number).</p>
+
+<h2 id="adam-adaptive-moment-estimation">Adam (Adaptive Moment Estimation)</h2>
+
+<blockquote>
+<p>Adam = Momentum + RMS Prop</p>
+</blockquote>
+
+<p>We do <strong>need to apply Bias Correction</strong> to both Momentum and RMSProp terms in this case, <strong>when implementing Adam</strong>.</p>
+
+<p><center><img src="/assets/DLai_2/adam1.PNG"/></center></p>
+
+<blockquote>
+<p>t = Number of iteration of Adam</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>   <span style="color:#75715e">## initialize number of iteration of adam</span>
+v, s <span style="color:#f92672">=</span> initialize_parameters_adam()
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> num_epochs:
+    <span style="color:#66d9ef">for</span> mini_batch <span style="color:#f92672">in</span> mini_batches: 
+        <span style="color:#75715e">## FORWARD PASS</span>
+        <span style="color:#75715e">## BACKWARD PASS </span>
+
+        t <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>    <span style="color:#75715e">## increment t</span>
+        parameters, v, s <span style="color:#f92672">=</span> update_adam(<span style="color:#f92672">..</span>, t)   <span style="color:#75715e">## update parameters using Adam </span></code></pre></div>
+<p>Some recommended hyper-parameter values are:</p>
+
+<p><center><img src="/assets/DLai_2/adam2.PNG"/></center></p>
+
+<blockquote>
+<p>In practice, we set these hyperparameters values and just tune the learning rate accordingly.</p>
+</blockquote>
+
+<h2 id="learning-rate-decay">Learning Rate Decay</h2>
+
+<p>As we know that in mini-batch GD, it doesn’t really converge and just revolves around minima. So, what we do is slowly reduce learning rate with every iteration such that initially, learning rate is large whereas at end its small so we take small steps (<strong>being closer in a tighter region around minima</strong>).</p>
+
+<p>We can implement it as follows:</p>
+
+<p><center><img src="/assets/DLai_2/ld1.PNG"/></center></p>
+
+<p>Other formulas people use are:</p>
+
+<p><center><img src="/assets/DLai_2/ld2.PNG"/></center></p>
+
+<blockquote>
+<p>In practice, when training a smaller number of models, we can also <strong>change learning rate manually over time</strong>.</p>
+</blockquote>
+
+<h2 id="local-optima">Local Optima</h2>
+
+<p>With the evolution of deep learning era, the intuition of local minima has also evolved.</p>
+
+<ul>
+<li>In <strong>low dimensions</strong>, if functions have <strong>gradient=0</strong> at some point, it is very much likely it is a <strong>local optimum</strong>.</li>
+<li>But in <strong>high dimensions</strong> those <strong>gradient=0</strong> points are <strong>SADDLE POINTS</strong> and not local optima.</li>
+<li>It is <strong>very unlikely to run into a saddle points</strong> as at a saddle point, all dimensions are to either form a concave/ convex shape.<br></li>
+<li>Gradient Descent gets really slow where cost function plateaus. That’s where Adam/ RMS prop help a lot.<br></li>
+</ul>
+
+<h2 id="hyperparameter-tuning">Hyperparameter Tuning</h2>
+
+<p>Different Hyperparameters have different importance:</p>
+
+<p><center><img src="/assets/DLai_2/hyperImp.PNG"/></center></p>
+
+<p>Try out <strong>Random Search (instead of Grid Search)</strong>, and <strong>narrow it down</strong> to the region more efficient for your problem.</p>
+
+<p><center><img src="/assets/DLai_2/hyper1.PNG"/></center></p>
+
+<h3 id="proper-scale-for-hyperparameters">Proper scale for Hyperparameters</h3>
+
+<p>If you are to tune <strong>Number of Units or Number of Layers</strong>, then <strong>trying out random number in a linear range is alright</strong>. But its <strong>not efficient for other hyperparameters</strong>.</p>
+
+<h4 id="tunning-learning-rate">Tunning Learning Rate</h4>
+
+<blockquote>
+<p>Use <strong>logarithmic scale</strong> for learning rate.</p>
+</blockquote>
+
+<ul>
+<li>Suppose your range is [0.001, 1]</li>
+<li>Take <strong>log base 10</strong> of both values.</li>
+<li>Pick a random number <strong>r</strong> in between those values</li>
+<li><span  class="math">\( \alpha = 10^r\)</span></li>
+</ul>
+
+<p><center><img src="/assets/DLai_2/lrSearch.PNG"/></center></p>
+
+<h4 id="tunning-exponentially-weighted-average-beta">Tunning Exponentially weighted average <span  class="math">\((\beta)\)</span></h4>
+
+<blockquote>
+<p>Instead of trying to find <span  class="math">\(\beta\)</span>, tune <span  class="math">\((1- \beta)\)</span> using the same process as above (using <strong>logarithmic scale</strong>).</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_2/betaTune.PNG"/></center></p>
+
+<h3 id="pandas-vs-caviar-approach">Pandas vs. Caviar Approach</h3>
+
+<ul>
+<li><strong>Pandas</strong> = Baby-sitting a single Model</li>
+<li><strong>Caviar</strong> = Training mutiple models with different hyperparameters in parallel</li>
+</ul>
+
+<p><center><img src="/assets/DLai_2/pandaCav.PNG"/></center></p>
+
+<h2 id="batch-normalization">Batch Normalization</h2>
+
+<p>As we saw earlier that normalizing inputs speeds up training, we can also normalize activations of hidden units.</p>
+
+<blockquote>
+<p>Usually <strong>Z is normalized instead of A</strong>.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_2/batchNorm1.PNG"/></center></p>
+
+<h3 id="implementation-1">Implementation</h3>
+
+<p><center><img src="/assets/DLai_2/batchNorm2.PNG"/></center></p>
+
+<p>The above implementation will always have <strong>Mean=0, Variance=1</strong>. But we do not want that as it will <strong>cluster values of Zs</strong>. Therefore, we add the following step:</p>
+
+<p><center><img src="/assets/DLai_2/batchNorm3.PNG"/></center></p>
+
+<blockquote>
+<p><span  class="math">\(\gamma\)</span>  and <span  class="math">\(\beta\)</span> are <strong>learnable parameters</strong>.</p>
+
+<p>To set Mean=0 and Variance=1, <span  class="math">\(\gamma = \sqrt{\sigma^2 + \epsilon} \,\)</span> and <span  class="math">\(\beta = \mu \,\)</span> i.e. <span  class="math">\(\, \widetilde{z}^{(i)} = z^{(i)}\)</span>
+<center><img src="/assets/DLai_2/batchNorm4.PNG"/></center></p>
+</blockquote>
+
+<p>And we will update <span  class="math">\(\gamma\)</span> and <span  class="math">\(\beta\)</span> just as we update weights in Gradient Descent:</p>
+
+<p><center><img src="/assets/DLai_2/batchNorm5.PNG"/></center></p>
+
+<blockquote>
+<p>Batch Normalization also works with <strong>Momentum</strong>, <strong>Adam</strong> or <strong>RMS Prop</strong>.</p>
+
+<p>Practically, Batch Normalization is <strong>used with Mini-Batches</strong>.</p>
+</blockquote>
+
+<h3 id="adding-batch-normalization-in-a-neural-net">Adding Batch Normalization in a Neural Net</h3>
+
+<p><center><img src="/assets/DLai_2/batchNorm6.PNG"/></center></p>
+
+<p>The <strong>mean substraction step</strong> of the Batch Normalization basically <strong>zeros out the scalling effect of bias term in Z</strong>. Therefore, <strong>it can be omitted</strong>.</p>
+
+<p><center><img src="/assets/DLai_2/batchNorm7.PNG"/></center></p>
+
+<h4 id="dimensions">Dimensions</h4>
+
+<p><span  class="math">\(\gamma\)</span> and <span  class="math">\(\beta\)</span> will have the same dimensions as the <strong>bias term of their corresponding layer</strong>.</p>
+
+<p><center><img src="/assets/DLai_2/batchNorm8.PNG"/></center></p>
+
+<h3 id="why-batch-normalization-works">Why Batch Normalization Works?</h3>
+
+<blockquote>
+<p>Batch Normalization makes the weights of the deeper layers more robust to the changes in the weights of earlier layers.</p>
+</blockquote>
+
+<p>According to <strong>Covariat Shift</strong>, if you are testing the model on data with distribution different that of the training data, the model will fail to generalize even though a similar function might be fitting the data.</p>
+
+<p>Consider the Layer 2 of the following Neural Network:</p>
+
+<p><center><img src="/assets/DLai_2/batchNorm9.PNG"/></center></p>
+
+<p>As <span  class="math">\(a^{[2]}\)</span> depends on <span  class="math">\(w^{[2]}\)</span> and <span  class="math">\(b^{[2]}\)</span> which are constantly changing i.e. distribution of the input to this layer is constantly changing, this will cause <strong>Covariat Shift Effect</strong>.</p>
+
+<p>What Batch Normalization does is that, even though the values of <span  class="math">\(w^{[2]}\)</span> and <span  class="math">\(b^{[2]}\)</span> change, their mean and variance remain almost the same reducing the Covariat Shift Effect and in turn faster training as if different layers are training almost independently (more robust).</p>
+
+<h3 id="regularization-effect-of-batch-normalization">Regularization Effect of Batch Normalization</h3>
+
+<p>As Batch Normalization is applied with Mini-Batches, as we are calculating mean and variance on a mini-batch (small number of examples), so it will have noise in it, and in turn noise in the value of <span  class="math">\(z^{[l]}\)</span>.</p>
+
+<p>This will cause the network to be dependent on any particular unit (<strong>same effect as Dropout Regulariztion</strong>).</p>
+
+<h3 id="batch-normalization-at-test-time">Batch Normalization at Test Time</h3>
+
+<p>As in calculation of mean and variance for each layer, many examples are used, but at test time, we only have a single example.</p>
+
+<p>So, we just <strong>estimate the value of mean and variance for each layer using exponentially weighted average over different values of mean and variances during training</strong> of mini-batches.</p>
+
+<blockquote>
+<p>We keep track of <span  class="math">\(\mu\)</span> and <span  class="math">\(\sigma\)</span> for in each layer during training using <strong>exponentially weighted moving average</strong>. And for our test example, we use these estimated values.</p>
+</blockquote>
+
+<h2 id="softmax-regression-multiclass-classification">Softmax Regression (Multiclass Classification)</h2>
+
+<p>Suppose we have multiclass classification problem (e.g. Cats, Dogs, Hens, Baby Chicks i.e. 4 classes). Now our network will be like:</p>
+
+<p><center><img src="/assets/DLai_2/softmax1.PNG"/></center></p>
+
+<p>In order to train the network, we will change the activate of output layer to <strong>softmax function</strong> as follows:</p>
+
+<p><center><img src="/assets/DLai_2/softmax2.PNG"/></center></p>
+
+<blockquote>
+<p>Softmax is basically an <strong>extension of Logistic Regression</strong> for multiclass problems.</p>
+</blockquote>
+
+<h3 id="softmax-implementation-example">Softmax Implementation Example</h3>
+
+<p><center><img src="/assets/DLai_2/softmax3.PNG"/></center></p>
+
+<h3 id="softmax-output">Softmax Output</h3>
+
+<p><center><img src="/assets/DLai_2/softmax4.PNG"/></center></p>
+
+<blockquote>
+<p>We can see that the <strong>decision boundary between 2 classes is linear</strong>.</p>
+</blockquote>
+
+<h3 id="loss-function">Loss Function</h3>
+
+<p><center><img src="/assets/DLai_2/softmax5.PNG"/></center></p>
+
+<h4 id="explaination">Explaination</h4>
+
+<p>Consider the following example:</p>
+
+<p><center><img src="/assets/DLai_2/softmax6.PNG"/></center></p>
+
+<p>When we apply the loss function on <span  class="math">\(y\)</span>, the only term left will be (as rest of the terms are zero):</p>
+
+<p><center>
+<span  class="math">\( \text{Loss} = -y_2 log(\hat{y}_2) = -log(\hat{y}_2) \)</span><br>
+</center></p>
+
+<p>As gradient descent tries to <strong>lower loss value</strong>, the only way possible to make <span  class="math">\( -log(\hat{y}_2) \)</span> small is to make <span  class="math">\( \hat{y}_2 \)</span> large, and thats what we want.</p>
+
+<h3 id="cost-function">Cost Function</h3>
+
+<p><center><img src="/assets/DLai_2/softmax7.PNG"/></center></p>
+
+<h3 id="backpropagation-step">Backpropagation Step</h3>
+
+<p><center><img src="/assets/DLai_2/softmax8.PNG"/></center></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zaryabmakram.github.io/tags/deeplearning.ai">deeplearning.ai</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/deep-learning">deep-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/machine-learning">machine-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/andrew-ng">andrew-ng</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [['$','$'], ['\\(','\\)']],
+displayMath: [['$$','$$'], ['\\[','\\]']],
+processEscapes: true,
+processEnvironments: true,
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+TeX: { equationNumbers: { autoNumber: "AMS" },
+extensions: ["AMSmath.js", "AMSsymbols.js"] }
+}
+});
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>

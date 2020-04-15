@@ -6,17 +6,26 @@
     <description>Recent content on Zaryab Muhammad Akram</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://zaryabmakram.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Improving Deep Neural Networks</title>
+      <link>https://zaryabmakram.github.io/blog/deeplearning.ai/02-course2/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zaryabmakram.github.io/blog/deeplearning.ai/02-course2/</guid>
+      <description>Train/ Dev/ Test Sets  Train Dev/ Cross-Validation Test   Small Data 70% 15% 15%   Big Data 98% (1 million) 1% (10,000) 1% (10,000)   In real world application, we often do not have enough data and our models are data hungry. Its alright to collect Train data from multiple sources (e.g. Web Scraping when actual application deals with photos takes from a phone camera) and can be different from distribution different from dev/ test sets.</description>
+    </item>
+    
+    <item>
       <title>Introduction to Deep Learning</title>
-      <link>https://zaryabmakram.github.io/posts/deeplearning.ai/01-course1/</link>
+      <link>https://zaryabmakram.github.io/blog/deeplearning.ai/01-course1/</link>
       <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://zaryabmakram.github.io/posts/deeplearning.ai/01-course1/</guid>
+      <guid>https://zaryabmakram.github.io/blog/deeplearning.ai/01-course1/</guid>
       <description>Deep Learning refers to training of Deep Neural Networks (neural networks with several hidden layers).
 Deep Neural Networks basically automate the feature extraction step.
 
