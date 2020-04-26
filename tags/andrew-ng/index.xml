@@ -6,10 +6,21 @@
     <description>Recent content in andrew-ng on Zaryab Muhammad Akram</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://zaryabmakram.github.io/tags/andrew-ng/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Structuring Machine Learning Projects</title>
+      <link>https://zaryabmakram.github.io/blog/deeplearning.ai/03-course3/</link>
+      <pubDate>Fri, 17 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zaryabmakram.github.io/blog/deeplearning.ai/03-course3/</guid>
+      <description>When working on a machine learning problem, if you want to improve your algorithm&#39;s performance, there a a lot of choices to choose from. So its very important to filter out the best possible choices to try for your current problem.
+Orthognalization The process of tuning one parameter/ hyperparameter at a time, such that its effect is independent to other parameters/ hyperparameters is called Orthognalization.
+A machine learning project have several goals (as listed below).</description>
+    </item>
     
     <item>
       <title>Improving Deep Neural Networks</title>

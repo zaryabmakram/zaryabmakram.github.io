@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Zaryab Akram ">
+<meta name="description" content="When working on a machine learning problem, if you want to improve your algorithm&#39;s performance, there a a lot of choices to choose from. So its very important to filter out the best possible choices to try for your current problem.
+Orthognalization The process of tuning one parameter/ hyperparameter at a time, such that its effect is independent to other parameters/ hyperparameters is called Orthognalization.
+A machine learning project have several goals (as listed below)." />
+<meta name="keywords" content=", deeplearning.ai, deep-learning, machine-learning, andrew-ng" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://zaryabmakram.github.io/blog/deeplearning.ai/03-course3/" />
+
+
+    <title>
+        
+            Structuring Machine Learning Projects :: Zaryab Muhammad Akram  — Personal Website
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.a71f1ccb2abf86c1f9d46cddfa6403b99497528c340efb7c3589023cc9808b15.css">
+
+
+
+
+<meta itemprop="name" content="Structuring Machine Learning Projects">
+<meta itemprop="description" content="When working on a machine learning problem, if you want to improve your algorithm&#39;s performance, there a a lot of choices to choose from. So its very important to filter out the best possible choices to try for your current problem.
+Orthognalization The process of tuning one parameter/ hyperparameter at a time, such that its effect is independent to other parameters/ hyperparameters is called Orthognalization.
+A machine learning project have several goals (as listed below).">
+<meta itemprop="datePublished" content="2020-04-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2233">
+<meta itemprop="image" content="https://zaryabmakram.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="deeplearning.ai,deep-learning,machine-learning,andrew-ng," /><meta property="og:title" content="Structuring Machine Learning Projects" />
+<meta property="og:description" content="When working on a machine learning problem, if you want to improve your algorithm&#39;s performance, there a a lot of choices to choose from. So its very important to filter out the best possible choices to try for your current problem.
+Orthognalization The process of tuning one parameter/ hyperparameter at a time, such that its effect is independent to other parameters/ hyperparameters is called Orthognalization.
+A machine learning project have several goals (as listed below)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zaryabmakram.github.io/blog/deeplearning.ai/03-course3/" />
+<meta property="og:image" content="https://zaryabmakram.github.io/"/>
+<meta property="article:published_time" content="2020-04-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-17T00:00:00+00:00" /><meta property="og:site_name" content="Zaryab Muhammad Akram" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zaryabmakram.github.io/"/>
+
+<meta name="twitter:title" content="Structuring Machine Learning Projects"/>
+<meta name="twitter:description" content="When working on a machine learning problem, if you want to improve your algorithm&#39;s performance, there a a lot of choices to choose from. So its very important to filter out the best possible choices to try for your current problem.
+Orthognalization The process of tuning one parameter/ hyperparameter at a time, such that its effect is independent to other parameters/ hyperparameters is called Orthognalization.
+A machine learning project have several goals (as listed below)."/>
+
+
+
+    <meta property="article:section" content="deeplearning.ai" />
+
+
+
+    <meta property="article:published_time" content="2020-04-17 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">/home/zaryab/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://zaryabmakram.github.io/blog/">Blog</a></li><li><a href="https://zaryabmakram.github.io/CV.pdf">CV</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://zaryabmakram.github.io/blog/deeplearning.ai/03-course3/">Structuring Machine Learning Projects</a></h2>
+
+            
+
+            <div class="post-content">
+                <p><center><img src="/assets/DL_logo.png" style="zoom: 50%;" /></center></p>
+
+<p>When working on a machine learning problem, if you want to improve your algorithm's performance, there a a lot of choices to choose from. So its very important to filter out the best possible choices to try for your current problem.</p>
+
+<h2 id="orthognalization">Orthognalization</h2>
+
+<p>The process of tuning one parameter/ hyperparameter at a time, such that its effect is independent to other parameters/ hyperparameters is called <strong>Orthognalization</strong>.</p>
+
+<p>A machine learning project have several goals (as listed below). What we want is to have seperate techniques to improve our performance on each goal such that it does not affect the performace of the other goal.</p>
+
+<p><center><img src="/assets/DLai_3/ortho.PNG"/></center></p>
+
+<blockquote>
+<p><strong>Early Stopping</strong> is one of the less orthognalized techniques as it affects both train/ dev sets. So try using other more orthognalized techniques first.</p>
+</blockquote>
+
+<h2 id="single-number-evaluation-metric">Single Number Evaluation Metric</h2>
+
+<p>Consider two Cat-Dog Classifier models with following metrics:</p>
+
+<p><center><img src="/assets/DLai_3/metricEg1.PNG"/></center></p>
+
+<p>where:</p>
+
+<ul>
+<li><strong>Precision:</strong> Out of examples recognized as cats, what percentage are actually cats?</li>
+<li><strong>Recall:</strong> What percentage of cats are actually recognized?</li>
+</ul>
+
+<p>Now if we want to pick the better model between these two, its difficult to decide as <strong>B has higher precision</strong> and <strong>A has higher recall</strong>.</p>
+
+<p>What we can do is to have a single number metric for these models based on precision and recall called <strong>F1-Score</strong>.
+<center><img src="/assets/DLai_3/metricEg1_2.PNG"/></center></p>
+
+<h3 id="f1-score">F1 Score</h3>
+
+<p>F1 Score is basically the <strong>harmonic mean of Precision and Recall</strong>.</p>
+
+<p><span  class="math">\[\text{F1 Score} = \frac{2}{\frac{1}{P} + \frac{1}{R}}\]</span></p>
+
+<p>Another example could be of models deployed in different countries of the world and their error in those regions. To pick the best model we could use <strong>Average Error</strong> across different countries.</p>
+
+<p><center><img src="/assets/DLai_3/metricEg2.PNG"/></center></p>
+
+<h2 id="satisficing-and-optimizing-metric">Satisficing and Optimizing Metric</h2>
+
+<p>Sometimes in our application, we care about a number of factors. Suppose the example of following classifier where in addition to accuracy we care about Running Time of the classifier also.</p>
+
+<p><center><img src="/assets/DLai_3/metric2.PNG"/></center></p>
+
+<p>One way could be to define our cost as a weighted sum of the two factors we care about but that would seem quite artificial.</p>
+
+<p><span  class="math">\[ \text{Cost} = \text{Accuracy} + 0.5*\text{Running Time}\]</span></p>
+
+<p>What we actually can do is to group our factors into: <code>Satisficing Metrics</code> and <code>Optimizing Metrics</code>.</p>
+
+<p>That is, we would want to maximize Accuracy as long as the Running Time <span  class="math">\(\leq\)</span> 100ms. So in this case:</p>
+
+<ul>
+<li><p><strong>Optimizing Metric</strong> = Accuracy</p></li>
+
+<li><p><strong>Satisficing Metric</strong> = Running Time</p></li>
+</ul>
+
+<blockquote>
+<p>Generally, given <em>N</em> Metrics, we want to pick <code>1 as Optimizing Metric</code> and <code>N-1 as Satisficing Metrics</code>.</p>
+</blockquote>
+
+<h2 id="train-dev-test-distributions">Train, Dev, Test Distributions</h2>
+
+<blockquote>
+<p>Dev Set = <code>Development Set</code> or <code>Hold out Cross Validation Set</code></p>
+</blockquote>
+
+<p>Consider a model to be deployed in different countries. Assigning the data from some countries to Dev Set and the remaining countries to Test Set would be wrong as they would have different distributions.</p>
+
+<p><center><img src="/assets/DLai_3/devDistribution.PNG"/></center></p>
+
+<blockquote>
+<p>Dev and Test Sets should come from the same distribution.</p>
+</blockquote>
+
+<p>What should actually be done is to randomize the data and then split them into Dev and Test Sets.</p>
+
+<blockquote>
+<p>Dev and Test Sets should reflect the data <strong>the model would expect to recieve in the future</strong> and we <strong>consider the model to do well on</strong>.</p>
+</blockquote>
+
+<h2 id="size-of-dev-and-test-sets">Size of Dev and Test Sets</h2>
+
+<p>In the pre-big data era, the rule of thumb for Train and Dev split was <strong>70-30 Split</strong> as follows:</p>
+
+<p><center><img src="/assets/DLai_3/testSize1.PNG"/></center></p>
+
+<p>But in this Big Data era, that rule is not applicable when even the models are mode data hungry:
+<center><img src="/assets/DLai_3/testSize2.PNG"/></center></p>
+
+<blockquote>
+<p>Test Set should be big enough to <strong>give high confidence in the overall performance of the model</strong>.</p>
+</blockquote>
+
+<p>It is alright to not have a seperate Test Set and to just iterate on Dev Set but it is not recomended.</p>
+
+<h2 id="when-to-change-devtest-sets-and-metrics">When to Change Dev/Test Sets and Metrics</h2>
+
+<p>If doing well on the Metric and Dev/ Test Set does not correspond to doing well on the application, then we need to change our Metric or Dev/ Test Sets.</p>
+
+<p>Consider the following example of classfiers:
+<center><img src="/assets/DLai_3/metric3_1.PNG" style="zoom: 75%;"/></center></p>
+
+<p>where Algorithm A is much better but it turns out that in lets out pornographic images to the users. In this case:</p>
+
+<ul>
+<li>Metric and Dev: Prefer Algorithm A</li>
+<li>You/ Users: Prefer Algorithm B</li>
+</ul>
+
+<p>Suppose, initially the error was as follows:
+<center><img src="/assets/DLai_3/metric3_2.PNG" style="zoom: 75%;"/></center></p>
+
+<p>In order to penalize pornographic images, we could change the error metric as follows:
+<center><img src="/assets/DLai_3/metric3_3.PNG" style="zoom: 75%;"/></center></p>
+
+<h2 id="comparing-to-human-level-performance">Comparing to Human Level Performance</h2>
+
+<p>It has been observed that the performance of models increase rapidly as long as they are working worse than humans. But once it surpases human-level perforamance, the growth in performance slows down to reach <code>Bayes Optimal Error</code> (Theorically possible highest performance).</p>
+
+<p><center><img src="/assets/DLai_3/humanPerf.PNG" style="zoom: 75%;"/></center></p>
+
+<p>It is due to the fact that <strong>difference between Human Performance and Bayes Optimal Error is quite narrow</strong>. Also, when the performance is worse than humans, there are quite a number of techniques available to improve them.</p>
+
+<h2 id="avoidable-bias">Avoidable Bias</h2>
+
+<p>In practice, especially for Computer Vision problems, we use <strong>Human Level Error as a proxy for Bayes Optimal Error</strong>. That is we assume that:</p>
+
+<p><center>
+<span  class="math">\(\text{Human Level Error} \approx \text{Bayes Optimal Error}\)</span>
+</center></p>
+
+<p>Thus, if for a problem, even the Human Level Error is quite higher, that means that we can <strong>avoid focusing on the bias once the difference between Bias and Human Level Error is acceptable enough</strong>.</p>
+
+<p><center><img src="/assets/DLai_3/avoidBias.PNG"/></center></p>
+
+<p>Thus, we can say that:</p>
+
+<p><center>
+<span  class="math">\(\text{Avoidable Bias} = \text{Difference between Human Error and Model Bias}\)</span>
+</center></p>
+
+<h2 id="understanding-humanlevel-performance">Understanding Human-Level Performance</h2>
+
+<p>Consider the following example:</p>
+
+<p><center><img src="/assets/DLai_3/bayesE.PNG" style="zoom: 75%;"/></center></p>
+
+<p>As Human-Level Performance is taken as a proxy to Bayes Error, then in this case:</p>
+
+<p><span  class="math">\[\text{Human Level Error} \leq 0.5\% \]</span></p>
+
+<p>But for an application to be deployed, it might be alright to even just surpass a single doctor performance.</p>
+
+<p><center><img src="/assets/DLai_3/bayesE2.PNG" style="zoom: 80%;"/></center></p>
+
+<h2 id="improving-model-performance">Improving Model Performance</h2>
+
+<p><center><img src="/assets/DLai_3/mPerf.PNG" style="zoom: 80%;"/></center></p>
+
+<h2 id="error-analysis">Error Analysis</h2>
+
+<p>Consider that your cat-dog classifier model has <strong>10% error</strong> and you find out that it is <em>performing poor on dogs that look like cats</em>.</p>
+
+<p><center><img src="/assets/DLai_3/EA1.PNG"/></center>
+Should you work on improving your model to work better on dogs that look like cats?</p>
+
+<p>What you should do is to manually examine the misclassfied examples in the Dev Set and compute their percentage.</p>
+
+<blockquote>
+<p>Error Analysis is the process to manually examine the misclassified examples.</p>
+</blockquote>
+
+<p>Suppose you find out that only 5% of the Dev Set examples are of dogs that look like cats that have been misclassified. It means that even if you work on improving this, the error might only go down from 10% to probably 9.5% (ceiling approximation).</p>
+
+<p>Similarly, you can carry out Error Analysis of different strategies to work on in parallel:</p>
+
+<p><center><img src="/assets/DLai_3/EA2.PNG"/></center></p>
+
+<h2 id="cleaning-up-incorrectly-labeled-data">Cleaning Up Incorrectly Labeled Data</h2>
+
+<p>Suppose you were going through the data and found out that certain examples have been mislabeled.</p>
+
+<h3 id="mislabeled-training-data">MisLabeled Training Data</h3>
+
+<blockquote>
+<p>Deep Learning Algorithms are quite <strong>robust to random errors</strong> in training set.</p>
+</blockquote>
+
+<p>But is errors are <code>systemetic</code>, e.g. all white dogs labeled as cats, then that is a problem.</p>
+
+<h3 id="mislabeled-dev-data">MisLabeled Dev Data</h3>
+
+<p>If there are mislabeled examples in Dev set, we can add it in our <strong>error analysis</strong> process:</p>
+
+<p><center><img src="/assets/DLai_3/mislabelData.PNG"/></center></p>
+
+<p>Lets say for the above data:</p>
+
+<ul>
+<li><strong>Overall Dev Error:</strong> 10%</li>
+<li><strong>Errors due to incorrect Labels:</strong> 0.6%</li>
+<li><strong>Errors due to Other Causes:</strong> 9.4%</li>
+</ul>
+
+<p>As it is clear that 0.6% of 10% is quite a minimum amount and wont affect the performance much.</p>
+
+<p>But if Overall Error was <strong>2%</strong> then 0.6% of 2% is quite a lot and we could work on correcting the mislabeled examples.</p>
+
+<h3 id="correcting-mislabeled-data">Correcting MisLabeled Data</h3>
+
+<p>When correcting mislabeled examples of the dev set:</p>
+
+<ul>
+<li><strong>Apply the same process to the Test Set as wel</strong>l to make sure they come from the same distribution.</li>
+<li><strong>Consider correctly classified examples as well</strong> as they may also be mislabeled (Usually this step is not considered as its time taking)</li>
+</ul>
+
+<blockquote>
+<p>After correcting misLabeled data, Train and Dev/Test sets might come from slightly different distributions but that is alright.</p>
+</blockquote>
+
+<h2 id="build-first-system-quickly-then-iterate">Build First System Quickly, then Iterate</h2>
+
+<p>Consider the problem of speech recognition. There could be following problems to work on to improve your system:</p>
+
+<p><center><img src="/assets/DLai_3/speechProblem.PNG"/></center></p>
+
+<p>What you should do is:</p>
+
+<ul>
+<li>Setup dev/test set and metric</li>
+<li>Bild initial system quickly (if working on a totally new problem) or build up on existing research</li>
+<li>Use <code>Bias/Variance analysis</code> and <code>Error Analysis</code> to prioritize next steps</li>
+</ul>
+
+<h2 id="training-and-testing-on-different-distributions">Training and Testing on Different Distributions</h2>
+
+<p>Deep learning algorithms are really data hungry but sometimes for our application, we have limited data.</p>
+
+<p>Suppose we are to train a Cat-Dog Classifier to be deployed on phone. We have only 10,000 examples of images from phone. In contrast, we have around 200,000 images but from web (different web).</p>
+
+<p><center><img src="/assets/DLai_3/diffTrain.PNG"/></center></p>
+
+<p>Only option could be to randmoize all the data and then split it into Train/ Dev/ Test sets but that would be wrong. (Dev and Test sets would contain alot of images from web which are different from what we care about).</p>
+
+<p>Another option could be to add a few of mobile app images to web images and train on that, keeping Dev/ Test Sets purely of mobile images.</p>
+
+<p><center><img src="/assets/DLai_3/diffTrain1.PNG"/></center></p>
+
+<p>This is a <strong>better option</strong>.</p>
+
+<h3 id="bias-and-variance-with-mismatched-data-distributions">Bias and Variance with Mismatched Data Distributions</h3>
+
+<p>Consider a Cat-Dog Classifier with:</p>
+
+<ul>
+<li><strong>Human Level Error</strong>: 0%</li>
+<li><strong>Train Error:</strong> 1%</li>
+<li><strong>Dev Error:</strong> 10%</li>
+</ul>
+
+<p>The above model seems to have a <strong>Variance Problem</strong> but as the <strong>data distribution of Train and Dev Sets is different</strong>, we changing two things, we are chagning two things: Data the Model has not seen and the distribution of that data. So it might be that the <strong>examples in Dev Set are much harder than those in the Train Set</strong>.</p>
+
+<blockquote>
+<p>Thus, the difference between Train and Dev Error does not give us a correct estimate of Variance Problem with Mismatched Data Distributions.</p>
+</blockquote>
+
+<p>What we do is to develop a <code>Training-Dev Set</code>: <strong>Same distribution as training set but not used for training</strong>.</p>
+
+<p><center><img src="/assets/DLai_3/dataMisMatch.PNG"/></center></p>
+
+<p><span  class="math">\[ \text{Difference between Train and Train-Dev Set Errors} = \text{Variance} \]</span></p>
+
+<p><span  class="math">\[\text{Difference between Train-Dev and Dev Set Errors} = \text{Data Mismatch Problem}\]</span></p>
+
+<p><center><img src="/assets/DLai_3/dataMisMatch2.PNG"/></center></p>
+
+<blockquote>
+<p>Somtimes, <strong>Dev Error &lt; Train-Dev Error</strong>. That maybe due to the fact that <strong>the Human-Level Error for Dev Error was lower than that on Train Set</strong>. So its a good idea to estimate Human Error of Dev Set data as well.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_3/dataMisMatch3.PNG"/></center></p>
+
+<h3 id="addressing-data-mismatch-problem">Addressing Data Mismatch Problem</h3>
+
+<p>Suppose you are working on a <strong>Speech Recognition</strong> task and encounter <strong>Data Mismatch Problem</strong>. What you can do is:</p>
+
+<ul>
+<li>Carry out manual <strong>Error Analysis to try to understand the difference between training and Dev Sets</strong></li>
+<li><strong>Make Traning Data more similar</strong>; or collect more data similar <strong>to Dev Set</strong></li>
+</ul>
+
+<p>Lets say, you find out after Error Analysis is that your Dev Set has a lot of noisy-car data. You should add noisy-car data in your traning data then (maybe using <code>Artificial Data Synthesis</code>).</p>
+
+<h4 id="artificial-data-synthesis">Artificial Data Synthesis</h4>
+
+<p><center><img src="/assets/DLai_3/artData1.PNG"/></center>
+<center><img src="/assets/DLai_3/artData2.PNG"/></center></p>
+
+<p>One of the problems in Artificial Data Synthesis is to <strong>overfit on synthesised Data</strong>.</p>
+
+<p>For example, you had only <strong>1 hour of car noise</strong> <strong>10,000 hours of speech</strong> and to generate noisy-car speech data, if you duplicate that 1 hour of car noise to 10,000 hours to generate data, it might cause the network to overfit on that 1 hour of car noise as <strong>we are adding only a subset of car noise from all the possible car noises</strong>.</p>
+
+<p><center><img src="/assets/DLai_3/artData3.PNG"/></center></p>
+
+<h2 id="transfer-learning">Transfer Learning</h2>
+
+<p>Suppose you trained a <strong>Image Recognition Model</strong> and now want to train a <strong>Radiology Diagnosis Model</strong>. What you can do is:</p>
+
+<p><center><img src="/assets/DLai_3/transferL1.PNG"/></center></p>
+
+<p>In this context:</p>
+
+<ul>
+<li><strong>Pre-Training</strong>: Image Recognition Task</li>
+<li><strong>Fine-Tuning</strong>: Radiology Diagnosis Task</li>
+</ul>
+
+<blockquote>
+<p>You can either train the whole model on the new dataset, or just train the added layer/ layers.</p>
+</blockquote>
+
+<p>Another example:</p>
+
+<p><center><img src="/assets/DLai_3/transferL2.PNG"/></center></p>
+
+<h3 id="when-to-use-transfer-learning">When to use Transfer Learning?</h3>
+
+<p>You should use Transfer Learning <strong>from Task A to Task B</strong> when:</p>
+
+<ul>
+<li>When Task A and Task B have <strong>same input</strong></li>
+<li>There is <strong>a lot more data</strong> of Task A compared to Task B</li>
+<li><strong>Low Level features</strong> from Task A could be <strong>helpful</strong> from Task B</li>
+</ul>
+
+<h2 id="multitask-learning">Multi-task Learning</h2>
+
+<p>Consider an Autonomous Driving Example for which we need to create different detectors (Pedestrians, Cars, Stop Signs, Traffic Lights...).
+<center><img src="/assets/DLai_3/multiTask1.PNG"/></center></p>
+
+<p>Instead of training seperate models for each detectors, we could train a single larger model, this is called <code>Multi-task Learning</code>.</p>
+
+<p><center><img src="/assets/DLai_3/multiTask2.PNG"/></center></p>
+
+<blockquote>
+<p>Unlike Softmax, with multi-task learning, <strong>one image will have multiple labels</strong>.</p>
+</blockquote>
+
+<h3 id="missing-labels">Missing Labels</h3>
+
+<p>Multi-task learning can also work when only a subset of labels are available for some images (missing some labels) i.e.</p>
+
+<p><center><img src="/assets/DLai_3/multiTask3.PNG"/></center></p>
+
+<p>For that, we can modify our <strong>cost function</strong> as:</p>
+
+<p><center><img src="/assets/DLai_3/multiTask4.PNG"/></center></p>
+
+<h3 id="when-to-use-multitask-learning">When to use Multi-task Learning?</h3>
+
+<ul>
+<li>Training on a set of tasks together could benifit from having <strong>shared low-level features</strong>.</li>
+<li>Amount of data for each task is quite similar. (So we could combine all the data to train a single larger model).</li>
+</ul>
+
+<blockquote>
+<p>Multi-task Learning is only efficient when you are able to train a big enough model to do well on all the tasks.</p>
+</blockquote>
+
+<h2 id="endtoend-deep-learning">End-to-End Deep Learning</h2>
+
+<p>Some learning systems require multiple stages of processes. What End-to-End Deep Learning does is it replace all those stages usually with a single neural network.</p>
+
+<p><center><img src="/assets/DLai_3/endDL.PNG"/></center></p>
+
+<blockquote>
+<p>One challenge in End-to-End Deep Learning is that it requires a lot of Data. When enough data is not available, sometimes the multi-step approach works better.</p>
+</blockquote>
+
+<p>Usually, <strong>very complex problems are broken down</strong> into a few steps isntead of complete end-to-end. For example, in face recognition, instead to directly feeding a picture of person, first the person's face is detected and then the cropped face is fed to the network for detection (as a person's face can be in any orientation in a picture, so end-to-end task is complex).
+<center><img src="/assets/DLai_3/endDL2.PNG"/></center></p>
+
+<h3 id="pros">Pros</h3>
+
+<ul>
+<li><strong>Lets the Data speak</strong> (the algorithm learns the most appropiate mapping of input to output using data statistics without injections of manual features/ knowledge)</li>
+<li>Less hand-designing of components needed</li>
+</ul>
+
+<h3 id="cons">Cons</h3>
+
+<ul>
+<li>Require Large amout of Data</li>
+<li>Excludes potential useful hand-designed components (sometimes adding manually designed feature is a good thing)</li>
+</ul>
+
+<h3 id="when-to-use-endtoend-deep-learning">When to use end-to-end deep learning?</h3>
+
+<p><strong>Key Question</strong>: Do you have sufficient data to learn a function of the complexity needed to map x to y?</p>
+
+<p>For fairly complex tasks (such as Self-Driving Car), we can use Deep Learning to learn <strong>individual componenets</strong>.
+<center><img src="/assets/DLai_3/endDL3.PNG"/></center></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zaryabmakram.github.io/tags/deeplearning.ai">deeplearning.ai</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/deep-learning">deep-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/machine-learning">machine-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/andrew-ng">andrew-ng</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [['$','$'], ['\\(','\\)']],
+displayMath: [['$$','$$'], ['\\[','\\]']],
+processEscapes: true,
+processEnvironments: true,
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+TeX: { equationNumbers: { autoNumber: "AMS" },
+extensions: ["AMSmath.js", "AMSsymbols.js"] }
+}
+});
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>
