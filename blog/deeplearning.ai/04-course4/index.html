@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Zaryab Akram ">
+<meta name="description" content="Computer Vision In Computer Vision problems, we have very large images (suppose 1000px \(\times\) 1000px) that means they have a very large input matrix X, in turn more weights. So, its gets very tough to get such a vast amount of data to prevent the model from overfitting. Also, it is computationally really slow.
+
+Edge Detection using Convolutions 
+The above mentioned example is of Vertical Edge Detection and works as follows:" />
+<meta name="keywords" content=", deeplearning.ai, deep-learning, machine-learning, andrew-ng" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://zaryabmakram.github.io/blog/deeplearning.ai/04-course4/" />
+
+
+    <title>
+        
+            Convolutional Neural Networks :: Zaryab Muhammad Akram  — Personal Website
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.a71f1ccb2abf86c1f9d46cddfa6403b99497528c340efb7c3589023cc9808b15.css">
+
+
+
+
+<meta itemprop="name" content="Convolutional Neural Networks">
+<meta itemprop="description" content="Computer Vision In Computer Vision problems, we have very large images (suppose 1000px \(\times\) 1000px) that means they have a very large input matrix X, in turn more weights. So, its gets very tough to get such a vast amount of data to prevent the model from overfitting. Also, it is computationally really slow.
+
+Edge Detection using Convolutions 
+The above mentioned example is of Vertical Edge Detection and works as follows:">
+<meta itemprop="datePublished" content="2020-04-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="4667">
+<meta itemprop="image" content="https://zaryabmakram.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="deeplearning.ai,deep-learning,machine-learning,andrew-ng," /><meta property="og:title" content="Convolutional Neural Networks" />
+<meta property="og:description" content="Computer Vision In Computer Vision problems, we have very large images (suppose 1000px \(\times\) 1000px) that means they have a very large input matrix X, in turn more weights. So, its gets very tough to get such a vast amount of data to prevent the model from overfitting. Also, it is computationally really slow.
+
+Edge Detection using Convolutions 
+The above mentioned example is of Vertical Edge Detection and works as follows:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zaryabmakram.github.io/blog/deeplearning.ai/04-course4/" />
+<meta property="og:image" content="https://zaryabmakram.github.io/"/>
+<meta property="article:published_time" content="2020-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-28T00:00:00+00:00" /><meta property="og:site_name" content="Zaryab Muhammad Akram" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zaryabmakram.github.io/"/>
+
+<meta name="twitter:title" content="Convolutional Neural Networks"/>
+<meta name="twitter:description" content="Computer Vision In Computer Vision problems, we have very large images (suppose 1000px \(\times\) 1000px) that means they have a very large input matrix X, in turn more weights. So, its gets very tough to get such a vast amount of data to prevent the model from overfitting. Also, it is computationally really slow.
+
+Edge Detection using Convolutions 
+The above mentioned example is of Vertical Edge Detection and works as follows:"/>
+
+
+
+    <meta property="article:section" content="deeplearning.ai" />
+
+
+
+    <meta property="article:published_time" content="2020-04-28 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">/home/zaryab/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://zaryabmakram.github.io/blog/">Blog</a></li><li><a href="https://zaryabmakram.github.io/CV.pdf">CV</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://zaryabmakram.github.io/blog/deeplearning.ai/04-course4/">Convolutional Neural Networks</a></h2>
+
+            
+
+            <div class="post-content">
+                <p><center><img src="/assets/DL_logo.png" style="zoom: 50%;" /></center></p>
+
+<h2 id="computer-vision">Computer Vision</h2>
+
+<p>In Computer Vision problems, we have very large images (suppose 1000px <span  class="math">\(\times\)</span> 1000px) that means they have a <strong>very large input matrix X</strong>, in turn <strong>more weights</strong>. So, its gets very tough to get such a vast amount of data to prevent the model from overfitting. Also, it is computationally really slow.</p>
+
+<p><center><img src="/assets/DLai_4/CV.PNG" /></center></p>
+
+<h2 id="edge-detection-using-convolutions">Edge Detection using Convolutions</h2>
+
+<p><center><img src="/assets/DLai_4/edgeDetect1.PNG" style="zoom:75%;"/></center></p>
+
+<p>The above mentioned example is of <code>Vertical Edge Detection</code> and works as follows:</p>
+
+<p><center><img src="/assets/DLai_4/edgeDetect2.PNG" style="zoom:75%;"/></center></p>
+
+<p>Consider the image on the left with an edge in the center as the color transitions. We multiply it with a <code>Vertical Edge Detector Filter (bright pixels on the left and dark pixels in the right)</code>, we get an image. Notice the edge detected in the result is very broad as we are working with small images. If the input was to be very large, it would have worked quite remarkably.</p>
+
+<h3 id="different-edge-detection-filter">Different Edge Detection Filter</h3>
+
+<p>Following are some Vertical Edge Detector filters:</p>
+
+<p><center><img src="/assets/DLai_4/edgeDetect3.PNG" style="zoom:75%;"/></center></p>
+
+<blockquote>
+<p>We can get <strong>Horizontal Edge Detector Filters</strong> by flipping <strong>Vertical Edge Detectors</strong> by <span  class="math">\(90^\circ\)</span></p>
+</blockquote>
+
+<h2 id="convolutions-using-deep-learning">Convolutions using Deep Learning</h2>
+
+<p>We use use different edges of images as features to initial layers. Instead of having a computer vision expert hand-pick the filter matrix values to detect these edges, we can have a <strong>Network to learn its own filter by setting filter values as weights</strong> so that it can detect different edges (even at different angles, not just vertical and horizontal edges), the best features for the Network:</p>
+
+<p><center><img src="/assets/DLai_4/edgeDetect4.PNG" style="zoom:75%;"/></center></p>
+
+<h2 id="convolution-dimensions">Convolution Dimensions</h2>
+
+<p><center><img src="/assets/DLai_4/convSize.PNG" /></center></p>
+
+<h2 id="padding">Padding</h2>
+
+<p>A few problems with the convolution operation are:</p>
+
+<ul>
+<li><strong>Shrinking of Image</strong> on applying convolution</li>
+<li><strong>Loss of data of corner pixels</strong> (used less): we can see that green pixel is used less comapred to the red one.</li>
+</ul>
+
+<p><center><img src="/assets/DLai_4/pad1.PNG" /></center></p>
+
+<p>So, in order to deal with these problems, we <strong>add padding to the image all around</strong>.</p>
+
+<blockquote>
+<p>Usually, <code>zero padding</code> is used.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_4/pad2.PNG" /></center></p>
+
+<h3 id="dimensions-after-padding">Dimensions after Padding</h3>
+
+<p><center><img src="/assets/DLai_4/pad3.PNG" /></center></p>
+
+<p>Now the image retains its original size, even after convolution operation.</p>
+
+<h2 id="valid-vs-same-convolutions">Valid vs. Same Convolutions</h2>
+
+<p><center><img src="/assets/DLai_4/samePad.PNG" /></center></p>
+
+<h3 id="padding-formula-for-same-convolution">Padding Formula for Same Convolution</h3>
+
+<p><span  class="math">\[ p = \frac{f-1}{2} \]</span></p>
+
+<h2 id="strided-convolution">Strided Convolution</h2>
+
+<p>Striding is basically the jump of filter window on image. Previously we were using a stride=1 that is why we skipped one row/ column to calculate new output pixel value.</p>
+
+<p><center><img src="/assets/DLai_4/stride1.PNG" /></center></p>
+
+<h3 id="dimensions-after-strided-convolution">Dimensions after Strided Convolution</h3>
+
+<p><center><img src="/assets/DLai_4/stride2.PNG" style="zoom:75%;"/></center></p>
+
+<h2 id="convolution-in-mathematics">Convolution in Mathematics</h2>
+
+<p>THe convolution operation in deeplearning is called <code>Cross-Correlation</code> in mathematics. Where as the actually convolution operation first <strong>flips the filter <span  class="math">\(180^\circ\)</span> before multiplication with image pixels</strong>.</p>
+
+<h2 id="convolutions-over-volume">Convolutions Over Volume</h2>
+
+<p>For convolutions over 2D-images, we have 2D filters, similarly, <strong>for convolutions over 3D Images, we have 3D filters</strong>.</p>
+
+<blockquote>
+<p>For convolutions, the number of channels of input images shall match the depth of the filter.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_4/conv3D1.PNG" style="zoom:75%;"/></center></p>
+
+<blockquote>
+<p>Result of convolution of a 3D image with a 3D filter is a <strong>2D image</strong>.</p>
+</blockquote>
+
+<p>If we are to detect features only in a single channel, the filter values of other channels could be zero.</p>
+
+<p><center><img src="/assets/DLai_4/conv3D2.PNG"/></center></p>
+
+<h3 id="convolution-with-multiple-filters">Convolution with Multiple Filters</h3>
+
+<p>If we want to detect multiple features with mutiple filters, we can just <strong>stack our 2D output images</strong> as follows:</p>
+
+<p><center><img src="/assets/DLai_4/conv3D3.PNG" style="zoom:75%;"/></center></p>
+
+<blockquote>
+<p>The <strong>number of channels of the output image depend on the number of filters</strong> applied on the input image.</p>
+</blockquote>
+
+<h3 id="dimensions-of-convolution-over-volume">Dimensions of Convolution over Volume</h3>
+
+<p><center><img src="/assets/DLai_4/conv3D4.PNG"/></center></p>
+
+<h2 id="convolutional-network-layer">Convolutional Network Layer</h2>
+
+<p>We know that for a single unit of forward pass, following are the computations:
+<center><img src="/assets/DLai_4/convL1.PNG"/></center></p>
+
+<p>Now, the above equations in a convolutional layer would be computed as:
+<center><img src="/assets/DLai_4/convL2.PNG"/></center></p>
+
+<h3 id="number-of-parameters-in-a-layer">Number of Parameters in a Layer</h3>
+
+<p>If we have <span  class="math">\(10\)</span> filters in a layers that are<span  class="math">\(3 \times 3 \times 3\)</span>, we have:</p>
+
+<p><span  class="math">\[ \text{Parameters for 1 Filter} = (3 \times 3 \times 3) + 1 \, bias = 28 \]</span></p>
+
+<p><span  class="math">\[ \text{Parameters for 10 Filters} = 28 \times 10 = 280 \]</span></p>
+
+<p>Thus, no matter how large the input image is, we can learn its features easily with just 280 paramters in a layer.</p>
+
+<h2 id="notation-for-convolutional-network">Notation for Convolutional Network</h2>
+
+<p>Consider the following notation:
+<center><img src="/assets/DLai_4/notConv1.PNG"/></center></p>
+
+<p>where <span  class="math">\(n_H^{[l]}\)</span> and <span  class="math">\(n_W^{[l]}\)</span> are calculated as:
+<center><img src="/assets/DLai_4/notConv2.PNG"/></center></p>
+
+<p>and,</p>
+
+<p><center><img src="/assets/DLai_4/notConv3.PNG"/></center></p>
+
+<h2 id="simple-convolutional-network-example">Simple Convolutional Network Example</h2>
+
+<p><center><img src="/assets/DLai_4/convNetEg.PNG"/></center></p>
+
+<blockquote>
+<p>With the increase in number of layers in Convolutional Network, <strong>input Height and Width decreases</strong> and <strong>Number of Channels increase</strong>.</p>
+</blockquote>
+
+<h2 id="pooling-layer">Pooling Layer</h2>
+
+<ul>
+<li>Pooling Layer has fixed hyperparamters and there is <strong>nothing to learn</strong>. Thus, it is <strong>not affected by back propagation</strong>.</li>
+<li>Usually <strong>no padding is used with pooling layer</strong> (p=0).</li>
+<li>Pooling is <strong>applied independently on each channel</strong> i.e. number of input and output channels remain the same.
+<center><img src="/assets/DLai_4/pool1.PNG"/></center></li>
+</ul>
+
+<h3 id="max-pooling">Max Pooling</h3>
+
+<p><center><img src="/assets/DLai_4/pool2.PNG"/></center></p>
+
+<h4 id="intuition-behind-max-pooling">Intuition behind Max Pooling</h4>
+
+<p>A large number in an activation means that the previous layers detected a useful feature. So what max pooling does is to keep that <strong>robust feature preserved while decreasing the size of input</strong>.</p>
+
+<h3 id="average-pooling">Average Pooling</h3>
+
+<p><center><img src="/assets/DLai_4/pool3.PNG"/></center></p>
+
+<blockquote>
+<p>Average Pooling is only usually used to collapse representation when deep in the Network: <span  class="math">\(7\times7\times1000 \rightarrow 1\times1\times1000\)</span></p>
+</blockquote>
+
+<h2 id="convolutional-network-with-pooling-example">Convolutional Network with Pooling Example</h2>
+
+<p><center><img src="/assets/DLai_4/convPool.PNG"/></center></p>
+
+<blockquote>
+<p>The <strong>activations</strong> in the network shall not be decreased at once and shall only be <strong>decreased gradually</strong>.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_4/convPool1.PNG"/></center></p>
+
+<h2 id="why-use-convolutions">Why use Convolutions?</h2>
+
+<p>Consider the following layer:</p>
+
+<p><center><img src="/assets/DLai_4/whyConv1.PNG"/></center></p>
+
+<p>if the following layer was to trained using a Fully Conected Layer, the parameter size would be very huge compared to the parameters number using convolutions:</p>
+
+<ul>
+<li><strong>Parameters for Fully Connected Layer:</strong> ~ 14M</li>
+<li><strong>Parameters for Convolutional Layer:</strong> 456</li>
+</ul>
+
+<p>The parameters are very less due to:</p>
+
+<p><center><img src="/assets/DLai_4/whyConv2.PNG"/></center>
+<center><img src="/assets/DLai_4/whyConv3.PNG"/></center>
+The same filter slides over the input and thus the parameters of the filter are shared between many features.</p>
+
+<p><center><img src="/assets/DLai_4/whyConv4.PNG"/></center></p>
+
+<h2 id="classical-networks">Classical Networks</h2>
+
+<h3 id="lenet5">LeNet-5</h3>
+
+<p><strong>LeNet-5</strong> was trained on <code>grayscale images</code> to recognize digits. Back when this paper was publised:</p>
+
+<ul>
+<li>Average Pooling Layer was preferred</li>
+<li>Sigmoid/ Tanh was preffered over ReLU</li>
+<li>Padding was not used much
+<center><img src="/assets/DLai_4/lenet.PNG"/></center></li>
+</ul>
+
+<blockquote>
+<p>We can see that with each layer, <span  class="math">\( n_H \)</span> and <span  class="math">\(n_W\)</span> is decreased while <span  class="math">\(n_C\)</span> is increased.</p>
+
+<p><strong>Basic Structure:</strong> Conv <span  class="math">\(\rightarrow\)</span> Pool <span  class="math">\(\rightarrow\)</span> Conv <span  class="math">\(\rightarrow\)</span> Pool <span  class="math">\(\rightarrow\)</span> FC <span  class="math">\(\rightarrow\)</span> FC <span  class="math">\(\rightarrow\)</span> Output</p>
+</blockquote>
+
+<h3 id="alexnet">AlexNet</h3>
+
+<p><center><img src="/assets/DLai_4/alexNet.PNG"/></center></p>
+
+<ul>
+<li>Simialar to LeNet but much bigger</li>
+<li>Around <code>60 Million</code> parameters</li>
+<li>used ReLU</li>
+</ul>
+
+<p>AlexNet also had some layers called <code>Local Response Normalization</code> that basically <strong>normalize activations over channels</strong>. These layers are not used anymore as they dont have any significant performace improvement.</p>
+
+<h3 id="vgg16">VGG-16</h3>
+
+<p>VGG-16 used:
+<center>
+<span  class="math">\(CONV = 3 \times 3 \, \text{filter}, \, s = 1, \, same\)</span></p>
+
+<p><span  class="math">\(\text{MAX-POOL} = 2 \times 2, \,s = 2\)</span>
+</center>
+<center><img src="/assets/DLai_4/vgg16.PNG"/></center></p>
+
+<ul>
+<li><code>138 Million</code> parameters</li>
+<li>The number of channels are doubled</li>
+<li>called VGG-16 as it has 16 layers with learnable parameters</li>
+</ul>
+
+<h2 id="resnets">ResNets</h2>
+
+<p>The basic building block of ResNets is <code>Residual Block</code>.</p>
+
+<h3 id="residual-block">Residual Block</h3>
+
+<p>In a <strong>Plain Network</strong>, for information to flow from <span  class="math">\(a^{[l]}\)</span> to <span  class="math">\(a^{[l+1]}\)</span>, it has to follow the <strong>main path</strong>.</p>
+
+<p>What ResNets do is to add these <strong>shortcuts/ skip connections</strong> that enable information from <span  class="math">\(a^{[l]}\)</span> to directly flow to <span  class="math">\(a^{[l+1]}\)</span>.</p>
+
+<p><center><img src="/assets/DLai_4/resnet1.PNG"/></center></p>
+
+<h3 id="residual-network">Residual Network</h3>
+
+<p>So, by stacking up these residual blocks, we get a Residual Network.</p>
+
+<p><center><img src="/assets/DLai_4/resnet2.PNG"/></center></p>
+
+<p>Usually, when we try to train very deep netowrks, the training error increases if the number of layers are increased too much, mainly due to vanishing/ exploding gradients. <strong>ResNets solve that problem and allow training of very deep netowrks</strong>.</p>
+
+<p><center><img src="/assets/DLai_4/resnet3.PNG"/></center></p>
+
+<h3 id="why-resnets-work">Why ResNets Work?</h3>
+
+<p>Consider the following network where we add a residual block deep in the network:
+<center><img src="/assets/DLai_4/resnet4.PNG"/></center></p>
+
+<p>When we apply L2-Regularization, it causes the elements of <em>W</em> to shrink. Deep in the network, the elements of <em>W</em> would reach almost zero, such that:
+<center><img src="/assets/DLai_4/resnet5.PNG"/></center></p>
+
+<p>That is,</p>
+
+<blockquote>
+<p>Residual Block enables the network to learn the <code>identity function</code>.</p>
+</blockquote>
+
+<p>Usually, in deeper layers, it gets hard for the network to choose parameters, so learning becomes hard. But Residual Block enables to learn identity function and ease the learning.</p>
+
+<h3 id="resnets-and-dimensions">Resnets and Dimensions</h3>
+
+<p>To apply short circuit, we need to keep the dimensions of <span  class="math">\(z^{[l+2]}\)</span> and <span  class="math">\(a^{[l]}\)</span> the same.</p>
+
+<p>If they are not the same, we multiply <span  class="math">\(a^{l}\)</span> with a matrix <span  class="math">\(W_s\)</span> to modify its dimensions:</p>
+
+<p><span  class="math">\[ \underset{256 \times 1}{a^{[l+2]}} = g(\underset{256 \times 1}{z^{[l+2]}} + \underset{256 \times 128}{W_s} \quad \underset{128 \times 1}{a^{[l]}}) \]</span></p>
+
+<h3 id="resnets-with-convolutions">ResNets with Convolutions</h3>
+
+<p>To keep the dimensions same, we <code>Same Convolutions</code> shown in the example:
+<center><img src="/assets/DLai_4/resnet6.PNG"/></center></p>
+
+<h3 id="resnet50">ResNet-50</h3>
+
+<p>Two main types of blocks are used in a ResNet, depending mainly on whether the input/output dimensions are same or different.</p>
+
+<ul>
+<li>Identity Block</li>
+<li>Convolutional Block</li>
+</ul>
+
+<p>Skip Connection of <strong>2 Layers</strong> is used (2 layers are skipped).</p>
+
+<h4 id="identity-block">Identity Block</h4>
+
+<p>The Identity Block is the standard block used in ResNets, and corresponds to the <strong>case where the input activation <span  class="math">\(a^{[l]}\)</span> has the same dimension as the output activation <span  class="math">\(a^{[l+2]}\)</span></strong>
+<center><img src="/assets/DLai_4/resnet501.PNG"/></center></p>
+
+<h4 id="convolutional-block">Convolutional Block</h4>
+
+<p>The Convolutional Block is used when the input and output dimensions do not match up. The difference with the identity block is that <strong>there is a CONV2D layer in the shortcut path</strong>, used to resize the input to a different dimension, so that the dimensions match up in the final addition needed ( similar role as the matrix <span  class="math">\(W_s\)</span>)
+<center><img src="/assets/DLai_4/resnet502.PNG"/></center></p>
+
+<p>Thus, ResNet-50 is formed by stacking multiple Identity and Convolutional blocks:
+<center><img src="/assets/DLai_4/resnet503.PNG"/></center></p>
+
+<h2 id="1times1-convolutions-network-in-network">1<span  class="math">\(\times\)</span>1 Convolutions (Network in Network)</h2>
+
+<p>1x1 convolution doesn’t make much sense as its just multiplying the whole image matrix by a real number. But what it really can do is seen in a multi-dimensional image.
+<center><img src="/assets/DLai_4/NinN1.PNG"/></center></p>
+
+<blockquote>
+<p>It is as if theres a fully connected layer for activation which is being multiplied by a number and then a ReLU activation function is applied. That is why, it is called Network in Network.</p>
+</blockquote>
+
+<p>As we know that pooling can be used to reduce image height and width, we can use <strong>1\times1 conv to reduce/ increase number of channels without learning a large number of parameters</strong>, keeping height and width same.
+<center><img src="/assets/DLai_4/NinN2.PNG"/></center></p>
+
+<h2 id="inception-network">Inception Network</h2>
+
+<p>Instead of predefining what dimensional filter to you or even to use one, or apply pooling, we try a number of filters and concatenate the output over one and another as follows:
+<center><img src="/assets/DLai_4/inception1.PNG"/></center></p>
+
+<blockquote>
+<p>In order to match the dimension out pooling layer with the output of convolutions, we need to <strong>use padding with pooling</strong> also in this case.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_4/inception6.PNG" style="zoom:75%"/></center></p>
+
+<h3 id="computational-cost">Computational Cost</h3>
+
+<p>But all this can be computationally really expensive. Consider only 5x5 conv, if we directly apply it to our input, we need to commute around 120M parameters:
+<center><img src="/assets/DLai_4/inception2.PNG"/></center></p>
+
+<p>What we do is to <code>use 1x1 convolution to reduce input size and then apply filter</code> to increase the size again. This greatly reduces the number of computations required.
+<center><img src="/assets/DLai_4/inception3.PNG"/></center></p>
+
+<h3 id="inception-module">Inception Module</h3>
+
+<p>Thus, to reduce computations, an Inception Module works as follows:
+<center><img src="/assets/DLai_4/inception4.PNG"/></center></p>
+
+<blockquote>
+<p>In order to reduce the depth of output of Pooling Layers, 1<span  class="math">\(\times\)</span> convolution is applied after pooling.</p>
+</blockquote>
+
+<p>An Inception Network is basically constructed by stacking up these Inceptions Modules:
+<center><img src="/assets/DLai_4/inception5.PNG"/></center></p>
+
+<p>There are these <strong>side branches</strong> in Inception Network that just use hidden layers to compute output (acts as <strong>regulerization</strong>).</p>
+
+<h2 id="transfer-learning">Transfer Learning</h2>
+
+<p>The process of using an pretrained network, freezing its previous pretrained layers and designing its further layers according to your problem.</p>
+
+<ul>
+<li>Used when you have less data for your problem</li>
+<li>If you have relatively more data, then you might <strong>freeze less layers</strong>.</li>
+<li>If you have quite a lot of data, you also just use the already trained network's weights to your network as parameter initialization and retrain the whole network</li>
+</ul>
+
+<h2 id="data-augmentation">Data Augmentation</h2>
+
+<p>The most commonly used Data Augmentation techniques for images are <code>Mirroring</code> and <code>Random Cropping</code>.
+<center><img src="/assets/DLai_4/augmen1.PNG"/></center></p>
+
+<p>Other techniques could be:</p>
+
+<ul>
+<li>Rotation</li>
+<li>Sheering</li>
+<li>Local warping</li>
+</ul>
+
+<p>Another technique oftenly used is <code>Color Shifting</code> where you add <strong>distortions to RGB channels</strong> (using <em>PCA Color Augmentation</em>).
+<center><img src="/assets/DLai_4/augmen2.PNG"/></center></p>
+
+<blockquote>
+<p>Usually, we use a seperate thread thats constantly loading and augmenting data in parallel to training the network.</p>
+</blockquote>
+
+<h2 id="data-vs-hand-engineering">Data vs. Hand Engineering</h2>
+
+<p>For Learning Algorithms, there are 2 sources of knowledge:</p>
+
+<ol>
+<li>Labeled Data</li>
+<li>Hand Engineered Features/ Network Architecture</li>
+</ol>
+
+<p>For most Computer Vision tasks, we have less data available, that is why, algorithms in Computer Vision are complex and different hand engineering techniques are used.
+<center><img src="/assets/DLai_4/handEng1.PNG"/></center></p>
+
+<h2 id="tips-for-benchmarks-and-competitions">Tips for Benchmarks and Competitions</h2>
+
+<ol>
+<li><strong>Ensembling:</strong> Training multiples networks in parallel and at test time, using the average output of all those network</li>
+<li><strong>Multi-Crop at Test Time:</strong> <em>10-crop</em>: center and corner crops of original and reflected image</li>
+</ol>
+
+<h2 id="object-localization">Object Localization</h2>
+
+<h3 id="localization-vs-detection">Localization vs Detection</h3>
+
+<ul>
+<li><strong>Localization:</strong> Classify a <em>single</em> object in image and predict its bounding box</li>
+<li><strong>Detection:</strong> Classify and predict bounding box of <em>multiple objects</em> in images belonging to <em>multiple classes</em>
+<center><img src="/assets/DLai_4/localize1.PNG"/></center></li>
+</ul>
+
+<h3 id="classification-with-localization">Classification with Localization</h3>
+
+<p>For a simple classification task, we would use a Convolutional Network with softmax as its output layer. For Classification with Localization, in addition to softmax, we need to predict the bounding box coordinates <span  class="math">\(( b_x, b_y, b_w, b_h)\)</span> as well.
+<center><img src="/assets/DLai_4/localize2.PNG"/></center></p>
+
+<p>Thus, our output vector would look like this:
+<center><img src="/assets/DLai_4/localize3.PNG"/></center></p>
+
+<h4 id="loss-function">Loss Function</h4>
+
+<p>We could use a simple mean-squared error loss function as follows:
+<center><img src="/assets/DLai_4/localize4.PNG"/></center></p>
+
+<p>The above loss function would work but in practice, we use different loss functions for each task:</p>
+
+<ul>
+<li><span  class="math">\(p_c\)</span>: Logistic Regression Loss</li>
+<li>bounding box coordinates: Squared Error Loss</li>
+<li>class labels: Log Loss</li>
+</ul>
+
+<h2 id="landmark-detection">Landmark Detection</h2>
+
+<p>Just as in the case of bounding box, we output four numbers (bx, by, bh, bw), in more general cases, we can have a neural network output xy-coordinates of important points in images (such as corners of eyes, joints of body for pose detection etc) called <strong>landmarks</strong>.</p>
+
+<table style="width: 100%">
+    <tr>
+        <td><center><img src="/assets/DLai_4/landmark2.PNG"/></center></td>
+        <td><center><img src="/assets/DLai_4/landmark1.PNG" style="zoom:70%"/></center></td>
+    </tr>
+</table>
+
+<h2 id="object-detection">Object Detection</h2>
+
+<p>Lets say we need to train a <strong>Car Detection</strong> algorithm, for that what we can do is to get a training data with <strong>closely cropped car images</strong> and use that to train a CovNet.
+<center><img src="/assets/DLai_4/carDetect.PNG"/></center></p>
+
+<p>After that, we can use a <strong>Sliding Window Algorithm</strong> with that trained ConvNet.</p>
+
+<h3 id="sliding-windows-algorithm">Sliding Windows Algorithm</h3>
+
+<p>In Sliding Windows Algorithm, we take a <strong>window sliding over the images</strong> and <strong>use the cropped window regions independtly as input to the ConvNet</strong> trained on closely cropped images.</p>
+
+<p>We use multiple window sizes so that if there is an object in the image, it can be captured by the window and can be detected.</p>
+
+<p><center><img src="/assets/DLai_4/slideWin1.PNG"/></center></p>
+
+<h4 id="cons-of-sliding-windows">Cons of Sliding Windows</h4>
+
+<ul>
+<li>Computationally Expensive if use a <strong>small window size</strong></li>
+<li>May miss the object to be detected if use a <strong>larger window size</strong> or <strong>larger stride</strong></li>
+</ul>
+
+<h4 id="turning-fully-connected-layers-to-convolutional-layers">Turning Fully Connected Layers to Convolutional Layers</h4>
+
+<p>We can turn Fully Connected Layers to Convolutional Layers by using a filter size such that it reduces the input to <span  class="math">\(1\times1\)</span> as follows:
+<center><img src="/assets/DLai_4/slidingWin1.PNG"/></center></p>
+
+<h4 id="convolutional-implementation-of-sliding-windows">Convolutional Implementation of Sliding Windows</h4>
+
+<p>Suppose we trained a CovNet that takes a <span  class="math">\(14\times14\times3\)</span> closely cropped image as input. If we use sliding window on a <span  class="math">\(16\times16\times3\)</span> image, we would have to input <em>4 sections</em> independently.</p>
+
+<p>It turns out that when you crop sections of image to input to CovNet independently, <strong>several crops share same parameters</strong>. Thus, we can input all those sections collectively to the network as follows:
+<center><img src="/assets/DLai_4/slidingWin2.PNG"/></center></p>
+
+<h3 id="bounding-box-predictions">Bounding Box Predictions</h3>
+
+<p>Suppose, using a Sliding Windows Algorithm, the blue window is able to detect the object. But as it can be seen, the actual ground truth bounding box covers multiple Window Regions.
+<center><img src="/assets/DLai_4/yolo1.PNG"/></center></p>
+
+<p>Thus, in order to predict better estimation of bounding box, we use <strong>YOLO Algorithm</strong>.</p>
+
+<h4 id="yolo-algorithm">YOLO Algorithm</h4>
+
+<blockquote>
+<p>YOLO = You Only Look Once</p>
+</blockquote>
+
+<p>YOLO Algorithm basically places a <strong>Grid over the image</strong> (practically a very fine gride) and runs the <strong>Object Localization Algorithm on each of the Grid Cells</strong>.
+<center><img src="/assets/DLai_4/yolo2.PNG"/></center></p>
+
+<p>Instead of seperately passing each grid cell to the Localization algorithm, it is implemented as a Convolutional Algorithm taking the whole image as input, outputing values for each grid cell. (So, the output shape for the above image with Grid Size <span  class="math">\(3\times3\)</span> would be <span  class="math">\(3\times3\times8\)</span>).</p>
+
+<p>YOLO basically assigs the object to the <strong>grid cell that contains that object's mid point</strong>. And the <strong>height and width of the object</strong> is predicted <strong>relative to the size of Grid Cell</strong>.
+<center><img src="/assets/DLai_4/yolo3.PNG"/></center></p>
+
+<blockquote>
+<p>Each object assigned to only one Grid Cell containing the object's midpoint.
+Height and Width are relative to size of grid cell size, so can be greater than 1.</p>
+</blockquote>
+
+<h2 id="intersection-over-union-iou">Intersection over Union (IoU)</h2>
+
+<p>For most of the Localization/ Detection tasks, the metric used to evalute models is <strong>Intersection over Union (IoU)</strong>.</p>
+
+<p><span  class="math">\[ \text{IoU} = \frac{\text{Intersection of Ground Truth and Predicted Bounded Box}}{\text{Union of Ground Truth and Predicted Bounded Box}} \]</span></p>
+
+<p><center><img src="/assets/DLai_4/iou.PNG"/></center></p>
+
+<blockquote>
+<p>Mostly used threshold for IoU is <code>0.5</code>.</p>
+</blockquote>
+
+<h2 id="nonmax-suppression">Non-max Suppression</h2>
+
+<p>Technically, in YOLO, only one of the Grid Cells shall be assigned the object as only one Grid Cell could contain the mid point of the object. But in practice, in turns out that multiple groud cells might think that the object belongs to them.
+<center><img src="/assets/DLai_4/nonmax1.PNG"/></center></p>
+
+<p>So we endup with multiple bounding boxes (with different probablities) for each object.
+<center><img src="/assets/DLai_4/nonmax2.PNG"/></center></p>
+
+<p>So, we use Non-max Suppression to pick the most accurate box as follows:</p>
+
+<ul>
+<li>Highlight the bounding box with highest probability</li>
+<li>Suppress all the neighbouring bounding box with larger IoU with this highlighted bounded box.
+<center><img src="/assets/DLai_4/nonmax3.PNG"/></center></li>
+</ul>
+
+<p>Consider a single class example (no softmax output values, can detect object using <span  class="math">\(p_c\)</span> only). Non-max Supression would work for it as follows:
+<center><img src="/assets/DLai_4/nonmax4.PNG"/></center></p>
+
+<h2 id="anchor-boxes">Anchor Boxes</h2>
+
+<p>As discussed previously, the <strong>object is assigned to the grid cell that contains the midpoint of the object</strong>. But what if <strong>multiple objects' midpoints lie in the same grid cell</strong>? Currently, the target vector (y) for each object can classify a single object only.<br>
+<center><img src="/assets/DLai_4/aBox1.PNG"/></center></p>
+
+<p>What we can do instead is to <strong>predefine different anchor boxes</strong> associated with each grid cell. Now we will assign object to <code>(grid cell, anchor box) pair</code>, <strong>grid cell that contains the object's midpoint</strong> and the <strong>anchor box of that grid cell with highest IoU with object's shape</strong>.
+<center><img src="/assets/DLai_4/aBox2.PNG"/></center></p>
+
+<blockquote>
+<p>If we have defined <strong>n</strong> anchor boxes, then our target vector for each grid cell will be of the shape <span  class="math">\((8n \times 1)\)</span></p>
+</blockquote>
+
+<h3 id="example">Example</h3>
+
+<p>For the example below, we are considering the target vector for the <strong>second grid cell in the last row</strong>.
+<center><img src="/assets/DLai_4/aBox3.PNG"/></center></p>
+
+<h3 id="choosing-anchor-boxes">Choosing Anchor Boxes</h3>
+
+<p>We usually a number of anchor boxes shapes depending on the shapes of objects we expect to encounter.
+For a more specialized approach, we can use a <strong>K-means Algorithm</strong> to group together the shapes of the objects in our dataset and then choose anchor boxes of those shapes.</p>
+
+<h3 id="notes">Notes</h3>
+
+<ul>
+<li>What if two objects <strong>associated with the same grid cell</strong> now even have the <strong>same anchor box shape</strong>? Anchor boxes do not handle this case but it can be solved solved using some tie breaking method (e.g. thresholding using <strong>Class Score</strong>).</li>
+<li>In practice, it is very rare for mutiple objects to be even associated wit the same grid cell as we use a very fine grid. But using <strong>anchor boxes enable the learning algorithm to specialize to objects</strong> (tall lengthy objects associated with vertical rectangles etc. )</li>
+</ul>
+
+<h4 id="class-score">Class Score</h4>
+
+<p>In practice, we will compute the following element-wise product and extract a probability that the box contains a certain class.
+<center>
+<span  class="math">\( \text{Score} = p_c \times c_i \)</span>
+</center>
+<center><img src="/assets/DLai_4/cScore.PNG"/></center></p>
+
+<h2 id="yolo-algorithm-step-by-step">YOLO Algorithm (Step by Step)</h2>
+
+<ol>
+<li><p><strong>Prepare Training Set:</strong> Suppose we are using a <span  class="math">\(3\times3\)</span> grid and 2 Anchor Boxes with 3 classes in our dataset, we need to prepare our target vectors for training of the shape <span  class="math">\(3\times3\times2\times8\)</span>.
+<center><img src="/assets/DLai_4/yolo4.PNG"/></center>
+<center><img src="/assets/DLai_4/yolo5.PNG"/></center></p></li>
+
+<li><p><strong>Making Predictions:</strong>
+<center><img src="/assets/DLai_4/yolo6.PNG"/></center></p></li>
+
+<li><p><strong>Running Output through Non-max Suppression:</strong> Our model output would look something like this:
+<center><img src="/assets/DLai_4/yolo7.PNG"/></center>
+So we will apply Non-max Suppression.
+<center><img src="/assets/DLai_4/yolo8.PNG"/></center></p></li>
+</ol>
+
+<h2 id="region-proposals-rcnn">Region Proposals (R-CNN)</h2>
+
+<p>The sliding windows algorithm makes predictions for many of the regions in the image that does not contain any object. R-CNN proposes a solution to that to run a <strong>segmentation algorithm on the image first to identify parts of the image containing objects</strong>, <strong>define anchor boxes on those regions</strong> and then <strong>run a classification algorithm on each of those regions</strong>.
+<center><img src="/assets/DLai_4/region1.PNG"/></center></p>
+
+<ul>
+<li><strong>R-CNN:</strong> It was a slow algorithm as it used a <strong>non-convolutional implementation of sliding windows</strong> algorithm</li>
+<li><strong>Fast R-CNN:</strong> It <strong>implemented the sliding windows step convolutionally</strong> but still, the <strong>region proposal step was slow</strong></li>
+<li><strong>Faster R-CNN:</strong> Used Convolutional Network to propose regions instead of a segmentation algorithm</li>
+</ul>
+
+<h2 id="face-recognition">Face Recognition</h2>
+
+<h3 id="face-recognition-vs-verification">Face Recognition vs Verification</h3>
+
+<p><center><img src="/assets/DLai_4/recogVSverif.PNG" style="zoom:50%;"/></center></p>
+
+<blockquote>
+<p><strong>Face Verification</strong> is <strong>1:1</strong> task where as <strong>Face Recognition</strong> is a <strong>1:K</strong> task.</p>
+</blockquote>
+
+<p>Fo a <em>Face Verification model</em> to be deployed in a <em>Face Recognition task</em>, we need the verification model to be of higher accuracy (around 99.9%).</p>
+
+<p>Lets say the Verification model accuracy is 99%. Now if we deploy it for a Recognition task with  database of k=100 people, that 1% error is now for each of those 100 people.</p>
+
+<h2 id="one-shot-learning">One Shot Learning</h2>
+
+<p><strong>One Shot Learning:</strong> Learning from just <em>one example</em> to recognize the person</p>
+
+<p>Historically, deep learning algorithms don't work well if you have only one training example. But in our case we will have only one image per person in our database.</p>
+
+<p>If we try to solve this problem using a general ConvNet (Classification Problem), the following problems could araise:</p>
+
+<ul>
+<li>ConvNet do not learn well with just one training example of each class (data hungry)</li>
+<li>What if another new person is included in the database?</li>
+</ul>
+
+<p><center><img src="/assets/DLai_4/recogCovn.PNG"/></center></p>
+
+<p>What we instead do is to learn a <strong>distance/ similarity function</strong> between images of similar people.</p>
+
+<h3 id="similarity-function">Similarity Function</h3>
+
+<p><center><img src="/assets/DLai_4/simlarityFunc.PNG" style="zoom:75%;"/></center></p>
+
+<p>So now, to <em>use this similarity function for recognition problem</em>, given an input image, we would compute distance with each image in our database. If the person exists, the output will be a small distance value with the image of that person, otherwise a large distance value.</p>
+
+<p><center><img src="/assets/DLai_4/simlarityFunc1.PNG"/></center></p>
+
+<h2 id="siamese-network">Siamese Network</h2>
+
+<p>Lets consider an intermediate layer in a simple Convolutional Neural network, and lets call its output <strong>encoding of <span  class="math">\(x^{(i)}\)</span></strong>, for an input image <span  class="math">\(x^{(i)}\)</span>.
+<center><img src="/assets/DLai_4/siamese1.PNG"/></center></p>
+
+<p>So, to compare 2 images, we feed them independently to the same network, with same parameters and get their encodings as follows:
+<center><img src="/assets/DLai_4/siamese2.PNG"/></center></p>
+
+<blockquote>
+<p>Remember that both the convNets have same parameters so that when input a similar image, the final vector is the also the same every time.</p>
+</blockquote>
+
+<p>Now, to <strong>compute similarity</strong>, we can use the <strong>norm of the difference of these encodings</strong>:
+<center><img src="/assets/DLai_4/siamese3.PNG"/></center></p>
+
+<p>Such a network is called <em>Siamese Network</em>.</p>
+
+<p>In short, the object of Siamese Network is:
+<center><img src="/assets/DLai_4/siamese4.PNG"/></center>
+<center><img src="/assets/DLai_4/siamese5.PNG" style="zoom:75%"/></center></p>
+
+<h3 id="triplet-loss-function">Triplet Loss Function</h3>
+
+<p>One way to learn the parameters of the neural network so that it gives you a good encoding for your pictures of faces is to define an applied gradient descent on the <strong>triplet loss function</strong>.</p>
+
+<p>We basically make triplet of images in our dataset, a pair of images of a similar person (Anchor and Positive) and a different person's image (Negative).
+<center><img src="/assets/DLai_4/triplet1.PNG"/></center></p>
+
+<blockquote>
+<p>Triplet Loss: As we are looking at 3 images at a time; Anchor, Positive, Negative</p>
+</blockquote>
+
+<p>So, our data set looks like:
+<center><img src="/assets/DLai_4/triplet2.PNG"/></center></p>
+
+<blockquote>
+<p>Notice that for training, we do need multiple images of the same person.</p>
+</blockquote>
+
+<p>What we basically want is to have a <strong>small distance between anchor and positive image</strong> and l<strong>arge distance value between anchor and negative image</strong>. That is:
+<center><img src="/assets/DLai_4/triplet3.PNG"/></center></p>
+
+<p>But the above expression can be learned easily by the network using the following trivial cases:</p>
+
+<ul>
+<li>outputing a <strong>zero encoding vector</strong> for every image</li>
+<li>outputing the <strong>same encoding vector</strong> for every image</li>
+</ul>
+
+<p>Thus, to prevent that, we add a <strong>Margin Constant</strong> <span  class="math">\(\alpha\)</span> in the above expression to push <span  class="math">\(d(A, P)\)</span> and <span  class="math">\(d(A, N)\)</span> away from each other.
+<center><img src="/assets/DLai_4/triplet4.PNG"/></center></p>
+
+<blockquote>
+<p>As we want to have a small distance between anchor and positive image and large distance value between anchor and negative image, what margin does is to scale both these distances down and up respectively.</p>
+</blockquote>
+
+<h3 id="loss-function-1">Loss Function</h3>
+
+<p><center><img src="/assets/DLai_4/triplet5.PNG"/></center></p>
+
+<p>We have taken max so as long as the norm difference satisfies our condition (<span  class="math">\(\leq 0\)</span>), loss stays zero.</p>
+
+<h3 id="cost-function">Cost Function</h3>
+
+<p><center><img src="/assets/DLai_4/triplet6.PNG"/></center></p>
+
+<h3 id="choosing-triplets-a-p-n">Choosing Triplets A, P, N</h3>
+
+<p>During training, if A, P and N and <strong>chosen randomly</strong>, the loss function is easily satisfied. As for randomly chosen triplets, <strong>d(A, N) would be much bigger than d(A, P)</strong> so our <strong>objective would easily be satisfied</strong>.</p>
+
+<p>Instead, we want such triplets in training examples which are hard to train on, such that:
+<center><img src="/assets/DLai_4/triplet7.PNG"/></center></p>
+
+<h2 id="face-verification-and-binary-classification">Face Verification and Binary Classification</h2>
+
+<p>We can also treat face verification problem as Binary Classification instead of using a triplet loss.</p>
+
+<p>So for that, we <strong>input our image encodings to a logistic regression</strong> unit as follows:
+<center><img src="/assets/DLai_4/fvClass1.PNG"/></center></p>
+
+<p>So the network output would be:</p>
+
+<p><span  class="math">\[ \hat{y} = \begin{cases} 1 & \text{Pictures of the Same Person} \\0 & \text{Pictures of Different People} \end{cases} \]</span></p>
+
+<p>Our dataset would now have <strong>pairs of images</strong>:
+<center><img src="/assets/DLai_4/fvClass2.PNG"/></center></p>
+
+<h3 id="logistic-regression-unit">Logistic Regression Unit</h3>
+
+<p>Rather than feeding the encodings directly, we can feed in their difference to the logistic regression unit as follows:
+<center><img src="/assets/DLai_4/fvClass3.PNG"/></center></p>
+
+<p>The expression underlined in <strong>green</strong> (difference of encodings) is an element-wise operation. It can also be calculated using <strong>Chi-Square Operation</strong> as follows:</p>
+
+<p><span  class="math">\[
+\frac{[ f(x^{(i)})_k - f(x^{(j)})_k ]^2}{f(x^{(i)})_k + f(x^{(j)})_k}
+\]</span></p>
+
+<h2 id="computation-trick-for-siamese-network">Computation Trick for Siamese Network</h2>
+
+<p>We can <strong>precompute the encodings for all the images in our database and store them</strong>. Thus, for verification task, we would have to run the encoding network only once for the input image.</p>
+
+<h2 id="neural-style-transfer">Neural Style Transfer</h2>
+
+<p>Neural Style Transfer basically employs a pretrained convolution neural network (CNN) to transfer styles from a given image to another.  It merges two images, namely: a &quot;content&quot; image (C) and a &quot;style&quot; image (S), to create a &quot;generated&quot; image (G).
+<center><img src="/assets/DLai_4/nst1.PNG"/></center></p>
+
+<h3 id="what-are-deep-convnets-learning">What are deep ConvNets learning?</h3>
+
+<p>Consider the following pretained CNN:
+<center><img src="/assets/DLai_4/nst2.PNG"/></center></p>
+
+<p>Now let us pass input images and visualize what patches of images are activating different neurons in different layers.
+<center><img src="/assets/DLai_4/nst3.PNG"/></center></p>
+
+<blockquote>
+<p>Earlier layers have <strong>smaller view</strong> of input image where as deeper layers have a <strong>large view</strong> of input image.</p>
+</blockquote>
+
+<p>We can clearly see that <strong>neurons in earlier layers</strong> are being activated by <strong>simple patterns such as edges, lines</strong> etc.
+<center><img src="/assets/DLai_4/nst4.PNG"/></center></p>
+
+<p>Where as in <strong>deeper layers</strong>, neurons have even started to be activated by whole objects/ dog faces (<strong>complex patterns and objects</strong>) etc.
+<center><img src="/assets/DLai_4/nst5.PNG" style="zoom: 60%;"/></center></p>
+
+<h3 id="cost-function-1">Cost Function</h3>
+
+<p>The cost function of Neural Style Transfer consists of two parts:</p>
+
+<ul>
+<li><strong>Content Cost Function</strong> (How similar is the content of Content and Generated image)</li>
+<li><strong>Style Cost Function</strong> (How similar is the style of Style and Generated image)</li>
+</ul>
+
+<p><span  class="math">\[J(G) = \alpha\, J_{content}(C, G) + \beta\, J_{style}(S, G)\]</span></p>
+
+<blockquote>
+<p>Usually, <span  class="math">\(\beta\)</span> is much larger than <span  class="math">\(\alpha\)</span>, often represented as a ratio <span  class="math">\(( \frac{\alpha}{\beta} )\)</span></p>
+</blockquote>
+
+<h4 id="finding-generated-image-g">Finding Generated Image G</h4>
+
+<ol>
+<li>Initialize G randomly (a noise image).</li>
+<li>Use Gradient Descent to minimize <em>J(G)</em>
+<center><img src="/assets/DLai_4/nst8.PNG"/></center></li>
+</ol>
+
+<p>So if given following images as input:
+<center><img src="/assets/DLai_4/nst6.PNG"/></center></p>
+
+<p>Output initially is a noise image and it starts to improve with each Gradient Descent step:
+<center><img src="/assets/DLai_4/nst7.PNG"/></center></p>
+
+<h4 id="content-cost-function">Content Cost Function</h4>
+
+<p>Lets say you use hidden layer l to compute content cost. If l is a small number (shallow layer), it will force the output image pixel values to be really similar to Content Image.</p>
+
+<p>But if we use a very deep layer, then the output image will not have much similar content as deep layers capture only high level features.</p>
+
+<p>So, in practice, an <strong>intermediate layer</strong> is used.</p>
+
+<p><center><img src="/assets/DLai_4/nst9.PNG"/></center></p>
+
+<p>So we basically unroll the activations of the chosen layer <em>l</em> into vectors and compute element-wise L2-normalization (squared difference) between image C and G. And we can control the similarity of content by the hyperparameter (<span  class="math">\(\alpha\)</span>).</p>
+
+<h3 id="style-cost-function">Style Cost Function</h3>
+
+<blockquote>
+<p><strong>Style</strong>: Correlation between activations across different channels of the chosen layer</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_4/nst10.PNG" style="zoom:75%"/></center>
+Suppose you have the following activation with different channels. So, correlation is how similar are the values of one channel to the others.</p>
+
+<h4 id="how-does-activation-correlation-captures-style">How does Activation Correlation captures style?</h4>
+
+<p>What coorelation tells us that which type of texture components tend to occur together.</p>
+
+<blockquote>
+<p>Degree of correlation tells how often these texture components occur together.</p>
+</blockquote>
+
+<p>Suppose we are looking at the activations of Red and Yellow channel:
+<center><img src="/assets/DLai_4/nst11.PNG"/></center></p>
+
+<p>If they are correlated, it means that if an image has vertical lines, its likely to also have orange shade.</p>
+
+<p>So what we can do is to find correlation between different channels of <em>Style Image</em> and <em>Generated Image</em> and then compare that correlation and see how similar it is.
+<center><img src="/assets/DLai_4/nst12.PNG"/></center></p>
+
+<h4 id="style-matrix">Style Matrix</h4>
+
+<p>Given the input image, we compute a Style Matrix that captures the correlations between different activations.
+<center><img src="/assets/DLai_4/nst13.PNG"/></center></p>
+
+<p>where;</p>
+
+<ul>
+<li><strong>i</strong> = index over <strong>Height</strong> of Activation</li>
+<li><strong>j</strong> = index over <strong>Width</strong> of Activation</li>
+<li><strong>k</strong> = index over <strong>Channel</strong> of Activation</li>
+</ul>
+
+<blockquote>
+<p>Elements of matrix G tells how coorelated each pair of activations are. Higher value corresponds to higher coorelation and vice versa.</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_4/nst14.PNG"/></center></p>
+
+<blockquote>
+<p>What we are calling <strong>Correlation</strong> here is basically <strong>Unnormalized Cross Coorelation</strong>.</p>
+
+<p>In Linear Algebra, Style Matrix is called <strong>Gram Matrix</strong>.</p>
+</blockquote>
+
+<p>We can compute the Style matrix by <strong>multiplying the &quot;unrolled&quot; filter matrix with its transpose</strong>:
+<center><img src="/assets/DLai_4/nst19.PNG" style="zoom:75%"/></center></p>
+
+<p><span  class="math">\[ G = A_{unrolled}\,A^T_{unrolled}\]</span></p>
+
+<p>We compute the Style matrix for both Style Image and Generated Image separately as follows:
+<center><img src="/assets/DLai_4/nst15.PNG"/></center></p>
+
+<p>And then compute <strong>Style Cost</strong> as <strong>Frobenius Norm squared between 2 style matrices</strong>:
+<center><img src="/assets/DLai_4/nst16.PNG"/></center></p>
+
+<p>The authors of this paper also added a <strong>normalization constant</strong> as follows:
+<center><img src="/assets/DLai_4/nst17.PNG"/></center></p>
+
+<blockquote>
+<p>It turns out, it is better to use Style of multiple layers.</p>
+</blockquote>
+
+<p>So overall Style Cost function would be:
+<center><img src="/assets/DLai_4/nst18.PNG"/></center></p>
+
+<blockquote>
+<p>Using multiple layer styles help the network use both low level and high level features.</p>
+
+<p>The hyperparameter (<span  class="math">\(\lambda\)</span>) for each Style Layer is chosen between <strong>0 and 1</strong>. Usually, <strong>higher values is used for shallow layers</strong>, and <strong>smaller value for deeper layers</strong>.</p>
+</blockquote>
+
+<h2 id="1d-and-3d-convolutions">1D and 3D Convolutions</h2>
+
+<p>Just as 2D convolutions, 1D and 3D convolutions work the same.</p>
+
+<p>Suppose we have following 1D ECG data, we can convolve it with 1D filter as:
+<center><img src="/assets/DLai_4/conv1d.PNG"/></center></p>
+
+<p>So we apply this filter at different positions (just like images, sliding it throughout the data).</p>
+
+<p><span  class="math">\[ 14 \times 1 \xrightarrow[]{16\quad 5 \times 1 \quad filters} 10 \times 16 \]</span></p>
+
+<p>Similarly, we can use the same idea for 3D data:
+<center><img src="/assets/DLai_4/conv3D.PNG"/></center>
+<center><img src="/assets/DLai_4/conv3dd1.PNG"/></center></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zaryabmakram.github.io/tags/deeplearning.ai">deeplearning.ai</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/deep-learning">deep-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/machine-learning">machine-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/andrew-ng">andrew-ng</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [['$','$'], ['\\(','\\)']],
+displayMath: [['$$','$$'], ['\\[','\\]']],
+processEscapes: true,
+processEnvironments: true,
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+TeX: { equationNumbers: { autoNumber: "AMS" },
+extensions: ["AMSmath.js", "AMSsymbols.js"] }
+}
+});
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>
