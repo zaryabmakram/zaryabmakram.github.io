@@ -6,10 +6,21 @@
     <description>Recent content in deeplearning.ai on Zaryab Muhammad Akram</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://zaryabmakram.github.io/categories/deeplearning.ai/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sequence Models</title>
+      <link>https://zaryabmakram.github.io/blog/05-course5/</link>
+      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zaryabmakram.github.io/blog/05-course5/</guid>
+      <description>Examples of Sequence Data Following are some input to output mapping of different types of data where Sequence Models are used: 
+We can see that there are different types of sequence models. Where,
+ input or output is a sequence both input and output are sequences (maybe of different lengths)  Notation Suppose we are working on Named Entity Recognition problem where given an input sequence of words, we want to predict where names are in the sequence.</description>
+    </item>
     
     <item>
       <title>Convolutional Neural Networks</title>

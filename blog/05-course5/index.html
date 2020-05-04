@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Zaryab Akram ">
+<meta name="description" content="Examples of Sequence Data Following are some input to output mapping of different types of data where Sequence Models are used: 
+We can see that there are different types of sequence models. Where,
+ input or output is a sequence both input and output are sequences (maybe of different lengths)  Notation Suppose we are working on Named Entity Recognition problem where given an input sequence of words, we want to predict where names are in the sequence." />
+<meta name="keywords" content=", deeplearning.ai, deep-learning, machine-learning, andrew-ng" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://zaryabmakram.github.io/blog/05-course5/" />
+
+
+    <title>
+        
+            Sequence Models :: Zaryab Muhammad Akram  — Personal Website
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.a71f1ccb2abf86c1f9d46cddfa6403b99497528c340efb7c3589023cc9808b15.css">
+
+
+
+
+<meta itemprop="name" content="Sequence Models">
+<meta itemprop="description" content="Examples of Sequence Data Following are some input to output mapping of different types of data where Sequence Models are used: 
+We can see that there are different types of sequence models. Where,
+ input or output is a sequence both input and output are sequences (maybe of different lengths)  Notation Suppose we are working on Named Entity Recognition problem where given an input sequence of words, we want to predict where names are in the sequence.">
+<meta itemprop="datePublished" content="2020-05-03T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-03T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="5775">
+<meta itemprop="image" content="https://zaryabmakram.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="deeplearning.ai,deep-learning,machine-learning,andrew-ng," /><meta property="og:title" content="Sequence Models" />
+<meta property="og:description" content="Examples of Sequence Data Following are some input to output mapping of different types of data where Sequence Models are used: 
+We can see that there are different types of sequence models. Where,
+ input or output is a sequence both input and output are sequences (maybe of different lengths)  Notation Suppose we are working on Named Entity Recognition problem where given an input sequence of words, we want to predict where names are in the sequence." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zaryabmakram.github.io/blog/05-course5/" />
+<meta property="og:image" content="https://zaryabmakram.github.io/"/>
+<meta property="article:published_time" content="2020-05-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-03T00:00:00+00:00" /><meta property="og:site_name" content="Zaryab Muhammad Akram" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zaryabmakram.github.io/"/>
+
+<meta name="twitter:title" content="Sequence Models"/>
+<meta name="twitter:description" content="Examples of Sequence Data Following are some input to output mapping of different types of data where Sequence Models are used: 
+We can see that there are different types of sequence models. Where,
+ input or output is a sequence both input and output are sequences (maybe of different lengths)  Notation Suppose we are working on Named Entity Recognition problem where given an input sequence of words, we want to predict where names are in the sequence."/>
+
+
+
+    <meta property="article:section" content="deeplearning.ai" />
+
+
+
+    <meta property="article:published_time" content="2020-05-03 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">/home/zaryab/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://zaryabmakram.github.io/blog/">Blog</a></li><li><a href="https://zaryabmakram.github.io/CV.pdf">CV</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://zaryabmakram.github.io/blog/05-course5/">Sequence Models</a></h2>
+
+            
+
+            <div class="post-content">
+                <p><center><img src="/assets/DL_logo.png" style="zoom: 50%;" /></center></p>
+
+<h2 id="examples-of-sequence-data">Examples of Sequence Data</h2>
+
+<p>Following are some input to output mapping of different types of data where Sequence Models are used:
+<center><img src="/assets/DLai_5/sqModel.PNG" style="zoom:75%"/></center></p>
+
+<p>We can see that there are different types of sequence models. Where,</p>
+
+<ul>
+<li>input or output is a sequence</li>
+<li>both input and output are sequences (maybe of different lengths)</li>
+</ul>
+
+<h2 id="notation">Notation</h2>
+
+<p>Suppose we are working on <em>Named Entity Recognition</em> problem where given an input sequence of words, we want to predict where names are in the sequence.</p>
+
+<p>We will denote our input as follows:
+<center><img src="/assets/DLai_5/notIn.PNG" style="zoom:75%"/></center></p>
+
+<p>Similarly, output as:
+<center><img src="/assets/DLai_5/notOut.PNG" style="zoom:75%"/></center></p>
+
+<p>where we have <em>1</em> in the index representing names in our input sequence.</p>
+
+<table style="width:100%">
+    <tr>
+        <td>$$ X^{(i)\langle t \rangle}$$</td>
+        <td><strong>t-th</strong> word in <strong>i-th</strong> training example</td>
+    </tr>
+    <tr>
+        <td>$$ T^{(i)}_{x}$$</td>
+        <td>length of <strong>i-th</strong> input sequence</td>
+    </tr>
+</table>
+
+<h2 id="input-processing">Input Processing</h2>
+
+<p>Now to process sequnce input of words so that it can be fed to a model, we follow following steps:</p>
+
+<ul>
+<li>Build a <strong>Vocabulary</strong> vector (of most common words in our problem)</li>
+<li>Represent each word as <strong>one-hot vector</strong> of the vocabulary vector</li>
+</ul>
+
+<p><center><img src="/assets/DLai_5/not2.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>To encounter unknown words during test time, we also include an <strong>&lt;UNK&gt;</strong> token in our vocabulary.</p>
+</blockquote>
+
+<h2 id="recurrent-neural-network-model">Recurrent Neural Network Model</h2>
+
+<h3 id="why-not-use-a-standard-network">Why not use a Standard Network?</h3>
+
+<p>Following are the problems that arise when we try to input our sequence to a Standard Network for prediction:
+<center><img src="/assets/DLai_5/stdProb.PNG" style="zoom:75%"/></center></p>
+
+<p>Also,</p>
+
+<ul>
+<li>Features between different neurons are not shared ()e.g. if a neuron learn to predict Harry as a name, if Harry is encountred anywhere else in the sequence, it should automatically be predicted as a name also)</li>
+<li>One-Hot vectors representing words are quite large ( around 10,000) so the network would have large number of parameters</li>
+</ul>
+
+<p>So, to tackle the problems mentioned above, we use <strong>Recurrent Neural Networks</strong> which processes input sequences one word at a time (from Left to Right).</p>
+
+<p>Basically we input a single word to layer and try to get an output corresponding to that word:
+<center><img src="/assets/DLai_5/RNN1.PNG" style="zoom:75%"/></center></p>
+
+<p>For the prediction on next word in the sequence, we not only use the input word but also the activations from the previous layer. So our network for overall sequence is as follows:
+<center><img src="/assets/DLai_5/RNN2.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>In order to generalize each time step, we input activation <span  class="math">\(a_0\)</span> to first time step, which usually a <strong>vector of zeros</strong> or sometimes <strong>initialized randomly</strong>.</p>
+</blockquote>
+
+<p>In some research papers, the above unrolled RNN is also reprsented as:
+<center><img src="/assets/DLai_5/RNN3.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>We can see that parameters from different time steps are shared between each other, but <strong>only from previous time steps to the next ones</strong>.</p>
+</blockquote>
+
+<p>This is a disadvantage of RNNs that it <strong>can only make predictions based on current and previous inputs</strong>.</p>
+
+<p>Consider the following examples:
+<center><img src="/assets/DLai_5/RNN4.PNG" style="zoom:75%"/></center></p>
+
+<ul>
+<li>Example 1: &quot;Teddy&quot; is a name</li>
+<li>Example 2: &quot;Teddy&quot; is not a name</li>
+</ul>
+
+<p>but it can only be predicted based on words after the word Teddy.</p>
+
+<blockquote>
+<p><strong>RNN Weakness</strong>: Only uses information from previous time steps.</p>
+</blockquote>
+
+<h3 id="forward-propagation">Forward Propagation</h3>
+
+<p>Forward Propagation with RNN is as follows:
+<center><img src="/assets/DLai_5/RNN5.PNG" style="zoom:75%"/></center></p>
+
+<p>More generally, we can write Forward Propagation equations as:
+<center><img src="/assets/DLai_5/RNN6.PNG" /></center></p>
+
+<p>The <strong>notation used for Weight Matrix</strong> is as follows:
+<center><img src="/assets/DLai_5/RNN7.PNG"/></center></p>
+
+<blockquote>
+<p>With RNNs, <strong>tanh</strong> is a preffered activation function compared to ReLU.</p>
+</blockquote>
+
+<h4 id="simplified-forward-propagation">Simplified Forward Propagation</h4>
+
+<p>We can write the above mentioned Forward Propagation equations as follows:
+<center><img src="/assets/DLai_5/RNN8.PNG" style="zoom:75%"/></center></p>
+
+<p>Suppose we have following dimensions:
+<center><img src="/assets/DLai_5/RNN9.PNG" style="zoom:75%"/></center></p>
+
+<p>Then <span  class="math">\(W_a\)</span> will be formed by <strong>horizontally stacking</strong> <span  class="math">\(W_{aa}\)</span> and <span  class="math">\(W_{ax}\)</span>.
+<center><img src="/assets/DLai_5/RNN10.PNG" style="zoom:65%"/></center></p>
+
+<p>Similarly, <strong>vertically stacking</strong> <span  class="math">\(a^{<t-1>}\)</span> and <span  class="math">\(x^{<t>}\)</span>:
+<center><img src="/assets/DLai_5/RNN11.PNG" style="zoom:65%"/></center></p>
+
+<p>Therefore, the complete equation would be as follows:
+<center><img src="/assets/DLai_5/RNN12.PNG" style="zoom:65%"/></center></p>
+
+<p>Also, we can now write the second equation as:
+<center><img src="/assets/DLai_5/RNN13.PNG"/></center></p>
+
+<p>In short, our Simplified RNN equations are as follows:</p>
+
+<p><span  class="math">\[ a^{\langle t \rangle} = g(W_{a} [a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_{a})\]</span></p>
+
+<p><span  class="math">\[ y^{\langle t \rangle} = g(W_{y} a^{\langle t \rangle} + b_{y})\]</span></p>
+
+<h3 id="backpropagation-through-time">Backpropagation Through Time</h3>
+
+<p>Lets first define our <strong>Cost Function</strong> and <strong>Loss Function</strong> as simple Logistic Regression Loss used for binary classification (as our problem is to predict whether a word is a name or not):
+<center><img src="/assets/DLai_5/bprop1.PNG" /></center></p>
+
+<p>As we can see that our loss function is simply <strong>loss computed at each time step and summing them all</strong> as follows:
+<center><img src="/assets/DLai_5/bprop2.PNG" /></center></p>
+
+<p>This Loss computed can then be used to backpropagate and compute gradient etc.</p>
+
+<p>During backpropagation, the major backpropagation step is the one <strong>highlighted with red</strong>, as it backpropagates through each time step. That is why, it has been named, <strong>Backpropagation through time</strong>.
+<center><img src="/assets/DLai_5/bprop3.PNG" style="zoom:75%" /></center></p>
+
+<h2 id="different-types-of-rnns">Different Types of RNNs</h2>
+
+<table style="width:100%">
+    <tr>
+        <td><center><strong>One to One</strong></center></td>
+        <td><center><img src="/assets/DLai_5/tRNN1.PNG" style="zoom:75%" /></center></td>
+    </tr>
+    <tr>
+        <td><center><strong>One to Many</strong> <br/>(e.g. Music Generation)</center></td>
+        <td><center><img src="/assets/DLai_5/tRNN2.PNG" style="zoom:75%" /></center></td>
+    </tr>
+    <tr>
+        <td><center><strong>Many to One</strong> <br/> (e.g. Sentiment Analysis of Reviews)</center></td>
+        <td><center><img src="/assets/DLai_5/tRNN3.PNG" style="zoom:75%" /></center></td>
+    </tr>
+    <tr>
+        <td><center><strong>Many to Many</strong> <br/> ($$T_x = T_y$$)</center></td>
+        <td><center><img src="/assets/DLai_5/tRNN4.PNG" style="zoom:75%" /></center></td>
+    </tr>
+    <tr>
+        <td><center><strong>Many to Many</strong> <br/> ($$T_x \neq T_y$$)</center></td>
+        <td><center><img src="/assets/DLai_5/tRNN5.PNG" style="zoom:75%" /></center></td>
+    </tr>
+</table>
+
+<blockquote>
+<p>For <strong>Sequence Generation</strong> tasks, usually <strong>output from previous time step is fed as input to next time step</strong> (as can be seen in One to Many Model). That is, we set, <span  class="math">\( x^{\langle t \rangle} = y^{\langle t-1 \rangle} \)</span>.</p>
+</blockquote>
+
+<h2 id="language-model-and-sequence-generation">Language Model and Sequence Generation</h2>
+
+<p>Suppose we are working on <strong>Speech Recognition</strong> task and our system hears a sentence. Which one of these sentences is it more likely to be?
+<center><img src="/assets/DLai_5/LM1.PNG" style="zoom:75%" /></center></p>
+
+<p>For our system to correctly predict the right sentence, it needs to use a <strong>Language Model</strong>. What Language Model basically does is to use the <strong>probability of each sentence</strong> and output the one which is more likely to be.
+<center><img src="/assets/DLai_5/LM2.PNG" style="zoom:75%" /></center></p>
+
+<p>So given an input sequence, a Language Model predicts its Probability:</p>
+
+<p><span  class="math">\[ y^{\langle 1 \rangle}, y^{\langle 2 \rangle}, ..., y^{\langle T_y \rangle} \xrightarrow[]{\text{Language Model}} P(y^{\langle 1 \rangle}, y^{\langle 2 \rangle}, ... , y^{\langle T_y \rangle})\]</span></p>
+
+<h3 id="language-modelling-with-rnn">Language Modelling with RNN</h3>
+
+<p>To train a language model with RNNs, we require a <strong>large corpus</strong> of English text as <strong>Training Set</strong>.</p>
+
+<p><strong>Each sentence</strong> in that corpus is then <strong>tokenized</strong> and used as a training example.</p>
+
+<ul>
+<li>Can add tokens for puntuations</li>
+<li>Usually, an <strong>End-of-Sentence (&lt;EOS&gt;)</strong>token added at the end.</li>
+<li>To tackle words out of vocabulary, <strong>&lt;UNK&gt;</strong> token is used.</li>
+</ul>
+
+<p><center><img src="/assets/DLai_5/LM3.PNG" style="zoom:75%" /></center></p>
+
+<p>Given the following sentence as input:</p>
+
+<p><span  class="math">\[ \text{Cats average 15 hours of sleep a day. } \langle EOS \rangle \]</span></p>
+
+<p>The RNN as Language Model, at each time step, tries to <strong>predict the probability of the next word given previous words</strong> as follows:
+<center><img src="/assets/DLai_5/LM4.PNG" style="zoom:75%" /></center></p>
+
+<p>with a <strong>Softmax Loss Function</strong> for each time step:
+<center><img src="/assets/DLai_5/LM5.PNG" /></center></p>
+
+<ul>
+<li>At each time-step, the RNN tries to predict what is the next word given the previous characters.</li>
+<li>The dataset <span  class="math">\(\mathbf{X} = (x^{\langle 1 \rangle}, x^{\langle 2 \rangle}, ..., x^{\langle T_x \rangle})\)</span></li>
+<li><span  class="math">\(\mathbf{Y} = (y^{\langle 1 \rangle}, y^{\langle 2 \rangle}, ..., y^{\langle T_x \rangle})\)</span> is the same list of words but shifted one word forward.</li>
+<li>At every time-step <span  class="math">\(t\)</span>, <span  class="math">\(y^{\langle t \rangle} = x^{\langle t+1 \rangle}\)</span>.  The prediction at time <span  class="math">\(t\)</span> is the same as the input at time <span  class="math">\(t + 1\)</span>.</li>
+</ul>
+
+<p>The <strong>probability output of each time step is then multiplied to get the probability of the whole sentence</strong>.</p>
+
+<p><center><img src="/assets/DLai_5/LM6.PNG" /></center></p>
+
+<h3 id="sampling-novel-sequences-from-a-sequence-model">Sampling Novel Sequences from a Sequence Model</h3>
+
+<p>As we have seen that Language Models given a sequence predicts the probabilities of what the next words could be as a softmax output.</p>
+
+<p>To generate novel sequences from a Language Model, what we can do is to randomly choose a word from the softmax output and input that randomly choosen word to the next time step as follows:
+<center><img src="/assets/DLai_5/LM7.PNG" /></center></p>
+
+<blockquote>
+<p>If we select the most probable, the model will always generate the same result given a starting input. That is why we sample randomly.</p>
+</blockquote>
+
+<p>We can keep sampling for a fixed number of time steps or till <EOS> token is sampled if (that is in our vocabulary).</p>
+
+<blockquote>
+<p>If &lt;UNK&gt; is sampled, we can just ignore it and sample again.</p>
+</blockquote>
+
+<h3 id="characterlevel-language-model">Character-Level Language Model</h3>
+
+<p>Just like Word-Level Lanuage Model, where our vocabulary consisted of words, we can also train a Character-Level Language Model with vocabulary consisting of characters.</p>
+
+<p><center><img src="/assets/DLai_5/CLM1.PNG"  style="zoom:75%" /></center>
+<center><img src="/assets/DLai_5/CLM2.PNG"  style="zoom:75%" /></center></p>
+
+<p>Now the model will output <strong>probability of characters</strong> instead of words.</p>
+
+<blockquote>
+<p>Character-Level Models c<strong>an assign probabilities to new/ unique words</strong> also which are replaced by &lt;UNK&gt; in Word-Level Models.</p>
+
+<p>Character-Level Models are <strong>unable to capture long-distance dependencies</strong> in sentences as a sentence consists of a few words but dozens of characters.</p>
+</blockquote>
+
+<h2 id="vanishing-gradients-with-rnns">Vanishing Gradients with RNNs</h2>
+
+<p>Just like in Deep Neural Networks, during backpropagation, it is quite difficult for the gradients to backpropagate all the way to the initial layers and affect them due to vanishing gradients.</p>
+
+<p><center><img src="/assets/DLai_5/vanish2.PNG"  style="zoom:75%" /></center></p>
+
+<p>Similarly, in RNNs, for longer sequences, <strong>Gradient Vanishing</strong> can occur.
+<center><img src="/assets/DLai_5/vanish3.PNG"  style="zoom:75%" /></center></p>
+
+<p>Consider the following sequences (with long lengths):
+<center><img src="/assets/DLai_5/vanish1.PNG"  style="zoom:75%" /></center></p>
+
+<p>It would be difficult for RNNs to remember it encountered singular or plural noun when sequence length is quite long.</p>
+
+<p>So only <strong>local inputs mostly affect the outputs  in RNNs</strong> compared to long-distance ones.</p>
+
+<blockquote>
+<p>RNNs are mostly affected by Vanishing Gradient. <strong>Exploding Gradients rarely occur</strong> and can easily be tackled using <strong>Gradient Clipping</strong>.</p>
+</blockquote>
+
+<h2 id="gated-recurrent-unit-gru">Gated Recurrent Unit (GRU)</h2>
+
+<p>We can represent an <strong>RNN Unit</strong> as a block diagram:
+<center><img src="/assets/DLai_5/gru1.PNG"  style="zoom:75%" /></center></p>
+
+<p>Gated Recurrent Unit is basically a modification to RNN layer which enables capturing long-distance dependencies and tackling vanishing gradients.</p>
+
+<p>A GRU consists of:</p>
+
+<table style="width:100%">
+    <tr>
+        <td><center>Memory Cell $$ c^{\langle t \rangle} $$</center></td>
+        <td><center>stores activations to be passed on to next the time step</center></td>
+    </tr>
+    <tr>
+        <td><center>Update Gate $$ \Gamma_{u}$$</center></td>
+        <td><center>decides which activations in memory cell to be updated</center></td>
+    </tr>
+</table>
+
+<h3 id="simplified-gru">Simplified GRU</h3>
+
+<p>The computations carried out by GRU as:
+<center><img src="/assets/DLai_5/gru2.PNG"/></center></p>
+
+<p>which can be represented as:
+<center><img src="/assets/DLai_5/gru3.PNG"/></center></p>
+
+<h3 id="update-gate">Update Gate</h3>
+
+<p>Update Gate in GRU is basically what enables it to capture long-distance dependencies. Basically, GRU calculates <span  class="math">\( \widetilde{c}^{\langle t \rangle} \)</span> which is a candidate of activations to replace the activations in memory cell from previous time step. Update Gate is the one which decides which activations will be updated in the memory cell.</p>
+
+<p>As we can see from the Update Gate's equation above that it is computed using <em>Sigmoid Function</em>, thus most of its values are either 0 or 1.
+<center><img src="/assets/DLai_5/gru4.PNG"/></center></p>
+
+<p>In the equation above, we can see that memory cell is updated with <span  class="math">\( \widetilde{c}^{\langle t \rangle} \)</span> only when <span  class="math">\( \Gamma_{u} = 1\)</span>.</p>
+
+<p>Consider the following example of a lengthy sequence where GRU should remember that it encountered a <em>singular noun</em> earlier.
+<center><img src="/assets/DLai_5/gru5.PNG"/></center></p>
+
+<p>So the Update Gate will stay 0 for that activation and remember till it encounters &quot;was&quot; and decides that it is okay to update the neuron now.</p>
+
+<h3 id="full-gru">Full GRU</h3>
+
+<p>In practice, GRU also uses a <strong>Relevance Gate (<span  class="math">\( \Gamma_{r}\)</span>)</strong> which tells us how relevant <span  class="math">\( c^{\langle t-1 \rangle} \)</span> is to calculate <span  class="math">\( \widetilde{c}^{\langle t \rangle} \)</span>.
+<center><img src="/assets/DLai_5/gru6.PNG"/></center></p>
+
+<h2 id="long-short-term-memory-lstm">Long Short Term Memory (LSTM)</h2>
+
+<p>LSTM is a more powerful version of GRU. Instead of handling updating and forgeting of activations in memory cell with a single Update Gate like in GRU, LSTM actually uses two gates; <strong>Update Gate (<span  class="math">\( \Gamma_{u}\)</span>)</strong> and <strong>Forget Gate (<span  class="math">\( \Gamma_{f}\)</span>)</strong>.</p>
+
+<p>In addition to that, the output activations to the next time step also uses an <strong>Output Gate (<span  class="math">\( \Gamma_{o}\)</span>)</strong>
+<center><img src="/assets/DLai_5/lstm1.PNG"/></center></p>
+
+<p>Here,</p>
+
+<p><span  class="math">\[[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] = \begin{bmatrix} a^{\langle t-1 \rangle} \\ x^{\langle t \rangle} \end{bmatrix}\]</span></p>
+
+<p>These computations can be represented as:
+<center><img src="/assets/DLai_5/lstm2.PNG"/></center></p>
+
+<p>So a layer of LSTM units would be as follows:
+<center><img src="/assets/DLai_5/lstm3.PNG" style="zoom:75%" /></center></p>
+
+<h3 id="peephole-connection">Peephole Connection</h3>
+
+<p>One <strong>variation of LSTM</strong> uses a peephole connection, where instead of just using <span  class="math">\([a^{\langle t-1 \rangle}, x^{\langle t \rangle}]\)</span> in computations of Gates, <span  class="math">\(c^{\langle t-1 \rangle}\)</span> is also fed in. And thus, <span  class="math">\([a^{\langle t-1 \rangle}, x^{\langle t \rangle}, c^{\langle t-1 \rangle}]\)</span> is used.
+<center><img src="/assets/DLai_5/lstm4.PNG"  /></center></p>
+
+<h2 id="bidirectional-rnn">Bidirectional RNN</h2>
+
+<p>As Uni/ Forward Directional RNN can only take into account previous inputs (which is their drawback):
+<center><img src="/assets/DLai_5/bsrnn1.PNG" style="zoom:75%"/></center></p>
+
+<p>To tackle that drawback, we use Bidirectional RNN, which in addition to forward activation units, also have backwards activation units.
+<center><img src="/assets/DLai_5/bsrnn2.PNG" /></center></p>
+
+<p>So information of the whole sequence is used for prediction.
+<center><img src="/assets/DLai_5/bsrnn3.PNG" /></center></p>
+
+<p>Bidirectional RNNs are basically <strong>Acyclic Graphs</strong>.</p>
+
+<blockquote>
+<p><strong>Drawback</strong>: Bidirectional RNN have to process the whole sequence before outputing a prediction.</p>
+</blockquote>
+
+<h2 id="deep-rnns">Deep RNNs</h2>
+
+<p>Just like Deep Neural Networks, we can also stack multiple RNN layers as follows:
+<center><img src="/assets/DLai_5/deepRNN1.PNG" /></center></p>
+
+<p>The weights <span  class="math">\(W_a\)</span> and bias <span  class="math">\(b_a\)</span> is shared between each time stamp of the layer, just like in a simple RNN layers.</p>
+
+<blockquote>
+<p>Not many layers of RNN are stacked in practice as they are computationally expensive. To stack more layers, the <strong>time step connections are removed for deeper layers</strong>.</p>
+</blockquote>
+
+<h2 id="introduction-to-word-embeddings">Introduction to Word Embeddings</h2>
+
+<h3 id="word-representation">Word Representation</h3>
+
+<h4 id="onehot-representation">One-Hot Representation</h4>
+
+<p>Previously we have have representing words in vocabulary as <strong>One-Hot vectors</strong>.
+<center><img src="/assets/DLai_5/wRep1.PNG" style="zoom:75%"/></center></p>
+
+<p>Here, <span  class="math">\(O_{5391}\)</span> is a one-hot vector with a <span  class="math">\(1\)</span> at index <span  class="math">\(5391\)</span>.</p>
+
+<p>One of the drawbacks of using One-Hot representation is that it does not enable learning algorithms to generalize well. For example: if a learning algorithm learns to predict &quot;juice&quot; after &quot;orange&quot;, it will not generalize to &quot;juice&quot; when tested with a similar sentence but with &quot;apple&quot; instead of &quot;orange&quot;.
+<center><img src="/assets/DLai_5/wRep2.PNG"/></center></p>
+
+<blockquote>
+<p>One-Hot representation does not allow generalization well as <strong>dot Product between any two One-Hot vectors is 0</strong>.</p>
+</blockquote>
+
+<h4 id="word-embeddings">Word Embeddings</h4>
+
+<p>So, instead of using One-Hot representation, <strong>Featurized Representation (Word Embeddings)</strong> are used, where elements of representation vector of a word correspond to different features.
+<center><img src="/assets/DLai_5/wRep3.PNG" style="zoom:75%"/></center></p>
+
+<p>Now, similar words will have similar representation vectors (e.g. &quot;Orange&quot; and &quot;Apple&quot; might only differ in Color feature) that will enable learning algorithms to generalize well.</p>
+
+<p>We can use a dimensionality reduction algorithm (like <strong>t-SNE</strong>) to visualize embedding vectors. We can see that similar words are closer and are forming clusters.
+<center><img src="/assets/DLai_5/wRep4.PNG" /></center></p>
+
+<blockquote>
+<p>The word <strong>Embeddings</strong> and <strong>Encodings</strong> (similar to the image representation vectors learned from Siamese Network for Face Recognition) are sometimes used interchangeably.</p>
+</blockquote>
+
+<h2 id="using-word-embeddings">Using Word Embeddings</h2>
+
+<p>Consider we are working on <em>Named Entity Recognition</em> Problem to identify <em>names</em> in a sequence, same as earlier. In order to use Word Embeddings, our input vectors (<span  class="math">\(  x^{\langle 1 \rangle}, x^{\langle 2 \rangle}, ..., x^{\langle T_y \rangle} \)</span>) to the network will be <strong>embedding vectors</strong>.
+<center><img src="/assets/DLai_5/wUse1.PNG" style="zoom:75%"/></center></p>
+
+<p>Now if our learning algorithm learns that &quot;Sally Johnson&quot; is a name corresponding to <em>&quot;orange farmer&quot;</em>, when encountered with <em>&quot;apple farmer&quot;</em> instead it will still predict well.</p>
+
+<p>Similarly, if complex words like <em>&quot;durain cultivator&quot;</em> are encountered, the algorithm will still work well as Embedding vectors would have already learned that <em>&quot;durian cultivator&quot;</em> and <em>&quot;orange farmer&quot;</em> are closely related.</p>
+
+<h3 id="transfer-learning-using-word-embedding">Transfer Learning using Word Embedding</h3>
+
+<p>Word Embeddings are used for <strong>transfer learning</strong> in NLP tasks. As word embeddings are learned on a large corpus (1B words) so they help tasks with smaller dataset generalise well.</p>
+
+<blockquote>
+<p>Do not retrain embedding vectors if dataset of the current problem is small.</p>
+</blockquote>
+
+<h2 id="analogy-reasoning">Analogy Reasoning</h2>
+
+<p>One of the properties of word embeddings is that they can also help with <strong>Analogy Reasoning</strong>. For example, if imposed with a question:</p>
+
+<p><span  class="math">\[ \text{If Man}\xrightarrow[]{} \text{Woman, then King }\xrightarrow[]{} ? \]</span></p>
+
+<p>We can automatically guess the right answer to be <strong>&quot;Queen&quot;</strong>. But we can use Word Embeddings to learn this mapping also.</p>
+
+<p>Consider the following Word Embedding vector representations:
+<center><img src="/assets/DLai_5/aRep1.PNG" style="zoom:75%"/></center>
+where, <span  class="math">\(e_{man}\)</span> is the representation of the word &quot;man&quot;etc.</p>
+
+<p>We can see that:
+<center><img src="/assets/DLai_5/aRep2.PNG" /></center></p>
+
+<p>That is, the distance between words <em>&quot;man&quot;</em> and <em>&quot;woman&quot;</em> is similar to the distance between words <em>&quot;king&quot;</em> and <em>&quot;queen&quot;</em> in our embedding.
+<center><img src="/assets/DLai_5/aRep4.PNG" /></center></p>
+
+<blockquote>
+<p>The above distance representation is quite rough. We might not see such clear Parallelogram representation especially when mapped to 2D using t-SNE.</p>
+</blockquote>
+
+<p>Thus, we can guess the correct answer using Word Embeddings as:
+<center><img src="/assets/DLai_5/aRep3.PNG" /></center></p>
+
+<p>In order to use a learning algorithm to answer this question, we can learn a similarity function:</p>
+
+<p><span  class="math">\[ similarity(e_w, e_{king} - e_{man} + e_{woman})\]</span></p>
+
+<p>where, <span  class="math">\(e_w\)</span> is the word we are trying to find out.</p>
+
+<p>To learn this similarity, we can use <strong>Cosine Similarity</strong>.</p>
+
+<p><span  class="math">\[\text{CosineSimilarity(u, v)} = \frac {u \cdot v} {||u||_2 ||v||_2} = cos(\theta)\]</span></p>
+
+<p>where, <strong>norm of <span  class="math">\(u\)</span></strong> is defined as:</p>
+
+<p><span  class="math">\[ ||u||_2 = \sqrt{\sum_{i=1}^{n} u_i^2}\]</span></p>
+
+<ul>
+<li>If <strong>u</strong> and <strong>v</strong> are very <strong>similar</strong>, their cosine similarity will be <strong>close to 1</strong>.</li>
+<li>If they are <strong>dissimilar</strong>, the cosine similarity will take a <strong>smaller value</strong>.</li>
+</ul>
+
+<p><center><img src="/assets/DLai_5/aRep5.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>To learn a <strong>dissimilarity function</strong>, <strong>Eculedian Distance</strong> can be used.</p>
+</blockquote>
+
+<p>It is seen that, the algorithm is able to learn and predict quite accurately using this method:
+<center><img src="/assets/DLai_5/aREp6.PNG" /></center></p>
+
+<h2 id="embedding-matrix">Embedding Matrix</h2>
+
+<p>Suppose we have a 10,000 words vocabulary. The embeddings for this vocabulary is represented as a <strong>Embedding Matrix (E)</strong>:
+<center><img src="/assets/DLai_5/eMat1.PNG"style="zoom:75%" /></center></p>
+
+<p>The One-Hot representation for words in this vocabulary are of 1,000D.
+<center><img src="/assets/DLai_5/eMat2.PNG" style="zoom:75%" /></center></p>
+
+<p>So we can use the One-Hot vector of a word to extract its Word Embedding vector from Embedding matrix as:</p>
+
+<p><span  class="math">\[ \text{Embedding of Word j} = E.o_j = e_j\]</span></p>
+
+<blockquote>
+<p>In practice, more efficient look-up algorithms are used instead of simple matrix multiplication.</p>
+</blockquote>
+
+<h2 id="learning-word-embeddings">Learning Word Embeddings</h2>
+
+<p>It turns out <strong>Word Embeddings can be learned similar to a Language Model</strong> (where we try to predict the next word given an input sequence).
+<center><img src="/assets/DLai_5/emb1.PNG" style="zoom:75%"/></center></p>
+
+<p>We initialize an Embedding Matrix for our vocabulary then use One-Hot vectors to extract Embedding Vectors of words, stack them to form a <strong>column vector</strong> and feed them to a network and use a softmax unit for prediction.
+<center><img src="/assets/DLai_5/emb2.PNG" style="zoom:75%"/></center></p>
+
+<p>We can them use <strong>Back propagation to update Embedding Matrix</strong>.</p>
+
+<p>Instead of inputing the whole sentence as input, in practice, a <strong>window is defined</strong> (e.g. 4 words) and <strong>only that many words in the sequence are fed to the network</strong> (as our main task is to learn an Embedding Matrix and not Language Modelling.)
+<center><img src="/assets/DLai_5/emb3.PNG" style="zoom:75%" /></center></p>
+
+<p>Researcher have experimented with many different windows such as:
+<center><img src="/assets/DLai_5/emb4.PNG" style="zoom:75%"/></center></p>
+
+<h2 id="word2vec">Word2Vec</h2>
+
+<p>Another way to learn Word Embeddings is a <strong>Word2Vec Model</strong> based on <strong>Skip Gram</strong> approach.</p>
+
+<p>In Word2Vec, we actually form <strong>(context, target) pairs</strong> of words. <strong>We choose a word as target and then randomly pick a word as context within a defined window</strong>.<br>
+<center><img src="/assets/DLai_5/w2v1.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>In practice, the words are not choosen truly randomly but based on some heuristics, else common words like <em>the, she, he</em> etc. would occur more frequently.</p>
+</blockquote>
+
+<p>These (context, target) is used to learn Embedding Matrix by feeding the context to a <strong>softmax unit</strong> and trying to predict target (as discussed in Learning Embeddings using Language Model), considering <strong>Vocabulary Size to be 10,000</strong>.
+<center><img src="/assets/DLai_5/w2v2.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>This supervised learning problem is quite difficult. But out actual goal is not to do well on the supervised problem but to learn good embedding vectors.</p>
+</blockquote>
+
+<p>The <strong>Softmax unit</strong>'s computations are as usual:
+<center><img src="/assets/DLai_5/w2v3.PNG" style="zoom:75%"/></center></p>
+
+<p>And our <strong>Loss Function</strong> is:
+<center><img src="/assets/DLai_5/w2v4.PNG" /></center></p>
+
+<h3 id="problems-with-softmax-classification">Problems with Softmax Classification</h3>
+
+<p>As we can see that in the denominator of softmax, we need to sum over all the examples, which is computationally expensive, especially when corpus size is quite large.</p>
+
+<p>So, instead of using a simple softmax unit, a <strong>Hierarchical Softmax Unit</strong> is used (which creates trees on the basis of whether the word lies in the first half of the vocabulary or later and so on).
+<center><img src="/assets/DLai_5/w2v5.PNG" /></center></p>
+
+<blockquote>
+<p>In practice, <strong>Hierarchical Tree is not completely balanced</strong>. Instead common words are in the top nodes where as, less common words are deeper in the tree.
+<center><img src="/assets/DLai_5/w2v6.PNG" /></center></p>
+</blockquote>
+
+<h2 id="negative-sampling">Negative Sampling</h2>
+
+<p>In Negative Sampling, instead of using Softmax Unit, we design our problem to be a <strong>Logistic Regression Problem</strong>.</p>
+
+<p>For our Training Data, we generate pair of words and target (1/0).</p>
+
+<ul>
+<li><strong>1 Positive Pair:</strong> can use similar approach as <em>Skip Gram</em></li>
+<li><strong>k Negative Pairs:</strong> can randomly pick a word from vocabulary corresponsing to context word<br>
+<center><img src="/assets/DLai_5/ns1.PNG" style="zoom:75%"/></center></li>
+</ul>
+
+<blockquote>
+<p>For <strong>Negative Examples</strong>, researchers actually used the following metric which is in between <em>uniform randomness</em> and <em>emperical frequency</em>:
+<center><img src="/assets/DLai_5/ns2.PNG" /></center>
+where <span  class="math">\(f(w_i)\)</span> is Empirical Frequency of word <span  class="math">\(w_i\)</span>.</p>
+</blockquote>
+
+<p>For the <strong>value of k (Number of Negative Examples)</strong>:</p>
+
+<ul>
+<li><strong>Small Dataset</strong>: <span  class="math">\(k = 5-20\)</span></li>
+<li><strong>Large Dataset</strong>: <span  class="math">\(k = 2-5\)</span></li>
+</ul>
+
+<p>We then initialize an Embedding matric, use One-Hot vectors of words to extract Embedding vectors and feed to a network to get logistic regression output.
+<center><img src="/assets/DLai_5/ns3.PNG" /></center></p>
+
+<p>With the following logistic regression computation:
+<center><img src="/assets/DLai_5/ns4.PNG" /></center></p>
+
+<blockquote>
+<p>On each iteration, instead of training logistic regression over whole vocabulary, we just train for <strong>k+1 units (1 positive and k negative examples)</strong>. So we do not have to sum over all the untis like in softmax.</p>
+</blockquote>
+
+<h2 id="glove-word-vectors">GloVe Word Vectors</h2>
+
+<p>For GloVe Word Vectors, given (context, target) pairs, we count <strong>the number of times target word appears in context of the context word</strong>.
+<center><img src="/assets/DLai_5/glove1.PNG" /></center></p>
+
+<blockquote>
+<p>Depending on the definition of the context, <span  class="math">\(X_{ij}\)</span> could be equal to <span  class="math">\(X_{ji}\)</span>.</p>
+</blockquote>
+
+<p>And using that, we simply minimize the following loss:
+<center><img src="/assets/DLai_5/glove2.PNG" /></center></p>
+
+<p>The <strong>weight function</strong> is defined so that:</p>
+
+<ul>
+<li>Loss is only the sum over examples where <span  class="math">\(X_{ij} \neq 0\)</span> as <span  class="math">\(log(0)\)</span> is undefined.</li>
+<li>We can assign more weight to less common words (e.g. Durian) and less weight to common words (e.g. the, she etc.)</li>
+</ul>
+
+<blockquote>
+<p>It turns out that our parameter matrices <span  class="math">\(\theta_{i}\)</span> and <span  class="math">\(e_j\)</span> are symmetric. So in practice, the <strong>final embedding vectors of the words are calculated as thier average</strong>.
+<center><img src="/assets/DLai_5/glove3.PNG" /></center></p>
+</blockquote>
+
+<h2 id="note-on-featurization-view-of-embeddings">Note on Featurization View of Embeddings</h2>
+
+<p>As we have previously defined each term in embedding vector corresponding to a particular dimension (such as Gender, Color). It turns out that actually, the dimensions can be anything, even between them.
+<center><img src="/assets/DLai_5/glove4.PNG" /></center></p>
+
+<p>A proof of this is that, <span  class="math">\(\theta_{i}^T\)</span>$ can be replaced with <span  class="math">\((A \theta_{i})^T A^{-T}\)</span> and still similar results would be obtained:
+<center><img src="/assets/DLai_5/glove5.PNG" /></center></p>
+
+<h2 id="sentiment-classification">Sentiment Classification</h2>
+
+<p>Sentiment Classification is the task of looking at a piece of text and telling if someone likes or dislikes the thing they're talking about.
+<center><img src="/assets/DLai_5/sc1.PNG" style="zoom:75%"/></center></p>
+
+<p>One of the problems with Sentiment Classification is the <strong>lack of labelled data set</strong>. But thankfully, to tackle that, we can utilize word embeddings.</p>
+
+<h3 id="simple-sentiment-classification-model">Simple Sentiment Classification Model</h3>
+
+<p>Following is a simple Sentiment Classification Model where we simply just average the embedding vectors of words in the review text and feed that averaged (single) vector to as softmax unit to output rating value (1-5 stars).
+<center><img src="/assets/DLai_5/sc2.PNG" style="zoom:75%"/></center></p>
+
+<ul>
+<li><strong>Advantage:</strong> No matter then length of review, we average all embedding vectors of words and feed only a single vector to the model</li>
+<li><strong>Disadvantage:</strong> Order of the words is ignored. Consider the following <em>negative</em> review. Even though the review is negative but contains a lot of &quot;good&quot; words. Not considering the order of words, the model misclassifies the example.<br>
+<center><img src="/assets/DLai_5/sc3.PNG"/></center></li>
+</ul>
+
+<h3 id="sentiment-classification-using-rnn">Sentiment Classification using RNN</h3>
+
+<p>In order to also account <em>order of words</em>, we can use RNN Layer and use a <strong>Many-to-One</strong> model, where output is predicted at the last time step.
+<center><img src="/assets/DLai_5/sc4.PNG" style="zoom:75%"/></center></p>
+
+<h2 id="debiasing-word-embeddings">Debiasing Word Embeddings</h2>
+
+<p>As Word Embeddings are trained on data generated by humans, it turns out that they also end up capturing <em>bias</em> of the data such as: <strong>Gender, Ethnicity</strong> etc.
+<center><img src="/assets/DLai_5/db1.PNG" style="zoom:75%"/></center></p>
+
+<p>Consider the following Embedding:
+<center><img src="/assets/DLai_5/db2.PNG" style="zoom:75%"/></center></p>
+
+<p>Lets consider <strong>Gender Bias</strong> in this embedding.</p>
+
+<h3 id="debiasing-steps">Debiasing Steps</h3>
+
+<p>Following are the steps to de-bias it:</p>
+
+<dl>
+    <dt><strong style="font-size: 150%">1. Identify Bias Direction</strong></dt>
+    <dd>
+        We can identify bias direction by taking difference between different gender word pairs and averaging them:
+        <center><img src="/assets/DLai_5/db3.PNG" style="zoom:75%"/></center>
+        <center><img src="/assets/DLai_5/db4.PNG" style="zoom:75%"/></center>
+    </dd>
+    <dt><strong style="font-size: 150%">2. Neutralization</strong></dt>
+    <dd>
+        For every word, that is not related to this bias, we will project it onto the non-bias dimension (zero out the components of vector that are in the direction of Bias).
+        <center><img src="/assets/DLai_5/db5.PNG" style="zoom:75%"/></center>
+        <strong>In practice, in order to classify words which need to be neuralized, a seperate Classification Model is trained.</strong>
+    </dd>
+    <dt><strong style="font-size: 150%">3. Equalize Pairs</strong></dt>
+    <dd>
+        Currently, we can see that due to Gender Bias, the distance between "baby-sitter" and "grandmother"is less than compared to "grandfather".
+        <center><img src="/assets/DLai_5/db6.PNG" style="zoom:75%"/></center>
+        In order to neuralize it, we pick a point such that this difference becomes equal (no other difference between "grandmother" and "grandfather" vectors left other than Gender). 
+        <center><img src="/assets/DLai_5/db7.PNG" style="zoom:75%"/></center>
+        <strong>In practice, it has been found out that the words that need to be equalized are comparetively few in number and can be hand picked.</strong>
+    </dd>
+</dl>
+
+<h2 id="sequence-to-sequence-architecture">Sequence to Sequence Architecture</h2>
+
+<h3 id="basic-model">Basic Model</h3>
+
+<p>Consider the task of <strong>Machine Translation</strong> where given a French Sentence, we want to translate it into English.</p>
+
+<p><center><img src="/assets/DLai_5/bm1.PNG" style="zoom:75%"/></center></p>
+
+<p>For this task, we can use a <strong>Many-to-Many</strong> model, where the <strong>encoder</strong> part of the network takes in the french sentence one word at a time and <strong>outputs an encoding vectors representing that french input sentence</strong>, which we can then feed to a <strong>decoder</strong> to <strong>generate english output one word at a time</strong>.<br>
+<center><img src="/assets/DLai_5/dm2.PNG" style="zoom:75%"/></center></p>
+
+<h3 id="image-captioning">Image Captioning</h3>
+
+<p>A similar <strong>Encoder-Decoder architecture</strong> can also be used for image captioning, where we instead use a <strong>CNN to get an encoding vector for the input image</strong>. A similar Decoder network is used to ouput the caption of the image.
+<center><img src="/assets/DLai_5/bm3.PNG" style="zoom:75%"/></center></p>
+
+<h2 id="picking-the-most-likely-sentence">Picking the Most Likely Sentence</h2>
+
+<blockquote>
+<p>There is a different between the decoder model used above, and the Language Model used to generate novel text as instead of randomly choosen text, we require the best possible output (caption/ translation).</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_5/mls1.PNG" style="zoom:75%"/></center></p>
+
+<p>We can see that the <strong>Decoder part of the network is similar to the Language Model</strong> (used to generate Novel sequences). But <strong>Language Model</strong> starts off with a <strong>vector of zeros</strong> (zero input) where as the <strong>Decoder Network</strong> starts off with an <strong>input of encoding vector</strong>.</p>
+
+<p>Language Model is basically computing the probability of random sentences.
+<span  class="math">\(\text{Language Model} = P(y^{\langle 1 \rangle}, y^{\langle 2 \rangle}, ... , y^{\langle T_y \rangle})\)</span></p>
+
+<p>Where as, Decoder is computing the probability of sentences given (conditioned with) an input sentence.
+<span  class="math">\(\text{Decoder Model} = P(y^{\langle 1 \rangle}, y^{\langle 2 \rangle}, ... , y^{\langle T_y \rangle} | x^{\langle 1 \rangle}, x^{\langle 2 \rangle}, ... , x^{\langle T_y \rangle})\)</span></p>
+
+<blockquote>
+<p>Decoder Model is also called a <strong>Conditional Language Model</strong>.</p>
+</blockquote>
+
+<p>But if we outputs random sequences from the Decoder Network, we get different ouputs each time (not so good sometimes).
+<center><img src="/assets/DLai_5/mls2.PNG" style="zoom:75%"/></center></p>
+
+<p>So instead of outputing any random sentence, we actually use the newtwork to <strong>maximize this probability</strong> to output the best sequence.<br>
+<center><img src="/assets/DLai_5/mls3.PNG" /></center></p>
+
+<h2 id="why-not-use-greedy-search">Why not use Greedy Search?</h2>
+
+<p><strong>Greedy Search</strong>: After picking the first word, we then pick the second word which is most likely, then we pick the third word which is most likely as so on (maximizing the probability of each word at a time instead of the whole sentence).</p>
+
+<p>It has been observed that <strong>Greedy Search</strong> does not work that well.
+<center><img src="/assets/DLai_5/mls4.PNG" style="zoom:75%"/></center></p>
+
+<p>Suppose following are two possible output sequences. Even though the second output is correct but it is wordy and would not be preffered. But if we use a Greedy Search, its most likely that the model with output that sequence as &quot;going&quot; is a common word so its probability would be higher.</p>
+
+<p><span  class="math">\[ P(\text{Jane is going}|x) > P(\text{Jane is visiting}|x)\]</span></p>
+
+<h2 id="beam-search">Beam Search</h2>
+
+<p>An important parameter of Beam Search is <strong>Beam Width (B)</strong> which defines <em>the number of outputs to be considered</em>.</p>
+
+<p>Suppose <strong>B=3</strong>, then the algorithm will look for top 3 predictions while predicting the output, as follows:</p>
+
+<h3 id="step--1">Step ## 1</h3>
+
+<p>Given the vocabulary (lets say of 1,000 words), the algorithms passes input sentences through encoder and then predicts outputs using decoder according to Beam Width. Suppose B=3, then the algorithm will pick top 3 words where <span  class="math">\(P(y^{<1>}|x)\)</span> is maximum. Lets say it picks the following 3 words: in, jane, september.
+<center><img src="/assets/DLai_5/bs1.PNG" style="zoom:75%"/></center></p>
+
+<h3 id="step--2">Step ## 2</h3>
+
+<p>In second step, we are actually predicting the <strong>most likely pair of first and second word</strong>.
+<center><img src="/assets/DLai_5/bs2.PNG" style="zoom:75%"/></center></p>
+
+<p>It repeats the process for each of the 3 choosen words (according to the value of B) and chooses top choices for pairs of words.
+<center><img src="/assets/DLai_5/bs3.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>We end up considering Beam width x Vocab Size choices (in this case 30k) and out of those choices, we then pick the top choices equal to beam width.</p>
+</blockquote>
+
+<p>We can see that, in second step, the word &quot;september&quot; has been rejected.</p>
+
+<h3 id="step--3">Step ## 3</h3>
+
+<p>In step 3 it is calulating <span  class="math">\(P(y^{\langle 3 \rangle}|x)\)</span> which is then used to calculate:</p>
+
+<p><span  class="math">\[P( y^{\langle 1 \rangle} , y^{\langle 2 \rangle}, y^{\langle 3 \rangle}|x) = P(y^{\langle 3 \rangle}|x) \, P(y^{\langle 1 \rangle}, y^{\langle 2 \rangle}|x, y^{\langle 1 \rangle})\]</span></p>
+
+<p><center><img src="/assets/DLai_5/bs4.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>At each step, we are using 3 (= Beam Width) copies of our network.</p>
+</blockquote>
+
+<p>After several step, we will get our ouput from the network, with highest probability of the whole sentence.
+<center><img src="/assets/DLai_5/bs5.PNG" /></center></p>
+
+<blockquote>
+<p>If <strong>Beam Width = 1</strong>, then beam search is similar to the <strong>Greedy Algorithm</strong>.</p>
+</blockquote>
+
+<h3 id="beam-width">Beam Width</h3>
+
+<ul>
+<li><strong>Larger B:</strong> Better Results, Slower, More memory</li>
+<li><strong>Smaller B:</strong> Worse Results, Faster, Less memory</li>
+</ul>
+
+<blockquote>
+<p>In production, Beam Width of around <span  class="math">\(10\)</span> is used. Whereas in reseach, where we are stress testing model's performance, Beam Width of <span  class="math">\(1000-3000\)</span> is not uncommon.</p>
+</blockquote>
+
+<h2 id="refinements-to-beam-search">Refinements to Beam Search</h2>
+
+<p>As Beam Search is trying to optimize the following equation:
+<center><img src="/assets/DLai_5/bs6.PNG" style="zoom:75%"/></center></p>
+
+<p>As we are taking products of probabilities which are less than 1. So multiplying numerous small decimal values results in <strong>numerical underflow</strong>. So instead of product of probablities, <strong>Sum of log of probabilities</strong> is used.
+<center><img src="/assets/DLai_5/bs7.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>Optimizing log(P) is in turn optimizing P, so the result is the same.</p>
+</blockquote>
+
+<p>It turns out that due to the same reason, multiplication of small probabilities causing numerical underflow, adding more and more log(probabilities), the values becomes more negative as they lie in the following log region:
+<center><img src="/assets/DLai_5/bs8.PNG" /></center></p>
+
+<p>So the <strong>model prefers to output shorter sequences</strong>. In order to penality that, we normalize it with <strong>length of sequence</strong>.
+<center><img src="/assets/DLai_5/bs9.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p><span  class="math">\(\alpha\)</span> is a hyperparameter. Usually, <span  class="math">\(\alpha = 0.7\)</span>.</p>
+</blockquote>
+
+<p>We consider model output on different <span  class="math">\(T_y\)</span> values (e.g. <span  class="math">\(T_y = 1, 2, .. , 30\)</span> ) and then check their score using the above Normalized Equation. The sequence with the length that has the highest score is then output.</p>
+
+<p><center><img src="/assets/DLai_5/bs10.PNG" style="zoom:75%"/></center></p>
+
+<h2 id="error-analysis-in-beam-search">Error Analysis in Beam Search</h2>
+
+<p>Our architecture for machine translation basically consists of two components:</p>
+
+<ul>
+<li>RNN</li>
+<li>Beam Search</li>
+</ul>
+
+<p>So if the model is not performing well, it would be better if we could figure out which component is underperforming.</p>
+
+<p>As Beam Search is an <strong>approximate (heuristic) algorithm</strong>, it does not always give the optimal output. So, in case of underperformance, it would an intuition to increase Beam Width. But that does not improve performance if RNN is acutally underperforming.</p>
+
+<p>Consider the following example, where :</p>
+
+<ul>
+<li><span  class="math">\(y^*\)</span> = Optimal Translation (by Human)</li>
+<li><span  class="math">\(\hat{y}\)</span> = Model Output
+<center><img src="/assets/DLai_5/eabs1.PNG" style="zoom:75%"/></center></li>
+</ul>
+
+<p>The RNN part of the architecture is basically computing <span  class="math">\(P(y|x)\)</span>.
+<center><img src="/assets/DLai_5/eabs2.PNG" style="zoom:75%"/></center></p>
+
+<p>For Error Analysis, what we can do is to <strong>use RNN to compute both <span  class="math">\(P(y^* |x)\)</span> and <span  class="math">\(P(\hat{y}|x)\)</span> and compare them</strong>.
+<center><img src="/assets/DLai_5/eabs3.PNG" style="zoom:65%"/></center></p>
+
+<p>So we can <strong>compare this for mutiple examples</strong> on which the model is not performing well, and based on fraction of errors, decide whether to improve RNN (more layers, regularization etc.) or Beam Search (increasing beam width).
+<center><img src="/assets/DLai_5/eabs4.PNG" style="zoom:50%"/></center></p>
+
+<h2 id="bleu-score">Bleu Score</h2>
+
+<p>What if there are mutiple good outputs possible? How to evaluate such a system? Well, we can use a single number metric called <strong>Bleu (Bilingual Evaluation Understudy) Score</strong>.</p>
+
+<p>What if we use a <strong>Normal Precision</strong> (For each word in the output sequence, check whether it exists in any of the target sequences)? As we can see that it does not evaluate very well.
+<center><img src="/assets/DLai_5/bl1.PNG" style="zoom:75%"/></center></p>
+
+<p>We instead use <strong>Bleu Score</strong> which is actually a <strong>Modified Precision</strong> (For each word in the output sequence, only check it the maximum number of times it appears in any target sequence).<br>
+<center><img src="/assets/DLai_5/bl2.PNG" style="zoom:75%"/></center>
+<center><img src="/assets/DLai_5/bl3.PNG" style="zoom:75%"/></center></p>
+
+<p>where,</p>
+
+<ul>
+<li><span  class="math">\(Count_{clip}("the")\)</span>: Maximum count of &quot;the&quot; in any target sequence</li>
+<li><span  class="math">\(Count("the")\)</span>: Total count of &quot;the&quot; in output sequence</li>
+</ul>
+
+<p>The above modified precision has been calculated for <strong>unigrams</strong> (single words). But we would also like to consider pairs of words:
+<center><img src="/assets/DLai_5/bl4.PNG" style="zoom:75%"/></center></p>
+
+<p>So, the generalized formula for unigram would be:
+<center><img src="/assets/DLai_5/bl5.PNG" style="zoom:75%"/></center></p>
+
+<p>And for <strong>n-grams</strong>:
+<center><img src="/assets/DLai_5/bl6.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>If output sequence is exactly similar to any of target sequences, Bleu Score = 1.0.</p>
+</blockquote>
+
+<p>In practice, we actually consider Bleu Score for multiple grams (e.g. till 4). So the <strong>Combined Bleu Score</strong> is:
+<center><img src="/assets/DLai_5/bl7.PNG" style="zoom:75%"/></center></p>
+
+<p>where <strong>BP</strong> is <strong>Brevity Penalty</strong>. It turns out that, by outputing sequences of smaller length, Bleu Score can be increased. So, it penalities smaller length sequences.
+<center><img src="/assets/DLai_5/bl8.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>Usually, Bleu Score is not used for Machine Translation as we only have a single target output. But in tasks like <strong>Image Captioning</strong>, where numerous captions could be correct, Bleu Score is used to evaluate them.</p>
+</blockquote>
+
+<h2 id="attention-model">Attention Model</h2>
+
+<h3 id="intuition">Intuition</h3>
+
+<p>We have been using an Encoer-Decoder architecture for tasks like Machine Translation, where the network maximizes the probability of the whole sentence given the input sentence.
+<center><img src="/assets/DLai_5/at1.PNG" style="zoom:80%"/></center></p>
+
+<p>It turns out that <strong>Encoder-Decoder architecture's performance starts to decrease as the length of the input sequence increases</strong>. As its taking the whole input sequence into account for the output sequence. (unlike humans who would translate a sentence part by part, instead of translating it all together).
+<center><img src="/assets/DLai_5/at2.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>Attention Model is based on human approach and looks at a part of the input sentence at a time.</p>
+</blockquote>
+
+<p>For each output word, we define <strong>Attention Weights (<span  class="math">\(\alpha\)</span>)</strong> corresponding to each input word.The value of the weight determines how much the input word should affect the current output. These weights are used to form the <strong>Context (c)</strong> for the output of the current word.
+<center><img src="/assets/DLai_5/at3.PNG" style="zoom:75%"/></center></p>
+
+<h3 id="context">Context</h3>
+
+<blockquote>
+<p>Context in Attention Model is basically a weighted sum of Attention Weights.</p>
+</blockquote>
+
+<p>We will <span  class="math">\(t'\)</span> to index over input sequence, and <span  class="math">\(t\)</span> to index over output sequence.
+<center><img src="/assets/DLai_5/at4.PNG" style="zoom:75%"/></center></p>
+
+<p>To calculate context for an output word, we multiply the Attention Weights from the input word and multiply it with its corresponsing word's activations (both forward and backwards). The context for first output word is calculated as:
+<center><img src="/assets/DLai_5/at5.PNG"/></center>
+Here,</p>
+
+<p><span  class="math">\[\alpha^{\langle t, t' \rangle} = \text{Amount of attention } y^{\langle t \rangle} \text{should pay to } a^{\langle t' \rangle}\]</span></p>
+
+<blockquote>
+<p>Sum of all the Attention Weights (corresponding to the whole input sequence) for an output word is <strong>1</strong>.</p>
+</blockquote>
+
+<p>Similarly, we can calculate context of second output word:
+<center><img src="/assets/DLai_5/at6.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>Output Network is a simple RNN/ LSTM network, with Context Vectors as input.</p>
+</blockquote>
+
+<h3 id="attention-weights">Attention Weights</h3>
+
+<p>To calculate Attention Weights from an output word, we use the following formula:
+<center><img src="/assets/DLai_5/at7.PNG"/></center></p>
+
+<p>To calculate <strong>energy</strong> <span  class="math">\(e^{\langle t, t' \rangle}\)</span> in the above formula, we can use a small neural network to automatically learn it through back-propagation.
+<center><img src="/assets/DLai_5/at8.PNG" style="zoom:75%"/></center></p>
+
+<p>As in our architecture, we can see that <span  class="math">\(y^{\langle t \rangle}\)</span> depends on activations from previous timestep, <span  class="math">\(s^{\langle t-1 \rangle}\)</span> and activations from inputs network <span  class="math">\(a^{\langle t' \rangle}\)</span> (both forward and backward activations), so we input that to a neural network to output <span  class="math">\(e^{\langle t, t' \rangle}\)</span>.
+<center><img src="/assets/DLai_5/at9.PNG"/></center></p>
+
+<h4 id="visualization-of-at-t">Visualization of <span  class="math">\(a^{<t, t'>}\)</span></h4>
+
+<p><center><img src="/assets/DLai_5/at10.PNG"/></center></p>
+
+<p>We can see that the attention weights of corresponding input and output words tend to be high (diagonal enteries). That means that when the model is generating a specific output word, it is usually paying attention to the correct input words.</p>
+
+<blockquote>
+<p><strong>Drawback of Attention Models:</strong> take quadratic running time i.e. <span  class="math">\(T_x \times T_y\)</span> but in practice, input sentences are not that long so it works fine.</p>
+</blockquote>
+
+<p><br/></p>
+
+<blockquote>
+<p>Attention models are also used is <strong>Image Captioning</strong> where only a part of the image is observed while predicting the caption.</p>
+</blockquote>
+
+<h3 id="summary">Summary</h3>
+
+<p>Following is the complete Attention Model:
+<center><img src="/assets/DLai_5/attn_model.png" style="zoom:50%"/></center></p>
+
+<p>With the Attention Step (that calculates Attention Weights) as follows:
+<center><img src="/assets/DLai_5/attn_mechanism.png" style="zoom:50%"/></center></p>
+
+<h2 id="speech-recognition">Speech Recognition</h2>
+
+<p>Speech Recognition (sometimes also called <strong>Keyword Detection</strong>, or <strong>Wake Word Detection</strong>) task is to map input audio clip to its corresponding texual representation.
+<center><img src="/assets/DLai_5/sr1.PNG" style="zoom:75%"/></center></p>
+
+<p>Human ear actually converts these changes into air pressure frequencies. A similar preprocessing step (<strong>Audio to Spectrogram</strong>) is also applied at times to audio input. (color represents the intensity of sound at that instance of time).
+<center><img src="/assets/DLai_5/sr2.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>Originally, speech recoginition was based on <strong>Phonemes</strong> but with Deep Learning and large Datasets, end-to-end can be created without hand-engineered feature extraction step.</p>
+</blockquote>
+
+<h3 id="using-attention-model">Using Attention Model</h3>
+
+<p>We can use a simple Attention Model where input would be <strong>Audio Time Frames</strong>.
+<center><img src="/assets/DLai_5/sr3.PNG" style="zoom:75%"/></center></p>
+
+<h3 id="ctc-cost">CTC Cost</h3>
+
+<p>One of the approaches that has been found to work really well for speech recognition is CTC cost.</p>
+
+<blockquote>
+<p>CTC = Connectionist Temporal Classifination</p>
+</blockquote>
+
+<p><center><img src="/assets/DLai_5/sr4.PNG" style="zoom:75%"/></center></p>
+
+<p>We can see that the above network has quite a lot of output timestep, where as acutally input timesteps could be numerous (many audio time frames) but output would not consist of that many words or characters.</p>
+
+<p>CTC outputs basically a sequence of repeated characters something like:
+<center><img src="/assets/DLai_5/sr5.PNG" style="zoom:75%"/></center></p>
+
+<p>All the repeated characters, not seperated by a space are then removed.</p>
+
+<p>Such an output allows it to have quite a large number of output timestamps.</p>
+
+<h2 id="trigger-word-detection">Trigger Word Detection</h2>
+
+<p>Following are some examples of Trigger Word Detection Systems:
+<center><img src="/assets/DLai_5/tw3.PNG" style="zoom:75%"/></center></p>
+
+<p>To build a Trigger Word Detection Algorithm, we can use a simple RNN, when fed an audio clip, to output 1 when the trigger word has been done saying otherwise output 0.
+<center><img src="/assets/DLai_5/tw1.PNG" style="zoom:75%"/></center></p>
+
+<p>But as we can see that the output vector is quite sparse (contains 1s only at a few places). So to tackle that, we actually output 1s from quite a few times stamps instead when a trigger word is detected (makes the training data more balanced).
+<center><img src="/assets/DLai_5/tw2.PNG" style="zoom:75%"/></center></p>
+
+<p>We can use aa model like this for Trigger Word Detection:
+<center><img src="/assets/DLai_5/tw4.PNG" style="zoom:75%"/></center></p>
+
+<blockquote>
+<p>Accuracy is not a good metric for this task as data is skewed. We should use F1 score or Precision/ Recall.</p>
+</blockquote>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zaryabmakram.github.io/tags/deeplearning.ai">deeplearning.ai</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/deep-learning">deep-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/machine-learning">machine-learning</a></span><span class="tag"><a href="https://zaryabmakram.github.io/tags/andrew-ng">andrew-ng</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [['$','$'], ['\\(','\\)']],
+displayMath: [['$$','$$'], ['\\[','\\]']],
+processEscapes: true,
+processEnvironments: true,
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+TeX: { equationNumbers: { autoNumber: "AMS" },
+extensions: ["AMSmath.js", "AMSsymbols.js"] }
+}
+});
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>
